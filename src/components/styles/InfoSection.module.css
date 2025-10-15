@@ -1,4 +1,29 @@
 .infoContainer {
-    height: 100vh;
-    margin-top: 20vh;
+    height: 90vh;
+    width: 80vw;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.infoContainer h2 {
+    margin-bottom: 1em;
+    width: 100%;
+}
+
+.infoParagraphs {
+    width: 100%;
+    line-height: 1.3;
+}
+
+.infoChecks {
+    border: 1px solid;
+    width: 100%;
+    margin-top: 1.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
 }

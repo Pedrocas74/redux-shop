@@ -1,8 +1,14 @@
 
 .navbar {
-    padding: 1em;  
-    border: 1px solid red;
+    padding: 0.7em;  
+    margin: 0 auto;
+    background-color: #2C2A2D;
     text-align: end;
     position: sticky;
     top: 0;
+
+}
+
+.navbar a {
+    color: #F5F5E9;
 }

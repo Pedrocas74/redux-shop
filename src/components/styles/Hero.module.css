@@ -21,14 +21,14 @@
 
 .titleContainer {
     background-color: #c6a06821;
-    backdrop-filter: blur(15px); /* this creates the blur effect */
+    backdrop-filter: blur(6px); /* this creates the blur effect */
     -webkit-backdrop-filter: blur(10px); /* for Safari */
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 18vh; 
+    height: 10vh; 
     /* border-top: 1px inset #C6A168;
     border-bottom: 1px outset #C6A168; */
 }

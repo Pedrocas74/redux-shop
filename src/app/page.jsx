@@ -9,7 +9,6 @@ export default function Home() {
       <Hero />
       <Navbar />
       <InfoSection />
-      <h1>Our Products</h1>
       <ProductsList />
     </main>
   );

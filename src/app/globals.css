@@ -15,3 +15,12 @@
   }
 }
 
+
+h2 {
+  font-family: var(--font-lexend);
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+}
+
+a {
+  text-decoration: none;
+}
