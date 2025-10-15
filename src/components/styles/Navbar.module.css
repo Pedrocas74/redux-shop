@@ -1,0 +1,12 @@
+
+.navbar {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  
+    background: transparent;
+    position: fixed;
+    top: 0;
+    
+
+}

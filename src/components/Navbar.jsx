@@ -1,5 +1,6 @@
 'use client';
 
+import styles from './styles/Navbar.module.css';
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
 import CurrencySelector from './CurrencySelector';
@@ -16,16 +17,8 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav
-      style={{
-        padding: '1rem',
-        borderBottom: '1px solid #ccc',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+    <nav className={styles.navbar}>
+      <div>
         <Link href="/">Home</Link>
          
         {mounted ? (
@@ -35,11 +28,7 @@ export default function Navbar() {
         )}
       </div>
 
-      {mounted ? (
-        <CurrencySelector />
-      ) : (
-        <span>Currency: {currentCurrency}</span>
-      )}
+      {mounted ? <CurrencySelector /> : <span>{currentCurrency}</span>}
     </nav>
   );
 }
