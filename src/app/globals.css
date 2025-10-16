@@ -15,12 +15,29 @@
   }
 }
 
+body {
+  background-color: #ffffff;
+}
+
 
 h2 {
   font-family: var(--font-lexend);
   font-size: clamp(1.5rem, 5vw, 2.5rem);
 }
 
+h2, h3 {
+  color: #1A140E;
+}
+
 a {
   text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  border-radius: 10px;
+  padding: 0.4em 1em;
+  background-color: #7C5D27;
+  color: #ffffff;
 }

@@ -1,23 +1,41 @@
 .groupOfSkeletons {
     border: 1px solid #ccc;
-    padding: 1rem;
+    padding: 0.5em;
     border-radius: 8px;
     text-align: center;
 }
 
 .productCard {
-    border: 1px solid #ccc;
-    padding: 1rem;
-    border-radius: 8px;
+    border: 1px solid #1A140E ;
+    padding: 0.5em;
+    border-radius: 20px;
     text-align: center;
+    width: 80vw;
+    margin: 0 auto;
 }
 
 .productCard img {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     object-fit: contain;
+
 }
 
 .productCard h3 {
-    color: black;
+    font-size: clamp(1.1rem, 2vw, 1.6rem);
+    padding: 0 1.5em;
+    width: fit-content;
+    margin: 0 auto;
+    margin-bottom: 1em;
 }
+
+.stockInfo {
+    margin: 0.5em 0;
+}
+
+.productCard p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-weight: 100;
+    
+}
+
