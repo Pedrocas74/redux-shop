@@ -1,13 +1,14 @@
 
-
-.productsContainer h2 {
+.productsContainer {
     text-align: center;
+}
+.productsContainer h2 + p{
     margin-bottom: 5vh;
 }
 
 .productsSelector {
-    border: 1px solid rgb(33, 35, 139);
-    margin-bottom: 50vh;
+    /* border: 1px solid rgb(33, 35, 139); */
+    margin-bottom: 20vh;
     width: 100%;
     height: 60vh;
     display: flex;
@@ -37,22 +38,22 @@
 }
 
 .overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 2rem;
-  font-weight: bold;
-  background: rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  transition: opacity 0.4s ease;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    color: white;
+    font-size: 1.7rem;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.4s ease;
 }
 .imageBox:hover .overlay {
   opacity: 1;
 }
-
 
 
 .grid {

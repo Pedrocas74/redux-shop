@@ -22,6 +22,7 @@ export default function ProductsList() {
   return (
     <section className={styles.productsContainer}>
       <h2>Our Products</h2>
+      <p>Select one</p>
 
       <div className={styles.productsSelector}>
         <div className={styles.imageBox}>
@@ -57,8 +58,11 @@ export default function ProductsList() {
           <div className={styles.overlay}>Electronics</div>
         </div>
       </div>
+
       <div className={styles.grid}>
+        
         {products.map((product) => (
+          
           <ProductCard key={product.id} product={product} />
         ))}
       </div>

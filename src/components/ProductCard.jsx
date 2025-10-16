@@ -1,10 +1,12 @@
 'use client';
 
+import styles from './styles/ProductCard.module.css';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../features/cart/cartSlice';
 import { useState, useEffect } from 'react';
 import Skeleton from './Skeleton';
+
 
 export default function ProductCard({ product }) {
   const dispatch = useDispatch();
@@ -24,12 +26,7 @@ export default function ProductCard({ product }) {
 
   if (!mounted) {
   return (
-    <div style={{
-      border: '1px solid #ccc',
-      padding: '1rem',
-      borderRadius: '8px',
-      textAlign: 'center'
-    }}>
+    <div className={styles.groupOfSkeletons}>
       <Skeleton width="150px" height="150px" style={{ margin: '0 auto' }} />
       <Skeleton width="80%" height="1rem" style={{ margin: '0.5rem auto' }} />
       <Skeleton width="50px" height="1rem" style={{ margin: '0.5rem auto' }} />
@@ -39,11 +36,9 @@ export default function ProductCard({ product }) {
 }
 
   return (
-    <div style={{
-      border: '1px solid #ccc', padding: '1rem', borderRadius: '8px', textAlign: 'center'
-    }}>
+    <div className={styles.productCard}>
       <Link href={`/product/${product.id}`}>
-        <img src={product.image} alt={product.title} width={150} height={150} style={{ objectFit: 'contain' }} />
+        <img src={product.image} alt={product.title} />
         <h3>{product.title}</h3>
       </Link>
       <p>{getSymbol()}{convert(product.price)}</p>
