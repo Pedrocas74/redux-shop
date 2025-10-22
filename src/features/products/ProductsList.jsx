@@ -1,16 +1,22 @@
 "use client";
 
 import styles from "./ProductsList.module.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "./productsSlice";
 import ProductCard from "../../components/ProductCard";
 import Image from "next/image";
-import { motion } from "framer-motion";
 
 export default function ProductsList() {
+  const [selectedCategory, setSelectedCategory] = useState(null); //null = show all products
   const dispatch = useDispatch();
   const { products, loading, error } = useSelector((state) => state.products);
+
+  const categoryMap = {
+    Clothing: ["men's clothing", "women's clothing"],
+    Jewelry: ["jewelery"],
+    Electronics: ["electronics"],
+  };
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -25,9 +31,9 @@ export default function ProductsList() {
       <p>Select one</p>
 
       <div className={styles.productsSelector}>
-        <div className={styles.imageBox}>
+        <div className={styles.imageBox} onClick={() => setSelectedCategory("Clothing")} >
           <Image
-            src="/images/clothing.webp"
+            src="/images/clothing.jpg"
             alt="Clothing"
             fill
             priority
@@ -36,9 +42,9 @@ export default function ProductsList() {
           <div className={styles.overlay}>Clothing</div>
         </div>
 
-        <div className={styles.imageBox}>
+        <div className={styles.imageBox} onClick={() => setSelectedCategory("Jewelry")}>
           <Image
-            src="/images/jewelry.webp"
+            src="/images/jewelry.jpg"
             alt="Jewelry"
             fill
             priority
@@ -47,9 +53,9 @@ export default function ProductsList() {
           <div className={styles.overlay}>Jewelry</div>
         </div>
 
-        <div className={styles.imageBox}>
+        <div className={styles.imageBox} onClick={() => setSelectedCategory("Electronics")}>
           <Image
-            src="/images/electronics.webp"
+            src="/images/electronics.jpg"
             alt="Electronics"
             fill
             priority
@@ -58,13 +64,17 @@ export default function ProductsList() {
           <div className={styles.overlay}>Electronics</div>
         </div>
       </div>
-
+      <button onClick={() => setSelectedCategory(null)}>Show All</button>
       <div className={styles.grid}>
-        
-        {products.map((product) => (
-          
-          <ProductCard key={product.id} product={product} />
-        ))}
+        {products
+          .filter(
+            (product) =>
+              !selectedCategory ||
+              categoryMap[selectedCategory].includes(product.category)
+          )
+          .map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
       </div>
     </section>
   );
