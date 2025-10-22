@@ -4,6 +4,14 @@ import axios from 'axios';
 export const fetchProducts = createAsyncThunk(
     'products/fetchProducts',
     async (_, thunkAPI) => {
+        // If products already loaded in the current app session, return them
+        // This prevents recalculating stock during route navigation (only recalculated after full browser refresh)
+        const state = thunkAPI.getState();
+        const existing = state.products?.products;
+        if (existing && existing.length > 0) {
+          return existing;
+        }
+
         try {
             const response = await axios.get('https://fakestoreapi.com/products');
             return response.data;
@@ -57,8 +65,14 @@ const productSlice = createSlice({
         const sizes = ["XS", "S", "M", "L", "XL"];
 
         state.products = action.payload.map((p) => {
+          // If product already has stock keep it unchanged
+          if (p.stock) return p;
+
           const cleanTitle = p.title.trim().toLowerCase();
-          const hasSizes = p.category === "men's clothing" || p.category === "women's clothing";
+          const hasSizes =
+            (p.category === "men's clothing" || p.category === "women's clothing") &&
+            p.title.toLowerCase().trim() !== "fjallraven - foldsack no. 1 backpack, fits 15 laptops";
+
           return {
             ...p,
             title: nameMap[cleanTitle] || p.title,

@@ -1,5 +1,5 @@
 import './globals.css';
-// import Navbar from '../components/Navbar';
+import Navbar from '../components/Navbar';
 import ReduxProvider from '../components/ReduxProvider';
 // import Footer from '@components/Footer';
 
@@ -29,6 +29,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${titillium.variable} ${lexend.variable}`} >
         <ReduxProvider>
+          <Navbar />
           <main>{children}</main>
         </ReduxProvider>
       </body>

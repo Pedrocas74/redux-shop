@@ -63,7 +63,6 @@ export default function ProductDetails() {
 
   return (
     <div className={styles.pageContainer}>
-      <Navbar />
       <section className={styles.detailsContainer}>
         {/* <button>Back</button> */}
         <span>HomePage/category</span>
