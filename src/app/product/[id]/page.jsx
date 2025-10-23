@@ -70,6 +70,7 @@ export default function ProductDetails() {
             src={product.image}
             alt={product.title}
             style={{ objectFit: "contain" }}
+            className={styles.productImage}
           />
         </figure>
 
@@ -123,67 +124,71 @@ export default function ProductDetails() {
         </details>
 
         {/* WASHING INSTRUCTIONS */}
-        <details>
-          <summary className={styles.instructions}>Care</summary>
-          <h3 className={styles.instructionsTitle}>Washing Instructions</h3>
-          <ul className={styles.careList}>
-            <li>
-              <span className={styles.iconWrapper}>
-                <Image
-                  src="/images/icons/instructions/not-bleach.png"
-                  alt="Do not bleach"
-                  fill
-                  priority
-                />
-              </span>
-              Do not bleach
-            </li>
-            <li>
-              <span className={styles.iconWrapper}>
-                <Image
-                  src="/images/icons/instructions/tumble-dry.png"
-                  alt="Do not tumble dry"
-                  fill
-                  priority
-                />
-              </span>
-              Do not tumble dry
-            </li>
-            <li>
-              <span className={styles.iconWrapper}>
-                <Image
-                  src="/images/icons/instructions/do-not-dry.png"
-                  alt="Do not dry clean"
-                  fill
-                  priority
-                />
-              </span>
-              Do not dry clean
-            </li>
-            <li>
-              <span className={styles.iconWrapper}>
-                <Image
-                  src="/images/icons/instructions/ironing.png"
-                  alt="Iron on the lowest setting"
-                  fill
-                  priority
-                />
-              </span>
-              Iron on the lowest setting
-            </li>
-            <li>
-              <span className={styles.iconWrapper}>
-                <Image
-                  src="/images/icons/instructions/wash-30.png"
-                  alt="Wash at low temperature"
-                  fill
-                  priority
-                />
-              </span>
-              Wash at low temperature and on delicate cycle
-            </li>
-          </ul>
-        </details>
+        {(product.category === "men's clothing" ||
+          product.category === "women's clothing") &&
+          !product.title.toLowerCase().includes("backpack") && (
+            <details>
+              <summary className={styles.instructions}>Care</summary>
+              <h3 className={styles.instructionsTitle}>Washing Instructions</h3>
+              <ul className={styles.careList}>
+                <li>
+                  <span className={styles.iconWrapper}>
+                    <Image
+                      src="/images/icons/instructions/not-bleach.png"
+                      alt="Do not bleach"
+                      fill
+                      priority
+                    />
+                  </span>
+                  Do not bleach
+                </li>
+                <li>
+                  <span className={styles.iconWrapper}>
+                    <Image
+                      src="/images/icons/instructions/tumble-dry.png"
+                      alt="Do not tumble dry"
+                      fill
+                      priority
+                    />
+                  </span>
+                  Do not tumble dry
+                </li>
+                <li>
+                  <span className={styles.iconWrapper}>
+                    <Image
+                      src="/images/icons/instructions/do-not-dry.png"
+                      alt="Do not dry clean"
+                      fill
+                      priority
+                    />
+                  </span>
+                  Do not dry clean
+                </li>
+                <li>
+                  <span className={styles.iconWrapper}>
+                    <Image
+                      src="/images/icons/instructions/ironing.png"
+                      alt="Iron on the lowest setting"
+                      fill
+                      priority
+                    />
+                  </span>
+                  Iron on the lowest setting
+                </li>
+                <li>
+                  <span className={styles.iconWrapper}>
+                    <Image
+                      src="/images/icons/instructions/wash-30.png"
+                      alt="Wash at low temperature"
+                      fill
+                      priority
+                    />
+                  </span>
+                  Wash at low temperature and on delicate cycle
+                </li>
+              </ul>
+            </details>
+          )}
       </section>
     </div>
   );

@@ -53,7 +53,7 @@ const productSlice = createSlice({
           "silicon power 256gb ssd 3d nand a55 slc cache performance boost sata iii 2.5" : "SSD 256GB",
           "wd 4tb gaming drive works with playstation 4 portable external hard drive": "WD 4TB Gaming HDD",
           "acer sb220q bi 21.5 inches full hd (1920 x 1080) ips ultra-thin": "Acer 21.5\" Full HD Monitor",
-          "samsung 49-inch chg90 144hz curved gaming monitor (lc49hg90dmnxza) – super ultrawide screen qled": "Samsung 49\" Curved Ultrawide QLED Monitor",
+          "samsung 49-inch chg90 144hz curved gaming monitor (lc49hg90dmnxza) – super ultrawide screen qled": "Samsung 49\" Curved Monitor",
           "biylaclesen women's 3-in-1 snowboard jacket winter coats": "3-in-1 Women's Snowboard Jacket",
           "lock and love women's removable hooded faux leather moto biker jacket": "Women's Moto Biker Jacket",
           "rain jacket women windbreaker striped climbing raincoats": "Women's Striped Windbreaker Rain Jacket",

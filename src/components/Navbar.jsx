@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+import CartIcon from "./CartIcon";
+
 
 const CurrencySelector = dynamic(
   () => import("./CurrencySelector"),
@@ -44,11 +46,9 @@ export default function Navbar() {
     >
       <Link href="/">Home</Link>
       <div className={styles.cartAndCurrency}>
-        {mounted ? (
-          <Link href="/cart">Cart ({totalQuantity})</Link>
-        ) : (
-          <Link href="/cart">Cart (0)</Link>
-        )}
+        <Link href="/cart" aria-label="Open cart">
+          <CartIcon count={mounted ? totalQuantity : 0} />
+        </Link>
         <CurrencySelector />
       </div>
     </nav>

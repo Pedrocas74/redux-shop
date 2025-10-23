@@ -1,0 +1,37 @@
+.wrapper {
+    position: relative;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.icon {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+    color: #ffffff;
+    transition: transform 120ms ease;
+}
+.badge {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    background: #d10221;
+    color: #fff;
+    padding: 2px 2px;
+    font-size: 0.7rem;
+    border-radius: 50px;
+    min-width: 18px;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(124, 124, 124, 0.473);
+    
+}
+.pulse {
+    animation: pop 260ms ease;
+}
+@keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
