@@ -6,21 +6,22 @@
     width: 90vw;
     margin: 0 auto;
     border: 1px solid blue;
-    margin-top: 2em;
+    margin-top: 2.5em;
 }
 
-.detailsContainer span {
+/* .detailsContainer span {
     border: 1px solid red;
-}
+} */
 
 .detailsContainer h1 {
     font-size: 1.2rem;
     text-transform: uppercase;
     font-weight: 100;
+    margin-top: 1em;
 }
 
 .price {
-    border: 1px solid red;
+    margin-top: 0.2em;
 }
 
 .detailsContainer figure {
@@ -33,6 +34,7 @@
 
 .detailsContainer img {
     width: 150px;
+    height: 200px;
 }
 
 .sizeSelector {
@@ -45,7 +47,45 @@
     border-radius: 0px;
 }
 
-.buttonAdd {
+.linkDescription {
     margin-top: 1.5em;
+    text-align: center;
 }
 
+.buttonAddContainer {
+    /* border: 1px solid red; */
+    margin: 1.5em 0;
+    display: flex;
+    justify-content: center;
+}
+
+.instructions {
+    /* border: 1px solid red; */
+    padding: 0.7em 0;
+    
+}
+.instructionsTitle {
+    margin: 0.5em 0;
+    text-transform: uppercase;
+}
+
+.careList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.careList li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: clamp(0.85rem, 2vw, 1rem);
+}
+
+.iconWrapper {
+    position: relative;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    
+}
