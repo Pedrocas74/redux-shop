@@ -56,10 +56,10 @@ const productSlice = createSlice({
           "samsung 49-inch chg90 144hz curved gaming monitor (lc49hg90dmnxza) – super ultrawide screen qled": "Samsung 49\" Curved Monitor",
           "biylaclesen women's 3-in-1 snowboard jacket winter coats": "3-in-1 Women's Snowboard Jacket",
           "lock and love women's removable hooded faux leather moto biker jacket": "Women's Moto Biker Jacket",
-          "rain jacket women windbreaker striped climbing raincoats": "Women's Striped Windbreaker Rain Jacket",
-          "mbj women's solid short sleeve boat neck v": "Women's Solid Short Sleeve V-Neck",
+          "rain jacket women windbreaker striped climbing raincoats": "Women's Striped Jacket",
+          "mbj women's solid short sleeve boat neck v": "Women's Sleeve V-Neck",
           "opna women's short sleeve moisture": "Women's Moisture-Wicking T-Shirt",
-          "danvouy womens t shirt casual cotton short": "Women's Casual Cotton T-Shirt"
+          "danvouy womens t shirt casual cotton short": "Women's Casual T-Shirt"
         };
 
         const sizes = ["XS", "S", "M", "L", "XL"];

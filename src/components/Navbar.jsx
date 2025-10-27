@@ -14,7 +14,8 @@ const CurrencySelector = dynamic(
 );
 
 export default function Navbar() {
-  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  const { items } = useSelector((state) => state.cart);
+  const totalQuantity = items.reduce((sum, item) => sum + item.quantity, 0);
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);

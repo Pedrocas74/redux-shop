@@ -6,8 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../features/cart/cartSlice";
 import { useState, useEffect } from "react";
 import Skeleton from "./Skeleton";
+import { Ruler } from "lucide-react";
 
 export default function ProductCard({ product }) {
+  const [sizeSelected, setSizeSelected] = useState("");
   const dispatch = useDispatch();
   const { current, rates } = useSelector((state) => state.currency);
 
@@ -48,6 +50,19 @@ export default function ProductCard({ product }) {
     );
   }
 
+  const handleAddToCart = () => {
+    if (product.sizes && !sizeSelected) {
+      alert("Please select a size");
+      return;
+    }
+    dispatch(
+      addToCart({
+        product,
+        selectedSize: product.sizes ? sizeSelected : null,
+      })
+    );
+  };
+
   return (
     <div className={styles.productCard}>
       <Link href={`/product/${product.id}`}>
@@ -66,14 +81,41 @@ export default function ProductCard({ product }) {
       >
         {stockStatus}
       </p>
+
       {stockStatus === "In stock" ? (
-        <button onClick={() => dispatch(addToCart(product))}>
-          Add to Cart
-        </button>
+        <button onClick={handleAddToCart}>Add to Cart</button>
       ) : (
         <button disabled style={{ opacity: 0.6, cursor: "not-allowed" }}>
           Out of Stock
         </button>
+      )}
+
+      {/* sizes */}
+      {product.sizes && (
+        <>
+          <label htmlFor="size-select"></label>
+          <div className={styles.selectWrapper}>
+            <Ruler className={styles.selectIcon} />
+            <select
+              className={styles.sizeSelector}
+              onChange={(e) => setSizeSelected(e.target.value)}
+              name="sizes"
+              id="size-select"
+              defaultValue=""
+              disabled={stockStatus !== "In stock"}
+              aria-label="Select size"
+            >
+              <option value="" disabled hidden>
+          
+              </option>
+              {product.sizes.map((size) => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
+              ))}
+            </select>
+          </div>
+        </>
       )}
     </div>
   );

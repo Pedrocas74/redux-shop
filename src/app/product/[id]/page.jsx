@@ -9,12 +9,15 @@ import Skeleton from "@components/Skeleton";
 import Image from "next/image";
 
 export default function ProductDetails() {
+  const [selectedSize, setSelectedSize] = useState(null);
   const { id } = useParams();
   const dispatch = useDispatch();
 
   const product = useSelector((state) =>
     state.products.products.find((p) => p.id === parseInt(id))
   );
+
+  const stockStatus = product?.stock;
 
   const { current, rates } = useSelector((state) => state.currency);
   const [mounted, setMounted] = useState(false);
@@ -31,6 +34,7 @@ export default function ProductDetails() {
         return "€";
     }
   };
+
 
   if (!mounted || !product) {
     return (
@@ -56,6 +60,19 @@ export default function ProductDetails() {
     );
   }
 
+  const handleAddToCart = () => {
+    if (product.sizes && !selectedSize) {
+      alert("Please select a size");
+      return;
+    }
+    dispatch(
+      addToCart({
+        product,
+        selectedSize: product.sizes ? selectedSize : null,
+      })
+    );
+  };
+
   return (
     <div className={styles.pageContainer}>
       <section className={styles.detailsContainer}>
@@ -77,7 +94,13 @@ export default function ProductDetails() {
         {product.sizes && (
           <div className={styles.sizeSelector}>
             {product.sizes.map((size) => (
-              <button key={size} className={styles.sizeButton}>
+              <button
+                key={size}
+                className={`${styles.sizeButton} ${
+                  selectedSize === size ? styles.selected : ""
+                }`}
+                onClick={() => setSelectedSize(size)}
+              >
                 {size}
               </button>
             ))}
@@ -85,22 +108,17 @@ export default function ProductDetails() {
         )}
 
         <div className={styles.buttonAddContainer}>
-          {product.stock === "In stock" && (
-            <button
-              className={styles.buttonAdd}
-              onClick={() => dispatch(addToCart(product))}
-            >
+          {stockStatus === "In stock" ? (
+            <button onClick={handleAddToCart} className={styles.buttonAdd}>
               Add to Cart
             </button>
-          )}
-          {product.stock === "Sold out" && (
+          ) : (
             <button
               className={styles.buttonAdd}
-              onClick={() => dispatch(addToCart(product))}
               disabled
-              style={{ cursor: "not-allowed" }}
+              style={{ opacity: 0.6 }}
             >
-              Out of stock
+              Out of Stock
             </button>
           )}
         </div>

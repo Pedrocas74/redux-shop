@@ -1,5 +1,5 @@
 .pageContainer {
-    width: 100vw;
+    width: 100%;
 }
 
 .detailsContainer {
@@ -46,10 +46,12 @@
     display: flex;
     justify-content: center;
     margin-top: 1em;
+    width: 100%;
 }
 
 .sizeButton {
-    border-radius: 0px;
+    text-align: center;
+    width: 60px;
 }
 
 .linkDescription {

@@ -13,6 +13,7 @@
     margin: 0 auto;
     width: 80%;
     height: 320px;
+    position: relative;
 }
 
 .productCard img {
@@ -39,4 +40,46 @@
     font-weight: 100;
     
 }
+
+
+.selectWrapper {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  top: 5px;
+  right: 5px;
+}
+
+.sizeSelector {
+  appearance: none; 
+  padding: 0.5em; /* leave space for the icon */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  background-color: white;
+  cursor: pointer;
+}
+
+.sizeSelector option {
+  color: #333;
+  background: white;
+  font-weight: 500;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.sizeSelector option:hover {
+    background: #ccc;
+    
+}
+
+.selectIcon {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  color: #666;
+  pointer-events: none; /* icon doesn’t block clicks */
+}
+
 

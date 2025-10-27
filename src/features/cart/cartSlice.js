@@ -30,27 +30,48 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const existingItem = state.items.find(item => item.id === action.payload.id);
+      const { product, selectedSize } = action.payload;
+      const itemKey = `${product.id}-${selectedSize || 'default'}`;
+      
+      const existingItem = state.items.find(item => 
+        `${item.id}-${item.selectedSize || 'default'}` === itemKey
+      );
+      
       if (existingItem) {
         existingItem.quantity += 1;
       } else {
-        state.items.push({ ...action.payload, quantity: 1 });
+        state.items.push({ 
+          ...product, 
+          quantity: 1, 
+          selectedSize: selectedSize || null,
+          itemKey //special key
+        });
       }
-      state.totalQuantity += 1;
-      state.totalPrice += action.payload.price;
+      state.totalQuantity = state.items.reduce((sum, item) => sum + item.quantity, 0);
+      state.totalPrice = state.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
       saveCartToLocalStorage(state);
     },
+    
     removeFromCart: (state, action) => {
-      const item = state.items.find(i => i.id === action.payload);
-      if (item) {
-        state.totalQuantity -= item.quantity;
-        state.totalPrice -= item.price * item.quantity;
-        state.items = state.items.filter(i => i.id !== action.payload);
+      const itemToRemove = state.items.find(item => 
+        `${item.id}-${item.selectedSize || 'default'}` === action.payload
+      );
+      
+      if (itemToRemove) {
+        state.totalQuantity -= itemToRemove.quantity;
+        state.totalPrice -= itemToRemove.price * itemToRemove.quantity;
+        state.items = state.items.filter(item => 
+          `${item.id}-${item.selectedSize || 'default'}` !== action.payload
+        );
       }
       saveCartToLocalStorage(state);
     },
+    
     increaseQuantity: (state, action) => {
-      const item = state.items.find(i => i.id === action.payload);
+      const item = state.items.find(item => 
+        `${item.id}-${item.selectedSize || 'default'}` === action.payload
+      );
+      
       if (item) {
         item.quantity += 1;
         state.totalQuantity += 1;
@@ -58,14 +79,20 @@ const cartSlice = createSlice({
       }
       saveCartToLocalStorage(state);
     },
+    
     decreaseQuantity: (state, action) => {
-      const item = state.items.find(i => i.id === action.payload);
+      const item = state.items.find(item => 
+        `${item.id}-${item.selectedSize || 'default'}` === action.payload
+      );
+      
       if (item && item.quantity > 1) {
         item.quantity -= 1;
         state.totalQuantity -= 1;
         state.totalPrice -= item.price;
       } else if (item && item.quantity === 1) {
-        state.items = state.items.filter(i => i.id !== action.payload);
+        state.items = state.items.filter(item => 
+          `${item.id}-${item.selectedSize || 'default'}` !== action.payload
+        );
         state.totalQuantity -= 1;
         state.totalPrice -= item.price;
       }
