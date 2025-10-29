@@ -1,33 +1,44 @@
 import './globals.css';
 import Navbar from '../components/Navbar';
 import ReduxProvider from '../components/ReduxProvider';
-// import Footer from '@components/Footer';
 
-import { Titillium_Web, Lexend } from "next/font/google";
+import localFont from "next/font/local";
 
-const titillium = Titillium_Web({
-  subsets: ['latin'],
-  weight: ['300','400','600','700','900'],
-  display: 'swap', 
-  variable: '--font-titillium',
+export const acma = localFont({
+  src: [
+    { path: "./fonts/acma/PPAcma-Thin.otf", weight: "100", style: "normal" },
+    { path: "./fonts/acma/PPAcma-Light.otf", weight: "300", style: "normal" },
+    { path: "./fonts/acma/PPAcma-Semibold.otf", weight: "600", style: "normal" },
+    { path: "./fonts/acma/PPAcma-Black.otf", weight: "900", style: "normal" },
+    { path: "./fonts/acma/PPAcma-ThinItalic.otf", weight: "100", style: "italic" },
+    { path: "./fonts/acma/PPAcma-LightItalic.otf", weight: "300", style: "italic" },
+    { path: "./fonts/acma/PPAcma-SemiboldItalic.otf", weight: "600", style: "italic" },
+    { path: "./fonts/acma/PPAcma-BlackItalic.otf", weight: "900", style: "italic" },
+  ],
+  variable: "--font-acma",
+  display: "swap",
 });
 
-const lexend = Lexend({
-  subsets: ['latin'],
-  weight: ['100','200','300','400','500','600','700','800','900'],
-  display: 'swap', 
-  variable: '--font-lexend',
+export const gatwickJet = localFont({
+  src: [
+    { path: "./fonts/gatwick-jet/PPGatwick-JetExtralight.otf", weight: "200", style: "normal" },
+    { path: "./fonts/gatwick-jet/PPGatwick-JetSemibold.otf", weight: "600", style: "normal" },
+  ],
+  variable: "--font-gatwick-jet",
+  display: "swap",
 });
+
 
 export const metadata = { //title of the app
   title: 'Redux Shop',
   description: 'Awesome e-commerce store',
 };
 
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${titillium.variable} ${lexend.variable}`} >
+      <body className={`${acma.variable} ${gatwickJet.variable}`}>
         <ReduxProvider>
           <Navbar />
           <main>{children}</main>
