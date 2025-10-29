@@ -1,7 +1,7 @@
 
 .productsContainer {
     text-align: center;
-    margin-bottom: 20vh;
+    margin-bottom: 10vh;
 }
 .productsContainer h2 + p{
     margin-bottom: 5vh;
