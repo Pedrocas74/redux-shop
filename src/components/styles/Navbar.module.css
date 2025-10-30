@@ -1,12 +1,9 @@
 
 .navbar {
-    padding: 0.7em;  
+    padding: 0.7em 0; 
     background-color: #2C2A2D;
     position: sticky;
     top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     color: #f5f5e9;
     z-index: 999;
     transition: transform 0.3s ease-in-out;
@@ -14,6 +11,13 @@
     overflow-x: hidden;
 }
 
+.navWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 85%;
+  margin: 0 auto;
+}
 
 .visible {
   transform: translateY(0);

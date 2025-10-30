@@ -18,7 +18,7 @@
 :root {
   /* Colors */
   --clr-primary: #e9c46a;
-  --clr-primary-light: #f1d88f;
+  --clr-primary-light: #ffe9a8;
   --clr-primary-dark: #d1ab4a;
 
   --clr-secondary: #333333;
@@ -92,7 +92,7 @@ button {
 /* 🟡 Primary (default) */
 .buttonPrimary {
   background: var(--clr-primary);
-  color: var(--clr-secondary);
+  color: var(--clr-bg);
 }
 .buttonPrimary:hover {
   background: var(--clr-primary-dark);

@@ -1,44 +1,52 @@
-.groupOfSkeletons {
+/* .groupOfSkeletons {
     border: 1px solid #ccc;
     padding: 0.5em;
     border-radius: 8px;
     text-align: center;
-}
+} */
 
 .productCard {
-    border: 1px solid #1A140E ;
-    padding: 0.5em;
-    border-radius: 20px;
+    border: 1px solid #333333 ;
+    padding: var(--pd-top-down) var(--pd-left-right);
+    border-radius: var(--radius);
     text-align: center;
     margin: 0 auto;
-    width: 80%;
-    height: 320px;
-    position: relative;
+    width: 85%;
+    height: 350px;
+    position: relative; 
+    
 }
 
 .productCard img {
-    width: 50%;
+    width: 60%;
     height: 40%;
     object-fit: contain;
+    /* border: 1px solid red; */
+    margin-bottom: 0.5em;
 }
 
 .productCard h3 {
-    font-size: clamp(1.1rem, 2vw, 1.6rem);
-    padding: 0 1.5em;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-weight: 600;
+    color: var(--clr-text);
     width: fit-content;
     margin: 0 auto;
-    margin-bottom: 1em;
-    /* border: 1px solid red; */
+    margin-bottom: 0.5em;
+    /* border: 1px solid rgb(20, 136, 111); */
+    max-height: 50px;
 }
 
-.stockInfo {
-    margin: 0.5em 0;
+.productCard h4 {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    margin-bottom: 2em;
+    font-weight: 300;
 }
 
 .productCard p {
-    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
     font-weight: 100;
-    
+    /* border: 1px solid yellow; */
+    margin-bottom: 0.7em;
 }
 
 
@@ -49,36 +57,36 @@
   justify-content: center;
   top: 5px;
   right: 5px;
+  
 }
 
 .sizeSelector {
   appearance: none; 
   padding: 0.5em; /* leave space for the icon */
-  border: 1px solid #ccc;
+  border: 1px solid #33333370;
   border-radius: 10px;
   font-size: 0.9rem;
   background-color: white;
   cursor: pointer;
+  text-align: center;
 }
 
 .sizeSelector option {
   color: #333;
-  background: white;
+  background: var(--clr-primary-light);
   font-weight: 500;
-  padding: 4px 8px;
+  padding: 0.5em;
   cursor: pointer;
+  /* text-align: center; */
 }
 
-.sizeSelector option:hover {
-    background: #ccc;
-    
-}
 
 .selectIcon {
   position: absolute;
   width: 18px;
   height: 18px;
-  color: #666;
+  color: #333333;
+  opacity: 0.7;
   pointer-events: none; /* icon doesn’t block clicks */
 }
 

@@ -34,26 +34,26 @@ export default function ProductCard({ product }) {
   const symbol = getSymbol();
 
   const stockStatus = product.stock;
-  const stockColor = stockStatus === "In stock" ? "#1a140ece " : "#630d0df3";
+  const stockColor = stockStatus === "In stock" ? "#1a1a1abd " : "#8f1010ff";
 
-  if (!mounted) {
-    return (
-      <div className={styles.groupOfSkeletons}>
-        <Skeleton width="150px" height="150px" style={{ margin: "0 auto" }} />
-        <Skeleton width="80%" height="1rem" style={{ margin: "0.5rem auto" }} />
-        <Skeleton
-          width="50px"
-          height="1rem"
-          style={{ margin: "0.5rem auto" }}
-        />
-        <Skeleton
-          width="80px"
-          height="2rem"
-          style={{ margin: "0.5rem auto" }}
-        />
-      </div>
-    );
-  }
+  // if (!mounted) {
+  //   return (
+  //     <div className={styles.groupOfSkeletons}>
+  //       <Skeleton width="150px" height="150px" style={{ margin: "0 auto" }} />
+  //       <Skeleton width="80%" height="1rem" style={{ margin: "0.5rem auto" }} />
+  //       <Skeleton
+  //         width="50px"
+  //         height="1rem"
+  //         style={{ margin: "0.5rem auto" }}
+  //       />
+  //       <Skeleton
+  //         width="80px"
+  //         height="2rem"
+  //         style={{ margin: "0.5rem auto" }}
+  //       />
+  //     </div>
+  //   );
+  // }
 
   const handleAddToCart = () => {
     if (product.sizes && !sizeSelected) {
@@ -74,7 +74,7 @@ export default function ProductCard({ product }) {
         <img src={product.image} alt={product.title} />
         <h3>{product.title}</h3>
       </Link>
-      <p>
+      <h4>
         {symbolPosition === "left" ? (
           <>
             {symbol}{convert(product.price)}
@@ -84,7 +84,7 @@ export default function ProductCard({ product }) {
             {convert(product.price)}{symbol}
           </>
         )}
-      </p>
+      </h4>
       <p
         className={styles.stockInfo}
         style={{
@@ -95,9 +95,9 @@ export default function ProductCard({ product }) {
       </p>
 
       {stockStatus === "In stock" ? (
-        <button onClick={handleAddToCart}>Add to Cart</button>
+        <button className="buttonPrimary" onClick={handleAddToCart}>Add to Cart</button>
       ) : (
-        <button disabled style={{ opacity: 0.6, cursor: "not-allowed" }}>
+        <button className="buttonPrimary" disabled style={{ opacity: 0.8, cursor: "not-allowed" }}>
           Out of Stock
         </button>
       )}
@@ -107,7 +107,12 @@ export default function ProductCard({ product }) {
         <>
           <label htmlFor="size-select"></label>
           <div className={styles.selectWrapper}>
-            <Ruler className={styles.selectIcon} />
+            <Ruler 
+              className={styles.selectIcon}
+              style={{
+                visibility: sizeSelected === "" ? "visible" : "hidden"
+              }}
+            />
             <select
               className={styles.sizeSelector}
               onChange={(e) => setSizeSelected(e.target.value)}

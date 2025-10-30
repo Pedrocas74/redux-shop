@@ -45,6 +45,7 @@ export default function Navbar() {
     <nav
       className={`${styles.navbar} ${visible ? styles.visible : styles.hidden}`}
     >
+      <div className={styles.navWrapper}>
       <Link href="/">Home</Link>
       <div className={styles.cartAndCurrency}>
         <Link href="/cart" aria-label="Open cart">
@@ -52,6 +53,7 @@ export default function Navbar() {
         </Link>
         <CurrencySelector />
       </div>
+    </div>
     </nav>
   );
 }
