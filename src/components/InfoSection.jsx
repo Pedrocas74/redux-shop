@@ -88,7 +88,7 @@ export default function InfoSection() {
 
         <li className={styles.statsItems}>
           {/* Join 10M happy customers*/}
-          <span className={styles.numbers}>+{inView && <CountUp end={10} duration={4} />}M&nbsp;</span>
+          <span className={styles.numbers}>+{inView && <CountUp end={8} duration={4} />}M&nbsp;</span>
           <p>Happy customers</p>
         </li>
 

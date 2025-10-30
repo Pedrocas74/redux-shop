@@ -1,15 +1,21 @@
 
 .productsContainer {
     text-align: center;
-    margin-bottom: 10vh;
+    margin-bottom: 20vh;
+    /* border: 1px solid; */
 }
-.productsContainer h2 + p{
-    margin-bottom: 5vh;
+.productsContainer h2 + p {
+    margin-bottom: 7vh;
+    line-height: 1.7;
+}
+.productsContainer p {
+    font-weight: 100;
+    letter-spacing: 0.05em;
 }
 
 .productsSelector {
     /* border: 1px solid rgb(33, 35, 139); */
-    margin-bottom: 10vh;
+    margin-bottom: 7vh;
     width: 100%;
     height: 60vh;
     display: flex;
@@ -25,7 +31,7 @@
   height: 100%;
   overflow: hidden;  
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  /* box-shadow: var(--shadow); */
   transition: all 0.6s ease;
   cursor: pointer;
 }
@@ -39,7 +45,8 @@
 }
 
 .overlay {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: var(--font-gatwick-jet);
+    font-weight: 600;
     position: absolute;
     inset: 0;
     display: flex;
@@ -48,7 +55,7 @@
     color: white;
     font-size: 1.7rem;
     font-weight: bold;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.199);
     opacity: 0;
     transition: opacity 0.4s ease;
 }
@@ -56,13 +63,10 @@
   opacity: 1;
 }
 
-.showAll {
-    margin-bottom: 10vh;
-}
-
 
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
+    gap: 1.5em;
 }
+

@@ -73,8 +73,10 @@ h3 {
   /* font-size: clamp(0.4rem, 2.5vw, 1.3rem); */
 }
 
-
 button {
+  font-family: var(--font-acma);
+  font-weight: 600;
+  letter-spacing: 0.05em;
   background: var(--clr-primary);
   color: var(--clr-bg);
   padding: var(--pd-top-down) var(--pd-left-right);
@@ -82,6 +84,43 @@ button {
   box-shadow: var(--shadow);
   border: none;
   font-size: var(--fs-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+/* 🟡 Primary (default) */
+.buttonPrimary {
+  background: var(--clr-primary);
+  color: var(--clr-secondary);
+}
+.buttonPrimary:hover {
+  background: var(--clr-primary-dark);
+  transform: translateY(-2px);
+}
+
+/* 🟠 Secondary (accent color) */
+.buttonSecondary {
+  background: var(--clr-accent);
+  color: var(--clr-bg);
+}
+.buttonSecondary:hover {
+  background: var(--clr-accent-dark);
+  transform: translateY(-2px);
+}
+
+/* ⚪️ Tertiary (subtle outline style) */
+.buttonTertiary {
+  background: transparent;
+  color: var(--clr-secondary);
+  border: 2px solid var(--clr-primary);
+  box-shadow: none;
+}
+.buttonTertiary:hover {
+  background: var(--clr-primary-light);
+  color: var(--clr-bg);
+  border-color: var(--clr-primary-dark);
+  transform: translateY(-2px);
 }
 
 a {
