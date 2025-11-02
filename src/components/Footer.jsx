@@ -1,6 +1,7 @@
 "use client";
 
 import styles from "./styles/Footer.module.css";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -16,15 +17,22 @@ export default function Footer() {
 
 
       <div className={styles.policiesContainer}>
-        <div className={styles.policiesLinks}>
-          <p>&copy; 2025 NAME, Inc. All rights reserved.</p>
-          <a href="/">Shipping Info</a>
-          <a href="/">Terms of Use</a>
-          <a href="/">Privacy Policy</a>
-          <a href="/">Returns and Refunds</a>
+        <div className={styles.leftContainer}>
+          <p>&copy; 2025 SunLiT, Inc. All rights reserved.</p>
+          <Link href="/shipping-info">Shipping Info</Link>
+          <Link href="/terms-of-use">Terms of Use</Link>
+          <Link href="/privacy-policy">Privacy Policy</Link>
+          <Link href="/returns-and-refunds">Returns & Refunds</Link>
+          <a
+          href="https://fakestoreapi.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>Powered by</span> FakeStore API
+        </a>
         </div>
         <div className={styles.rightContainer}>
-            <button type="button">Contact</button>
+            <a href="/" className="buttonPrimary">Contact</a>
             <div className={styles.creditContainer}>
                 <p>CARDS</p>
             </div>
@@ -33,13 +41,7 @@ export default function Footer() {
 
 
       <footer className={styles.footer}>
-        <a
-          href="https://fakestoreapi.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span>Powered by</span> FakeStore API
-        </a>
+        
         <a
           href="https://www.pedromagalhaes.vercel.app"
           target="_blank"

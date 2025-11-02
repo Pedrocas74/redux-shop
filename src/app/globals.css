@@ -25,7 +25,7 @@
   --clr-bg: #ffffff;
 
   --clr-accent: #f57d37;
-  --clr-accent-light: #ff995c;
+  --clr-accent-light: #ffc29e;
   --clr-accent-dark: #d96a25;  
 
   --clr-text: #1a1a1a;
@@ -113,7 +113,7 @@ button {
 .buttonTertiary {
   background: transparent;
   color: var(--clr-secondary);
-  border: 2px solid var(--clr-primary);
+  border: 3px solid var(--clr-primary);
   box-shadow: none;
 }
 .buttonTertiary:hover {
