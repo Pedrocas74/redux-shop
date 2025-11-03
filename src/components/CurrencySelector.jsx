@@ -1,25 +1,71 @@
-'use client';
+"use client";
 
-import { useDispatch, useSelector } from 'react-redux';
-import { setCurrency } from '../features/currency/currencySlice';
+import styles from "./styles/CurrencySelector.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrency } from "../features/currency/currencySlice";
+import { Euro, DollarSign, PoundSterling } from "lucide-react";
+
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+} from "@heroui/dropdown";
+import { Button } from "@heroui/button";
+
+
 
 export default function CurrencySelector() {
   const dispatch = useDispatch();
   const current = useSelector((state) => state.currency.current);
 
-  const handleChange = (e) => {
-    dispatch(setCurrency(e.target.value));
+  const currencies = [
+    { key: "EUR", icon: <Euro size={20} /> },
+    { key: "USD", icon: <DollarSign size={20} /> },
+    { key: "GBP", icon: <PoundSterling size={20} /> },
+  ];
+
+  const handleSelect = (key) => {
+    dispatch(setCurrency(key));
   };
 
+  let currentCurrency = currencies.find((c) => c.key === current);
+
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-      <label htmlFor="currency"></label>
-      <select id="currency" value={current} onChange={handleChange}>
-        <option value="EUR">€ EUR</option>
-        <option value="USD">$ USD</option>
-        <option value="GBP">£ GBP</option>
-      </select>
-    </div>
+    <>
+    <Dropdown>
+      <DropdownTrigger>
+        <Button     
+          className={styles.triggerButton}
+          variant="ghost"
+          size="sm"
+          disableRipple
+        >
+          
+          {currentCurrency?.icon || "currency"}
+          
+        </Button>
+      </DropdownTrigger>
+
+      <DropdownMenu
+        aria-label="Currency selection"
+        onAction={handleSelect}
+        className={styles.dropdownMenu}
+      >
+        {currencies
+          .filter(c => c.key !== current)
+          .map((currency) => (
+            <DropdownItem
+              key={currency.key}
+              className={styles.menuItem}
+              textValue={currency.key} 
+              onClick={() => handleSelect(currency.key)} 
+            >
+              {currency.icon}
+            </DropdownItem>
+          ))}
+      </DropdownMenu>
+    </Dropdown>
+    </>
   );
 }
-

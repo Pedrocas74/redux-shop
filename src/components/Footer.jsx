@@ -13,8 +13,6 @@ import {
   FaGooglePay,
 } from "react-icons/fa";
 import Image from "next/image";
-// import githubIcon from "/images/icons/socials/github-mark-white.png";
-// import linkedinIcon from "/images/icons/socials/InBug-White.png";
 
 export default function Footer() {
   return (
@@ -25,7 +23,7 @@ export default function Footer() {
           Apply the code <span>PEDRO74</span> at the checkout
         </h6>
       </div>
-      <hr />
+      {/* <hr /> */}
 
       <div className={styles.policiesContainer}>
         <div className={styles.leftContainer}>

@@ -115,7 +115,7 @@
 
 .socials {
     /* border: 1px solid yellow; */
-    width: 65px;
+    gap: 1em;
     display: flex;
     justify-content: space-between;
     align-items: center;

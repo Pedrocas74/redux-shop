@@ -1,0 +1,39 @@
+.triggerButton {
+  all: unset;
+  background: transparent;
+  color: var(--clr-bg);
+  padding: 0.2em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: var(--radius);
+  transition: background-color 0.2s;
+}
+
+.triggerButton:hover {
+  background-color: #00000026;
+}
+
+.dropdownMenu {
+  background: var(--clr-secondary);
+  color: var(--clr-bg);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px #00000026;
+  min-width: fit-content;
+  
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  cursor: pointer;
+  border-radius: var(--radius);
+  transition: background-color 0.2s;
+  padding: 5px; 
+}
+
+.menuItem:hover {
+  background-color: rgba(255, 255, 255, 0.123);
+}
