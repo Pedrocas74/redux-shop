@@ -13,7 +13,8 @@
 
 
 .itemsContainer {
-    
+    /* border: 1px solid red; */
+    margin-bottom: 10vh;
 }
 .cartItem {
     border-left: 1px solid #333;
@@ -97,26 +98,60 @@
     
 } */
 
-.clearAllButton {
-    
+.clearAllContainer {
+    width: 100%;
+    /* border: 1px solid; */
+    text-align: center;
+    margin-bottom: 10vh;
 }
+/* .clearAllButton {
+    
+} */
+
 
 
 
 
 .summarySection {
-    border: 1px solid orange;
-    margin-top: 10vh;
+    /* border: 1px solid rgb(255, 8, 0); */
+    margin-bottom: 20vh;
 }
 
 .summarySection h2 {
-    font-size: clamp(1.1rem, 2vw, 1.2rem);
+    font-size: clamp(1.2rem, 2vw, 1.3rem);
     text-align: center;
+    margin: 1.5em 0 2em 0;
 }
 
 .totalItems {
+    letter-spacing: 0.5px;
+}
+.subtotalPrice {
+    letter-spacing: 0.5px;
+    margin-bottom: 7vh;
+}
+.totalItems span,
+.subtotalPrice span {
+    font-weight: 600;
+}
+
+.summaryButtonsContainer {
+    /* border: 1px solid red; */
+     display: flex;
+     flex-direction: column;
 
 }
-.totalPrice {
-
+.summaryButtonsContainer a {
+    letter-spacing: 0.05em;
+    padding: var(--pd-top-down) var(--pd-left-right);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: none;
+    font-size: var(--fs-md);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    width: 70%;
+    margin: 0.2em auto;
 }
+

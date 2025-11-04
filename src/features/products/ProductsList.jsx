@@ -26,7 +26,7 @@ export default function ProductsList() {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <section className={styles.productsContainer}>
+    <section className={styles.productsContainer} id="products-list">
       <h2>Our Products</h2>
       <p>Select one</p>
 

@@ -1,7 +1,9 @@
 "use client";
 
 import styles from "./Cart.module.css";
+import Link from "next/link";
 import React from "react";
+import { Minus, Plus } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   removeFromCart,
@@ -38,7 +40,7 @@ export default function Cart() {
   };
   const symbol = getSymbol();
 
-  if (items.length === 0) return <p>Your cart is empty</p>;
+  // if (items.length === 0) return <p>Your cart is empty</p>;
 
   return (
     <section className={styles.cartSection}>
@@ -74,6 +76,7 @@ export default function Cart() {
 
           <div className={styles.buttonsContainer}>
             <button
+              style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
               className="buttonSecondary"
               onClick={() =>
                 dispatch(
@@ -83,9 +86,10 @@ export default function Cart() {
                 )
               }
             >
-              +
+              <Plus size={15} /> 
             </button>
             <button
+              style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
               className="buttonSecondary"
               onClick={() =>
                 dispatch(
@@ -95,7 +99,7 @@ export default function Cart() {
                 )
               }
             >
-              -
+              <Minus size={15} />
             </button>
             <button
               className="buttonSecondary"
@@ -112,20 +116,28 @@ export default function Cart() {
           </article>
         ))}
       </div>
-
+      
+      <div className={styles.clearAllContainer}>
       <button className={`buttonTertiary ${styles.clearAllButton} `} onClick={() => dispatch(clearCart())}>
         Clear Cart
       </button>
-
+      </div>
+        <hr />
       <section className={styles.summarySection}>
         <h2>Order Summary</h2>
-        <p className={styles.totalItems}>Total Items: {totalQuantity}</p>
-        <p className={styles.totalPrice}>
-          Total Price:{" "}
+        <p className={styles.totalItems}><span>Total Items:</span> {totalQuantity}</p>
+        <p className={styles.subtotalPrice}>
+          <span>Subtotal:</span>{" "}
           {symbolPosition === "left"
             ? `${symbol}${convert(totalPrice)}`
             : `${convert(totalPrice)}${symbol}`}
         </p>
+        
+
+        <div className={styles.summaryButtonsContainer}>
+          <Link href="/#products-list" className="buttonSecondary" >Continue Shopping</Link>
+          <Link href="/checkout" className="buttonPrimary">Proceed to Checkout</Link>
+        </div>
       </section>
     </section>
   );
