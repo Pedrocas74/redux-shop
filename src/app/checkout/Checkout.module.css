@@ -61,6 +61,7 @@
 
 .toggleCode {
     margin: 0.5em 0 1em 0;
+    cursor: pointer;
 }
 .promoCodeContainer {
     /* border: 1px solid red; */
