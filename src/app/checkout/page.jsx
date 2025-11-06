@@ -13,6 +13,7 @@ import {
   FaCcStripe,
   FaGooglePay,
 } from "react-icons/fa";
+import FooterSimple from "@components/FooterSimple";
 
 export default function Checkout() {
   const { items } = useSelector((state) => state.cart);
@@ -58,6 +59,7 @@ export default function Checkout() {
   };
 
   return (
+    <>
     <section className={styles.checkoutSection}>
       <h1>Checkout</h1>
 
@@ -149,38 +151,38 @@ export default function Checkout() {
             <input type="radio" name="payment" defaultChecked /> Credit/Debit
             Card
             <span className={styles.paymentIcons}>
-              <FaCcVisa  />
-              <FaCcMastercard  />
-              <FaCcAmex  />
+              <FaCcVisa size={22} />
+              <FaCcMastercard  size={22} />
+              <FaCcAmex size={22} />
             </span>
           </label>
 
           <label>
             <input type="radio" name="payment" value="card" /> PayPal
             <span className={styles.paymentIcons}>
-              <FaCcPaypal  />
+              <FaCcPaypal size={22} />
             </span>
           </label>
 
           <label>
             <input type="radio" name="payment" value="applepay" /> Apple Pay
             <span className={styles.paymentIcons}>
-              <FaCcApplePay  />
+              <FaCcApplePay size={22} />
             </span>
           </label>
 
           <label>
             <input type="radio" name="payment" value="googlepay" /> Google Pay
             <span className={styles.paymentIcons}>
-              <FaGooglePay  />
+              <FaGooglePay size={22} />
             </span>
           </label>
 
           <label>
             <input type="radio" name="payment" value="other" /> Other methods
             <span className={styles.paymentIcons}>
-              <FaCcAmazonPay  />
-              <FaCcStripe  />
+              <FaCcAmazonPay size={22} />
+              <FaCcStripe size={22} />
             </span>
           </label>
         </div>
@@ -190,5 +192,7 @@ export default function Checkout() {
         Place Order
       </button>
     </section>
+    <FooterSimple />
+    </>
   );
 }

@@ -2,6 +2,7 @@
 
 import styles from "./styles/RelatedProductsSlider.module.css";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 
 export default function RelatedProductsSlider({ category, id }) {
   const products = useSelector((state) => state.products.products);
@@ -27,28 +28,32 @@ export default function RelatedProductsSlider({ category, id }) {
   };
   const symbol = getSymbol();
 
-
   return (
     <section className={styles.relatedProductsSection}>
       <h3>You may also like</h3>
       <div className={styles.sliderContainer}>
         {relatedProducts.map((product) => (
-            <div key={product.id} className={styles.productCard}>
+          <div key={product.id} className={styles.productCard}>
+            <Link href={`/product/${product.id}`}>
             <img src={product.image} alt={product.title} />
             <p>{product.title}</p>
-            <p>{symbolPosition === "left" ? (
-            <>
-              {symbol}
-              {convert(product.price)}
-            </>
-          ) : (
-            <>
-              {convert(product.price)}
-              {symbol}
-            </>
-          )}</p>
-            </div>
+            </Link>
+            <p>
+              {symbolPosition === "left" ? (
+                <>
+                  {symbol}
+                  {convert(product.price)}
+                </>
+              ) : (
+                <>
+                  {convert(product.price)}
+                  {symbol}
+                </>
+              )}
+            </p>
+          </div>
         ))}
+        
       </div>
     </section>
   );

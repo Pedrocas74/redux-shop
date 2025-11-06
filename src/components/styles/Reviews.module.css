@@ -31,7 +31,7 @@
   /* border: 1px solid green; */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .navButton {

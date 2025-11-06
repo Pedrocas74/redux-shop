@@ -11,6 +11,7 @@ import {
   decreaseQuantity,
   clearCart,
 } from "./cartSlice";
+import FooterSimple from "@components/FooterSimple";
 
 export default function Cart() {
   const { items } = useSelector((state) => state.cart);
@@ -43,103 +44,131 @@ export default function Cart() {
   // if (items.length === 0) return <p>Your cart is empty</p>;
 
   return (
-    <section className={styles.cartSection}>
-      <h1>Your Cart</h1>
+    <>
+      <section className={styles.cartSection}>
+        <h1>Your Cart</h1>
 
-      <div className={styles.itemsContainer}>
-        {items.map((item) => (
-          <article
-            key={`${item.id}-${item.selectedSize || "default"}`}
-            className={styles.cartItem}
+        <div className={styles.itemsContainer}>
+          {items.map((item) => (
+            <article
+              key={`${item.id}-${item.selectedSize || "default"}`}
+              className={styles.cartItem}
+            >
+              <img src={item.image} alt={`Image of ${item.title}`} />
+              <div className={styles.rightContainer}>
+                <div className={styles.itemInformation}>
+                  <p className={styles.title}>{item.title}</p>
+                  <p className={styles.price}>
+                    <span>Price: </span>
+                    {symbolPosition === "left" ? (
+                      <>
+                        {symbol}
+                        {convert(item.price)}
+                      </>
+                    ) : (
+                      <>
+                        {convert(item.price)}
+                        {symbol}
+                      </>
+                    )}
+                  </p>
+                  <p className={styles.quantity}>
+                    <span>Quantity: </span>
+                    {item.quantity}
+                  </p>
+                  {item.selectedSize && (
+                    <p className={styles.size}>
+                      <span>Size: </span> {item.selectedSize}
+                    </p>
+                  )}
+                </div>
+
+                <div className={styles.buttonsContainer}>
+                  <button
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                    className="buttonSecondary"
+                    onClick={() =>
+                      dispatch(
+                        increaseQuantity(
+                          `${item.id}-${item.selectedSize || "default"}`
+                        )
+                      )
+                    }
+                  >
+                    <Plus size={15} />
+                  </button>
+                  <button
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                    className="buttonSecondary"
+                    onClick={() =>
+                      dispatch(
+                        decreaseQuantity(
+                          `${item.id}-${item.selectedSize || "default"}`
+                        )
+                      )
+                    }
+                    disabled={item.quantity === 1 ? true : false}
+                  >
+                    <Minus size={15} />
+                  </button>
+                  <button
+                    className="buttonSecondary"
+                    onClick={() =>
+                      dispatch(
+                        removeFromCart(
+                          `${item.id}-${item.selectedSize || "default"}`
+                        )
+                      )
+                    }
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className={styles.clearAllContainer}>
+          <button
+            className={`buttonTertiary ${styles.clearAllButton} `}
+            onClick={() => dispatch(clearCart())}
           >
-            <img src={item.image} alt={`Image of ${item.title}`} />
-          <div className={styles.rightContainer}>
-            <div className={styles.itemInformation}>
-              <p className={styles.title}>{item.title}</p>
-              <p className={styles.price}>
-                <span>Price:{" "}</span>
-                {symbolPosition === "left" ? (
-                  <>
-                    {symbol}
-                    {convert(item.price)}
-                  </>
-                ) : (
-                  <>
-                    {convert(item.price)}
-                    {symbol}
-                  </>
-                )}
-              </p>
-              <p className={styles.quantity}><span>Quantity:{" "} </span>{item.quantity}</p>
-              {item.selectedSize && <p className={styles.size}><span>Size:{" "} </span> {item.selectedSize}</p>}
-            </div>
-
-          <div className={styles.buttonsContainer}>
-            <button
-              style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-              className="buttonSecondary"
-              onClick={() =>
-                dispatch(
-                  increaseQuantity(
-                    `${item.id}-${item.selectedSize || "default"}`
-                  )
-                )
-              }
-            >
-              <Plus size={15} /> 
-            </button>
-            <button
-              style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-              className="buttonSecondary"
-              onClick={() =>
-                dispatch(
-                  decreaseQuantity(
-                    `${item.id}-${item.selectedSize || "default"}`
-                  )
-                )
-              }
-              disabled={item.quantity === 1 ? true : false}
-            >
-              <Minus size={15} />
-            </button>
-            <button
-              className="buttonSecondary"
-              onClick={() =>
-                dispatch(
-                  removeFromCart(`${item.id}-${item.selectedSize || "default"}`)
-                )
-              }
-            >
-              Remove
-            </button>
-          </div>
+            Clear Cart
+          </button>
         </div>
-          </article>
-        ))}
-      </div>
-      
-      <div className={styles.clearAllContainer}>
-      <button className={`buttonTertiary ${styles.clearAllButton} `} onClick={() => dispatch(clearCart())}>
-        Clear Cart
-      </button>
-      </div>
         <hr />
-      <section className={styles.summarySection}>
-        <h2>Order Summary</h2>
-        <p className={styles.totalItems}><span>Total Items:</span> {totalQuantity}</p>
-        <p className={styles.subtotalPrice}>
-          <span>Subtotal:</span>{" "}
-          {symbolPosition === "left"
-            ? `${symbol}${convert(totalPrice)}`
-            : `${convert(totalPrice)}${symbol}`}
-        </p>
-        
+        <section className={styles.summarySection}>
+          <h2>Order Summary</h2>
+          <p className={styles.totalItems}>
+            <span>Total Items:</span> {totalQuantity}
+          </p>
+          <p className={styles.subtotalPrice}>
+            <span>Subtotal:</span>{" "}
+            {symbolPosition === "left"
+              ? `${symbol}${convert(totalPrice)}`
+              : `${convert(totalPrice)}${symbol}`}
+          </p>
 
-        <div className={styles.summaryButtonsContainer}>
-          <Link href="/#products-list" className="buttonSecondary" >Continue Shopping</Link>
-          <Link href="/checkout" className="buttonPrimary">Proceed to Checkout</Link>
-        </div>
+          <div className={styles.summaryButtonsContainer}>
+            <Link href="/#products-list" className="buttonSecondary">
+              Continue Shopping
+            </Link>
+            <Link href="/checkout" className="buttonPrimary">
+              Proceed to Checkout
+            </Link>
+          </div>
+        </section>
       </section>
-    </section>
+      {/* <FooterSimple /> */}
+    </>
   );
 }

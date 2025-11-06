@@ -1,7 +1,7 @@
 .checkoutSection {
     /* border: 1px solid red; */
     width: 85%;
-    margin: 0 auto 20vh auto;
+    margin: 0 auto;
 }
 
 .checkoutSection h1 {
@@ -93,7 +93,7 @@
 
 .paymentSection {
     /* border: 1px solid red; */
-    margin-bottom: 5vh;
+    margin-bottom: 10vh;
 }
 .paymentSection h2 {
     text-align: center;
@@ -110,9 +110,8 @@
     /* border: 1px solid red; */
     display: inline-flex;
     min-height: fit-content;
-    margin-left: 0.3em;
-    width: 4em;
-    gap: 0.1em;
+    margin-left: 0.5em;
+    gap: 0.2em;
 }
 .paymentMethodsContainer label {
     /* border: 1px solid green; */
@@ -127,5 +126,5 @@
 .placeOrderButton {
     width: 90%;
     display: block;
-    margin: 0 auto;
+    margin: 0 auto 10vh auto;
 }

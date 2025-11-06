@@ -69,6 +69,7 @@ export default function Footer() {
             href="https://www.pedromagalhaes.vercel.app"
             target="_blank"
             rel="noopener noreferrer"
+            className={styles.madeByPedro}
           >
             Made by Pedro
           </a>
@@ -80,8 +81,7 @@ export default function Footer() {
             >
               <Image
                 src="/images/icons/socials/github-mark-white.png"
-                width={25}
-                height={25}
+                fill
                 priority
                 alt="Github link"
               />
@@ -93,8 +93,7 @@ export default function Footer() {
             >
               <Image
                 src="/images/icons/socials/InBug-White.png"
-                width={25}
-                height={25}
+                fill
                 priority
                 alt="Linkedin link"
               />

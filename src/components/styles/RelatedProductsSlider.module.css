@@ -1,12 +1,13 @@
 .relatedProductsSection {
-    /* border: 1px solid red; */
+    border: 1px solid red;
     width: 100%;
     margin-bottom: 10vh;
 }
 
 .relatedProductsSection h3 {
-    /* border: 1px solid black; */
-    text-align: center;
+    border: 1px solid black;
+    width: 90%;
+    /* padding-left: 1rem; */
 }
 
 .sliderContainer {
