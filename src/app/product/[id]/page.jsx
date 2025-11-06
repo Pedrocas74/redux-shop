@@ -16,17 +16,14 @@ export default function ProductDetails() {
     summary2: false,
     summary3: false,
   });
+  const [mounted, setMounted] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
 
   const product = useSelector((state) =>
     state.products.products.find((p) => p.id === parseInt(id))
   );
-
-  const stockStatus = product?.stock;
-
   const { current, rates } = useSelector((state) => state.currency);
-  const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
   const convert = (price) => (price * rates[current]).toFixed(2);
@@ -45,6 +42,7 @@ export default function ProductDetails() {
     }
   };
   const symbol = getSymbol();
+  const stockStatus = product?.stock;
 
   const arrow1 = openStates.summary1 ? <ChevronUp color="white"/> : <ChevronDown color="#333"/>;
   const arrow2 = openStates.summary2 ? <ChevronUp color="white"/> : <ChevronDown color="#333"/>;
