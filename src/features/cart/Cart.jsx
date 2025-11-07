@@ -5,25 +5,42 @@ import Link from "next/link";
 import React from "react";
 import { Minus, Plus } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 import {
   removeFromCart,
   increaseQuantity,
   decreaseQuantity,
   clearCart,
+  reconcileWithProducts,
 } from "./cartSlice";
-import FooterSimple from "@components/FooterSimple";
+// import FooterSimple from "@components/FooterSimple";
 import Breadcrumbs from "@components/Breadcrumbs";
+import { fetchProducts } from "../products/productsSlice.js";
 
 export default function Cart() {
-  const { items } = useSelector((state) => state.cart);
+  const { items = [] } = useSelector((state) => state.cart || { items: [] }); //items in cart
   const { current, rates } = useSelector((state) => state.currency);
+  const { products = [] } = useSelector((state) => state.products); //products in productList
   const dispatch = useDispatch();
 
-  const totalQuantity = items.reduce((sum, item) => sum + item.quantity, 0);
-  const totalPrice = items.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+  //fetch products if they're not loaded
+  useEffect(() => {
+    if (!products.length) {
+      dispatch(fetchProducts());
+    }
+  }, [dispatch, products.length]);
+
+  //update stock status on cart
+  useEffect(() => {
+    if (items.length > 0 && products.length > 0) {
+      dispatch(reconcileWithProducts(products));
+    }
+  }, [dispatch, items.length, products]);
+
+  const totalQuantity =
+    items?.reduce((sum, item) => sum + item.quantity, 0) || 0;
+  const totalPrice =
+    items?.reduce((sum, item) => sum + item.price * item.quantity, 0) || 0;
 
   const convert = (price) => (price * rates[current]).toFixed(2);
   let symbolPosition = "right"; //euro as default
@@ -42,21 +59,90 @@ export default function Cart() {
   };
   const symbol = getSymbol();
 
-  // if (items.length === 0) return <p>Your cart is empty</p>;
+  const unavailableItems = items?.filter((item) => item.unavailable) || [];
+
+  // EMPTY CARD MESSAGE
+  if (!items?.length) {
+    return (
+      <section className={styles.cartSection}>
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Cart", href: "/cart" },
+          ]}
+        />
+        <h1>Your Cart</h1>
+        <p className={styles.emptyCart}>Your cart is empty</p>
+        <Link href="/#products-list" className="buttonSecondary">
+          Continue Shopping
+        </Link>
+      </section>
+    );
+  }
 
   return (
     <>
       <section className={styles.cartSection}>
-      <Breadcrumbs 
-        items={[{ label: "Home", href: "/" }, { label: "Cart", href: "/cart" }]}
-      />
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Cart", href: "/cart" },
+          ]}
+        />
         <h1>Your Cart</h1>
+
+        {/* WARNING if there are unavailable items */}
+        {unavailableItems.length > 0 && (
+          <div className={styles.warningBanner}>
+            <p>Some items in your cart are no longer available:</p>
+            <ul>
+              {unavailableItems.map((item) => (
+                <li
+                  key={`unavailable-${item.id}-${
+                    item.selectedSize || "default"
+                  }`}
+                >
+                  {item.title}{" "}
+                  {item.selectedSize ? `(Size: ${item.selectedSize})` : ""}
+                  <button
+                    className="buttonTertiary"
+                    onClick={() =>
+                      dispatch(
+                        removeFromCart(
+                          `${item.id}-${item.selectedSize || "default"}`
+                        )
+                      )
+                    }
+                  >
+                    Remove
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <button
+              className="buttonSecondary"
+              onClick={() => {
+                unavailableItems.forEach((item) =>
+                  dispatch(
+                    removeFromCart(
+                      `${item.id}-${item.selectedSize || "default"}`
+                    )
+                  )
+                );
+              }}
+            >
+              Remove All Unavailable Items
+            </button>
+          </div>
+        )}
 
         <div className={styles.itemsContainer}>
           {items.map((item) => (
             <article
               key={`${item.id}-${item.selectedSize || "default"}`}
-              className={styles.cartItem}
+              className={`${styles.cartItem} ${
+                item.unavailable ? styles.unavailableItem : ""
+              }`}
             >
               <img src={item.image} alt={`Image of ${item.title}`} />
               <div className={styles.rightContainer}>
@@ -84,6 +170,12 @@ export default function Cart() {
                     <p className={styles.size}>
                       <span>Size: </span> {item.selectedSize}
                     </p>
+                  )}
+
+                  {item.unavailable && (
+                    <div className={styles.unavailableOverlay}>
+                      Currently Unavailable
+                    </div>
                   )}
                 </div>
 

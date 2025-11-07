@@ -1,11 +1,14 @@
-import ProductsList from '@features/products/ProductsList';
+"use client";
+
 import Hero from '@components/Hero';
 import InfoSection from '@components/InfoSection';
+import ProductsList from '@features/products/ProductsList';
 import Reviews from '@components/Reviews';
 import Footer from '@components/Footer';
 
-
 export default function Home() {
+
+
   return (
     <main>
       <Hero />  

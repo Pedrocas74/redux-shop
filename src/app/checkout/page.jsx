@@ -74,7 +74,7 @@ export default function Checkout() {
           <thead>
             <tr>
               <th scope="col">Items</th>
-              <th scope="col">Subtotal ({symbol})</th>
+              <th style={{textAlign: "right"}} scope="col">Subtotal ({symbol})</th>
             </tr>
           </thead>
           <tbody>

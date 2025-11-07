@@ -1,45 +1,64 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 
-
-export const fetchProducts = createAsyncThunk(
-    'products/fetchProducts',
-    async (_, thunkAPI) => {
-        // If products already loaded in the current app session, return them
-        // This prevents recalculating stock during route navigation (only recalculated after full browser refresh)
-        const state = thunkAPI.getState();
-        const existing = state.products?.products;
-        if (existing && existing.length > 0) {
-          return existing;
-        }
-
-        try {
-            const response = await axios.get('https://fakestoreapi.com/products');
-            return response.data;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error.response?.data || "Error fetching the products");
-        }
-    }
-);
-
 const initialState = {
     products: [],
     loading: false,
     error: null,
 };
 
+export const fetchProducts = createAsyncThunk(
+    'products/fetchProducts',
+    async (_, thunkAPI) => {
+        const state = thunkAPI.getState();
+        const existing = state.products?.products;
+        if (existing && existing.length > 0) {
+          return { products: existing, cartItems: (state.cart?.items ?? [])};
+        }
+
+        try {
+            const response = await axios.get('https://fakestoreapi.com/products');
+            
+            // Get cart items to check availability
+            let cartItems = [];
+            if (typeof window !== 'undefined') {
+  const cartRaw = localStorage.getItem('cart') || '{}';
+  try {
+    const cart = JSON.parse(cartRaw);
+    if (cart.items) {
+      cart.items = cart.items.map(item =>
+        item.id === p.id ? { ...item, unavailable: true } : item
+      );
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+  } catch {}
+}
+
+            return { 
+              products: response.data,
+              cartItems 
+            };
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response?.data || "Error fetching the products");
+        }
+    }
+);
+
 const productSlice = createSlice({
-  name: "products",
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
+    name: "products",
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
       .addCase(fetchProducts.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.loading = false;
+        
+        
+        const { products, cartItems } = action.payload;
 
         const nameMap = {
           "fjallraven - foldsack no. 1 backpack, fits 15 laptops": "Urban Backpack",
@@ -67,20 +86,37 @@ const productSlice = createSlice({
 
         const sizes = ["XS", "S", "M", "L", "XL"];
 
-        state.products = action.payload.map((p) => {
+        state.products = products.map((p) => {
           // If product already has stock keep it unchanged
           if (p.stock) return p;
 
           const cleanTitle = p.title.trim().toLowerCase();
           const hasSizes =
             (p.category === "men's clothing" || p.category === "women's clothing") &&
-            p.title.toLowerCase().trim() !== "fjallraven - foldsack no. 1 backpack, fits 15 laptops";
+            p.title.toLowerCase().trim() !== "fjallraven - foldsack no. 1 backpack, fits 15 laptops"; //ignore the backpack
+          const newStatus = Math.random() > 0.2 ? "In stock" : "Sold out";
+
+          // Check if this product is in cart and now out of stock
+          const inCart = cartItems.some(item => item.id === p.id);
+          if (inCart && newStock === "Sold out") {
+            // Update cart item to mark as unavailable
+            const cart = JSON.parse(localStorage.getItem('cart') || '{}');
+            if (cart.items) {
+                cart.items = cart.items.map(item => 
+                    item.id === p.id 
+                        ? { ...item, unavailable: true }
+                        : item
+                );
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }
+          }
 
           return {
             ...p,
             title: nameMap[cleanTitle] || p.title,
-            stock: Math.random() > 0.2 ? "In stock" : "Sold out",
+            stock: newStatus,
             sizes: hasSizes ? sizes : null,
+            
           }; 
         });
       })
@@ -88,7 +124,7 @@ const productSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       });
-  },
+    },
 });
 
 

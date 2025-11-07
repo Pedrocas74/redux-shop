@@ -12,6 +12,51 @@
 
 
 
+.warningBanner {
+  background: #fff3cd;
+  border: 1px solid #ffeeba;
+  color: #856404;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+}
+
+.warningBanner button {
+  margin-left: 1rem;
+}
+
+.warningBanner ul {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.unavailableItem {
+  opacity: 0.7;
+  position: relative;
+}
+
+.unavailableOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255,255,255,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #dc3545;
+}
+
+
+
+
+
+
+
+
+
 .itemsContainer {
     /* border: 1px solid red; */
     margin-bottom: 10vh;

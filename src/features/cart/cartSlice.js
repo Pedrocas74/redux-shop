@@ -20,14 +20,17 @@ const saveCartToLocalStorage = (state) => {
   }
 };
 
-const initialState =
-  typeof window !== 'undefined'
-    ? loadCartFromLocalStorage()
-    : { items: [], totalQuantity: 0, totalPrice: 0 };
+const initialState = {
+  items: [],
+  totalQuantity: 0,
+  totalPrice: 0
+};
 
 const cartSlice = createSlice({
   name: 'cart',
-  initialState,
+  initialState: typeof window !== 'undefined' 
+    ? loadCartFromLocalStorage() || initialState
+    : initialState,
   reducers: {
     addToCart: (state, action) => {
       const { product, selectedSize } = action.payload;
@@ -104,9 +107,21 @@ const cartSlice = createSlice({
       state.totalPrice = 0;
       saveCartToLocalStorage(state);
     },
+    reconcileWithProducts: (state, action) => {
+  
+  state.items = state.items.map(item => {
+        const productInState = action.payload.find(p => p.id === item.id);
+        return {
+          ...item,
+          unavailable: productInState?.stock === "Sold out"
+        };
+      });
+      
+      saveCartToLocalStorage(state);
+    }
   },
 });
 
-export const { addToCart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart, reconcileWithProducts } = cartSlice.actions;
 export default cartSlice.reducer;
 
