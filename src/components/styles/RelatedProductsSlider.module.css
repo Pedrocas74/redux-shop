@@ -1,13 +1,13 @@
 .relatedProductsSection {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 100%;
     margin-bottom: 10vh;
 }
 
 .relatedProductsSection h3 {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 90%;
-    /* padding-left: 1rem; */
+    margin: 0 auto;
 }
 
 .sliderContainer {
@@ -15,6 +15,8 @@
   overflow-x: auto;
   gap: 2em;
   padding: 1.5em 1rem;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 }
 
 .productCard {
@@ -26,10 +28,13 @@
 
 }
 .productCard img {
-    border-bottom: 1px solid #ccc;
     padding: 0.5em;
     width: 150px;
     height: 200px;
+}
+.productTitle {
+
+    border-top: 1px solid #ccc;
 }
 .productCard p {
     padding: 0.2em 0 0.2em 0.2em;

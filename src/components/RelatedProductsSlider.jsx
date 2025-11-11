@@ -36,7 +36,7 @@ export default function RelatedProductsSlider({ category, id }) {
           <div key={product.id} className={styles.productCard}>
             <Link href={`/product/${product.id}`}>
             <img src={product.image} alt={product.title} />
-            <p>{product.title}</p>
+            <p className={styles.productTitle}>{product.title}</p>
             </Link>
             <p>
               {symbolPosition === "left" ? (

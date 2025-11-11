@@ -19,52 +19,38 @@ import Breadcrumbs from "@components/Breadcrumbs";
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 
+
 export default function Checkout() {
   const { items } = useSelector((state) => state.cart);
   const { current, rates } = useSelector((state) => state.currency);
-  const [showCode, setShowCode] = useState(false);
-  const [code, setCode] = useState("");
-  const [isApplied, setIsApplied] = useState(false);
+  const [showCode, setShowCode] = useState(false); //promo code input display set | hidden -> visible
+  const [code, setCode] = useState(""); //promo code input
+  const [isApplied, setIsApplied] = useState(false); //promo code validation
   const totalPrice = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
-  const [discountedTotal, setDiscountedTotal] = useState(totalPrice);
-  const [paymentMethod, setPaymentMethod] = useState("card");
-  const [isPlaced, setIsPlaced] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [discountedTotal, setDiscountedTotal] = useState(totalPrice); //total price BEFORE|AFTER discount
+  const [paymentMethod, setPaymentMethod] = useState("card"); //defaul for card payment method
+  const [isPlaced, setIsPlaced] = useState(false); //place order button click
+  const [isProcessing, setIsProcessing] = useState(false); //payment processing -> successful
   const router = useRouter();
 
   useEffect(() => {
-    if (isPlaced) {
-      const timer = setTimeout(() => {
-        setIsProcessing(false);
+  if (!isPlaced) return;
 
-      const redirectTimer = setTimeout(() => {
-        router.replace("/?payment=success");
-      }, 3000);
+  setIsProcessing(true);
 
-      return () => clearTimeout(redirectTimer);
-      }, 4000);
+  const totalDelay = 4000 + 3000; 
+  const timer = setTimeout(() => {
+    setIsProcessing(false);
+    router.replace("/?payment=success");
+  }, totalDelay);
 
-      return () => clearTimeout(timer);
-    }
-  }, [isPlaced]);
+  return () => clearTimeout(timer);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setIsProcessing(false);
+}, [isPlaced, router]);
 
-      
-  //     const redirectTimer = setTimeout(() => {
-  //       router.push("/"); 
-  //     }, 2000);
-
-  //     return () => clearTimeout(redirectTimer);
-  //   }, 3000);
-
-  //   return () => clearTimeout(timer);
-  // }, [isPlaced]);
 
   const convert = (price) => (price * rates[current]).toFixed(2);
 
@@ -347,6 +333,7 @@ export default function Checkout() {
                 <>
                   <h3>Payment successful!</h3>
                   <CheckCircle size={50}/>
+                  
                 </>
               )}
             </div>

@@ -150,7 +150,7 @@ export default function ProductDetails() {
           />
         </figure>
 
-        {product.sizes && (
+        {stockStatus === "In stock" && product.sizes && (
           <div className={styles.sizeSelector}>
             {product.sizes.map((size) => (
               <button
