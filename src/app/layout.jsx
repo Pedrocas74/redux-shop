@@ -59,7 +59,6 @@ export const gatwickJet = localFont({
 });
 
 export const metadata = {
-  //title of the app
   title: "Redux Shop",
   description: "Awesome e-commerce store",
 };
@@ -69,7 +68,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${acma.variable} ${gatwickJet.variable}`}>
         <ReduxProvider>
-          <Navbar />
+          {/* <Navbar /> */}
           <main>
             {children}
             <Toaster
