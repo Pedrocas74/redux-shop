@@ -81,7 +81,7 @@
     background: radial-gradient(circle at center, #ff9d00 0%, #ff6a00 100%);
     border-radius: 50%;
     z-index: 0;
-    /* border: 5px solid #00000000; */
+    border: 5px solid black;
 }
 
 .topCity {
@@ -91,8 +91,6 @@
     position: fixed;
     top: 0;
     left: 0;
-    background: url("/images/city.webp") no-repeat bottom center;
-    background-size: cover;
     z-index: 0;
 }
 
@@ -103,8 +101,6 @@
     position: fixed;
     bottom: 0;
     right: 0;
-    background: url("/images/city.webp") no-repeat bottom center;
-    background-size: cover;
     z-index: -1;
 }
 

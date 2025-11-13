@@ -1,63 +1,41 @@
 "use client";
 
 import styles from "./styles/Hero.module.css";
-import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValueEvent,
+} from "framer-motion";
 import { SquareArrowDown } from "lucide-react";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Hero() {
   const { scrollY } = useScroll();
   const [isMoving, setIsMoving] = useState(false);
-  useMotionValueEvent(scrollY, "change", (latest) => setIsMoving(latest > 0));
-  
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsMoving((prev) => (prev === latest > 0 ? prev : latest > 0));
+  });
+
   const topCityY = useTransform(scrollY, [0, 1500], ["0%", "-50%"]);
   const bottomCityY = useTransform(scrollY, [0, 1500], ["0%", "50%"]);
-  const titleOpacity = useTransform(
-    scrollY,
-    [200, 600, 2200, 2300],
-    ["0%", "100%", "100%", "0%"]
-  );
-  const sunBorder = useTransform(
-    scrollY,
-    [0, 1000],
-    ["22%", "5px solid black"]
-  );
-  const sunZoom = useTransform(scrollY, [2100, 2600], [1, 1.7]);
+  const titleOpacity = useTransform(scrollY, [200, 600, 2200, 2300], [0, 1, 1, 0]);
+  const sunZoom = useTransform(scrollY, [0, 2600], [1, 1.5]);
   const sunOpacity = useTransform(scrollY, [2300, 2600], ["100%", "0%"]);
-  const wOp = useTransform(
-    scrollY,
+  const letters = ["W", "E", "L", "C", "O", "M", "E"];
+  const offsets = [
     [300, 400, 1500, 1600],
-    ["0%", "100%", "100%", "0%"]
-  );
-  const eOp = useTransform(
-    scrollY,
     [400, 500, 1600, 1700],
-    ["0%", "100%", "100%", "0%"]
-  );
-  const lOp = useTransform(
-    scrollY,
     [500, 600, 1700, 1800],
-    ["0%", "100%", "100%", "0%"]
-  );
-  const cOp = useTransform(
-    scrollY,
     [600, 700, 1800, 1900],
-    ["0%", "100%", "100%", "0%"]
-  );
-  const oOp = useTransform(
-    scrollY,
     [700, 800, 1900, 2000],
-    ["0%", "100%", "100%", "0%"]
-  );
-  const mOp = useTransform(
-    scrollY,
     [800, 900, 2000, 2100],
-    ["0%", "100%", "100%", "0%"]
-  );
-  const lastEOp = useTransform(
-    scrollY,
     [900, 1000, 2100, 2200],
-    ["0%", "100%", "100%", "0%"]
+  ];
+
+  const opacities = offsets.map(([a, b, c, d]) =>
+    useTransform(scrollY, [a, b, c, d], ["0%", "100%", "100%", "0%"])
   );
 
   const planeX = useTransform(scrollY, [300, 1000], ["-100%", "100%"]);
@@ -71,18 +49,33 @@ export default function Hero() {
           scaleY: -1,
           scaleX: -1,
         }}
-      ></motion.div>
+      >
+        <Image
+          src="/images/city.webp"
+          alt="Top city skyline"
+          fill
+          priority
+          sizes="(max-width: 768px) 100vw, 50vw"
+          style={{ objectFit: "cover" }}
+        />
+      </motion.div>
 
       <div className={styles.heroContainer}>
         <div className={`${styles.arrowLeft} ${styles.heartbeat}`}>
-          <SquareArrowDown size={30} style={{ visibility: isMoving ? "hidden" : "visible",
-            opacity: 0.2
-          }} />
+          <SquareArrowDown
+            size={30}
+            style={{
+              opacity: isMoving ? 0 : 0.2
+            }}
+          />
         </div>
         <div className={`${styles.arrowRight} ${styles.heartbeat}`}>
-          <SquareArrowDown size={30} style={{ visibility: isMoving ? "hidden" : "visible", 
-            opacity: 0.2
-          }} />
+          <SquareArrowDown
+            size={30}
+            style={{
+              opacity: isMoving ? 0 : 0.2
+            }}
+          />
         </div>
         <div className={styles.heroWrapper}>
           <div className={styles.topTitleContainer}>
@@ -117,61 +110,20 @@ export default function Hero() {
 
             <motion.div
               className={styles.sun}
-              style={{ border: sunBorder, scale: sunZoom, opacity: sunOpacity }}
+              style={{ scale: sunZoom, opacity: sunOpacity }}
             ></motion.div>
           </section>
 
           <div className={styles.bottomTitleContainer}>
             <p>
-              <motion.span
-                style={{
-                  opacity: wOp,
-                }}
-              >
-                W
-              </motion.span>
-              <motion.span
-                style={{
-                  opacity: eOp,
-                }}
-              >
-                E
-              </motion.span>
-              <motion.span
-                style={{
-                  opacity: lOp,
-                }}
-              >
-                L
-              </motion.span>
-              <motion.span
-                style={{
-                  opacity: cOp,
-                }}
-              >
-                C
-              </motion.span>
-              <motion.span
-                style={{
-                  opacity: oOp,
-                }}
-              >
-                O
-              </motion.span>
-              <motion.span
-                style={{
-                  opacity: mOp,
-                }}
-              >
-                M
-              </motion.span>
-              <motion.span
-                style={{
-                  opacity: lastEOp,
-                }}
-              >
-                E
-              </motion.span>
+              {letters.map((char, i) => (
+                <motion.span
+                  key={`${char}-${i}`}
+                  style={{ opacity: opacities[i] }}
+                >
+                  {char}
+                </motion.span>
+              ))}
             </p>
           </div>
         </div>
@@ -182,7 +134,16 @@ export default function Hero() {
         style={{
           y: bottomCityY,
         }}
-      ></motion.div>
+      >
+        <Image
+          src="/images/city.webp"
+          alt="Bottom city skyline"
+          fill
+          priority
+          sizes="(max-width: 768px) 100vw, 50vw"
+          style={{ objectFit: "cover" }}
+        />
+      </motion.div>
     </div>
   );
 }
