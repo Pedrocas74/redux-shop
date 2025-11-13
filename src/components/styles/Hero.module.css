@@ -4,11 +4,13 @@
     overflow-x: hidden; 
     position: relative;
     z-index: 1;
+    /* border: 1px solid red; */
     
     /* new */
     display: flex;
     align-items: center;
     overflow-y: auto;
+    /* contain: layout paint; */
 }
 .heroContainer {
     /* border: 1px solid rgb(10, 211, 37); */
@@ -20,7 +22,7 @@
     justify-content: center;
     align-items: center;
     z-index: 0;
-    pointer-events: none;
+    
 }
 .heroWrapper {
     /* border: 1px solid rgb(10, 187, 34); */
@@ -93,7 +95,11 @@
     left: 0;
     background: url("/images/city.webp") no-repeat bottom center;
     background-size: cover;
+    background-attachment: scroll;
+    image-rendering: auto;
+    backface-visibility: hidden;
     z-index: 0;
+    pointer-events: none;
 }
 
 .bottomCity {
@@ -105,8 +111,22 @@
     right: 0;
     background: url("/images/city.webp") no-repeat bottom center;
     background-size: cover;
+    background-attachment: scroll;
+    image-rendering: auto;
+    backface-visibility: hidden;
     z-index: -1;
+    pointer-events: none;
 }
+
+.topCity,
+.bottomCity,
+.sun {
+  will-change: transform, opacity;
+  contain: layout paint size style;
+}
+
+
+
 
 .heartbeat {
 	-webkit-animation: heartbeat 1.5s ease-in-out infinite both;
