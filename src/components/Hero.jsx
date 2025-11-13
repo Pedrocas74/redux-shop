@@ -18,27 +18,27 @@ export default function Hero() {
     setIsMoving((prev) => (prev === latest > 0 ? prev : latest > 0));
   });
 
-  const topCityY = useTransform(scrollY, [0, 1500], ["0%", "-50%"]);
-  const bottomCityY = useTransform(scrollY, [0, 1500], ["0%", "50%"]);
-  const titleOpacity = useTransform(scrollY, [200, 600, 2200, 2300], [0, 1, 1, 0]);
-  const sunZoom = useTransform(scrollY, [0, 2600], [1, 1.5]);
-  const sunOpacity = useTransform(scrollY, [2300, 2600], ["100%", "0%"]);
+  const topCityY = useTransform(scrollY, [0, 750], ["0%", "-50%"]);
+  const bottomCityY = useTransform(scrollY, [0, 750], ["0%", "50%"]);
+  const titleOpacity = useTransform(scrollY, [100, 300, 1100, 1150], [0, 1, 1, 0]);
+  const sunZoom = useTransform(scrollY, [0, 1300], [1, 1.5]);
+  const sunOpacity = useTransform(scrollY, [1150, 1300], [1, 0]);
   const letters = ["W", "E", "L", "C", "O", "M", "E"];
   const offsets = [
-    [300, 400, 1500, 1600],
-    [400, 500, 1600, 1700],
-    [500, 600, 1700, 1800],
-    [600, 700, 1800, 1900],
-    [700, 800, 1900, 2000],
-    [800, 900, 2000, 2100],
-    [900, 1000, 2100, 2200],
+    [150, 200, 750, 800],
+    [200, 250, 800, 850],
+    [250, 300, 850, 900],
+    [300, 350, 900, 950],
+    [350, 400, 800, 1000],
+    [400, 450, 1000, 1050],
+    [450, 500, 1050, 1100],
   ];
 
   const opacities = offsets.map(([a, b, c, d]) =>
     useTransform(scrollY, [a, b, c, d], ["0%", "100%", "100%", "0%"])
   );
 
-  const planeX = useTransform(scrollY, [300, 1000], ["-100%", "100%"]);
+  const planeX = useTransform(scrollY, [150, 500], ["-100%", "100%"]);
 
   return (
     <div className={styles.heroPage}>

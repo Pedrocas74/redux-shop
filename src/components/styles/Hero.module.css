@@ -3,8 +3,8 @@
     width: 100%;
     overflow-x: hidden; 
     position: relative;
-    z-index: 1;
-    
+    z-index: -10;
+
     /* new */
     display: flex;
     align-items: center;
@@ -19,8 +19,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 0;
-    pointer-events: none;
 }
 .heroWrapper {
     /* border: 1px solid rgb(10, 187, 34); */
