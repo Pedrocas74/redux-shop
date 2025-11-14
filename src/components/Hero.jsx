@@ -102,7 +102,7 @@ export default function Hero() {
         </div>
         <div className={styles.heroWrapper}>
           <div className={styles.topTitleContainer}>
-            <motion.div className={styles.plane} style={{ x: planeX }}>
+            <motion.div className={styles.plane} style={{ x: planeX, willChange: "transform" }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

@@ -7,6 +7,7 @@
     inset: 0;
     display: flex;
     align-items: center;
+    will-change: opacity;
 }
 .heroContainer {
     /* border: 1px solid rgb(10, 211, 37); */
@@ -87,7 +88,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 0;
+    /* z-index: 0; */
+    will-change: transform;
 }
 
 .bottomCity {
@@ -97,8 +99,10 @@
     position: fixed;
     bottom: 0;
     right: 0;
-    z-index: -1;
+    /* z-index: -1; */
+    will-change: transform;
 }
+
 
 .heartbeat {
 	-webkit-animation: heartbeat 1.5s ease-in-out infinite both;
