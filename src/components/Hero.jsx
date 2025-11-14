@@ -18,27 +18,29 @@ export default function Hero() {
     setIsMoving((prev) => (prev === latest > 0 ? prev : latest > 0));
   });
 
-  const topCityY = useTransform(scrollY, [0, 750], ["0%", "-50%"]);
-  const bottomCityY = useTransform(scrollY, [0, 750], ["0%", "50%"]);
-  const titleOpacity = useTransform(scrollY, [100, 300, 1100, 1150], [0, 1, 1, 0]);
-  const sunZoom = useTransform(scrollY, [0, 1300], [1, 1.5]);
-  const sunOpacity = useTransform(scrollY, [1150, 1300], [1, 0]);
+  const topCityY = useTransform(scrollY, [0, 375], ["0%", "-50%"]);
+  const bottomCityY = useTransform(scrollY, [0, 375], ["0%", "50%"]);
+  const titleOpacity = useTransform(scrollY, [50, 150, 550, 600], [0, 1, 1, 0]);
+  
   const letters = ["W", "E", "L", "C", "O", "M", "E"];
   const offsets = [
-    [150, 200, 750, 800],
-    [200, 250, 800, 850],
-    [250, 300, 850, 900],
-    [300, 350, 900, 950],
-    [350, 400, 800, 1000],
-    [400, 450, 1000, 1050],
-    [450, 500, 1050, 1100],
+    [75, 100, 375, 400],
+    [100, 125, 400, 425],
+    [125, 300, 425, 450],
+    [150, 175, 450, 475],
+    [175, 200, 475, 500],
+    [200, 225, 500, 525],
+    [225, 250, 525, 550],
   ];
 
   const opacities = offsets.map(([a, b, c, d]) =>
     useTransform(scrollY, [a, b, c, d], ["0%", "100%", "100%", "0%"])
   );
 
-  const planeX = useTransform(scrollY, [150, 500], ["-100%", "100%"]);
+  const planeX = useTransform(scrollY, [75, 250], ["-100%", "100%"]);
+  
+  const sunZoom = useTransform(scrollY, [450, 550], [1, 1.5]);
+  const sunOpacity = useTransform(scrollY, [600, 650], [1, 0]);
 
   return (
     <div className={styles.heroPage}>
@@ -110,7 +112,7 @@ export default function Hero() {
 
             <motion.div
               className={styles.sun}
-              style={{ scale: sunZoom, opacity: sunOpacity }}
+              style={{ opacity: sunOpacity, scale: sunZoom }}
             ></motion.div>
           </section>
 
