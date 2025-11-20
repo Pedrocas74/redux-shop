@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import styles from "./Checkout.module.css";
-// import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   FaCcVisa,

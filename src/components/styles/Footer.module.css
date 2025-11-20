@@ -13,7 +13,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--clr-text);
+    background-color: #0E0C0D;
     color: var(--clr-secondary);
 }
 .promotionContainer h5 {

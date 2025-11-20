@@ -1,7 +1,6 @@
 "use client";
 
 import { Suspense } from 'react';
-// import { useScroll } from 'framer-motion';
 
 import Hero from '@components/Hero';
 import InfoSection from '@components/InfoSection';

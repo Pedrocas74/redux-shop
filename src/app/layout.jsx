@@ -4,8 +4,8 @@ import Navbar from "../components/Navbar";
 import ReduxProvider from "../components/ReduxProvider";
 import { Toaster } from "sonner";
 
-
 import localFont from "next/font/local";
+import dynamic from "next/dynamic";
 
 export const acma = localFont({
   src: [
@@ -78,7 +78,7 @@ export default function RootLayout({ children }) {
               theme="light"
               duration={4000}
               toastOptions={{
-                style: { fontSize: "1rem", borderRadius: "10px", color: "#1a1a1a" },
+                style: { fontSize: "1rem", borderRadius: "10px", color: "black" },
               }}
             />
           </main>

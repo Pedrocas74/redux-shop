@@ -17,7 +17,7 @@
 
 :root {
   --clr-bg: hsl(300 50% 100%);
-  --clr-bg-light: hsl(300 0% 95%);
+  --clr-bg-light: #f2f2f2;
   --clr-bg-dark: hsl(0 0% 90%);
 
   --clr-text: hsl(300 0% 4%);
@@ -101,7 +101,10 @@ h2 {
 }
 
 
-button {
+button,
+a.buttonPrimary,
+a.buttonSecondary,
+a.buttonTertiary {
   font-family: var(--font-acma);
   font-weight: 600;
   letter-spacing: 1.5px;
@@ -111,13 +114,13 @@ button {
   border: none;
   font-size: var(--fs-md);
   cursor: pointer;
-  
   transition: var(--transition);
 }
 
 
 /* Primary (default) */
-.buttonPrimary {
+.buttonPrimary,
+a.buttonPrimary {
   background: var(--clr-text);
 }
 .buttonPrimary:hover {
@@ -128,7 +131,8 @@ button {
 }
 
 /* black Secondary (secondary color) */
-.buttonSecondary {
+.buttonSecondary,
+a.buttonSecondary {
   background: transparent;
   color: var(--clr-text);              /* override base white text  */
   border: 1px solid var(--clr-text);

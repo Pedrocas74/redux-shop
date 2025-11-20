@@ -67,43 +67,92 @@
 
 .selectWrapper {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 6px;
+  right: 6px;
+
   /* border: 1px solid red; */
 }
-
-
-
-.sizeSelector {
-  padding: 0.2em 0.2em 0 0.2em;
-  border: 1px solid #ccc;
-  border-radius: var(--radius);
-  background-color: white;
+.sizeTrigger {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-small);
+  border: 1px solid var(--border-muted);
+  background-color: var(--clr-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;                     
   cursor: pointer;
-  text-align: center;
-  transition: all 0.3s ease;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.08);
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.1s ease,
+    border-color 0.2s ease;
+  position: relative;
 }
-.sizeSelector:hover {
-  background-color: #eeeeee;
-  opacity: 1;
+
+/* Hover / focus / active states */
+.sizeTrigger:hover {
+  background-color: var(--clr-bg);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  transform: translateY(-1px);
 }
+
+.sizeTrigger[data-focus-visible="true"],
+.sizeTrigger:focus-visible {
+  outline: none;
+  border-color: var(--clr-primary);
+  box-shadow: 0 0 0 2px rgba(255, 119, 0, 0.3);
+}
+
+.sizeTrigger[data-pressed="true"] {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+/* Disabled state */
+.sizeTrigger[data-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
 
 .sizeValue {
-  color: #333;
-  line-height: 1;         
+  font-size: 1.5rem;
+  color: var(--border);
+  text-align: center;
+  /* border: 1px solid red; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+
+
+/* RULER */
+.selectIcon {
+  pointer-events: none;
+  margin-right: 0;
+}
+
+/* DROPDOWN PANEL */
 .dropdownContent {
   position: relative;
-  right: 2px;
+  top: 5px;
+  right: 0;
   background-color: var(--clr-bg);
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-small);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
   z-index: 9999;
   text-align: center;
-  list-style-type: none;
-  width: fit-content;
+  width: 40px; 
 }
 
 .dropdownList {
@@ -111,21 +160,18 @@
 }
 
 .dropdownItem {
-  /* padding: 0.2em 0.1em; */
   cursor: pointer;
-  color: #333;
+  color: var(--clr-text);
   display: block;
-  padding: 0.2em;
-
+  padding: 0.5rem 0.6rem;
+  font-size: 1rem;
 }
 .dropdownItem svg {
-  display: none;  /* hides the checkmark */
+  display: none; 
 }
 .dropdownItem:hover {
-  background-color: #f0f0f0;
-  border-radius: 5px;
-  height: min-content;
+  background-color: var(--clr-bg-light);
+  border-radius: var(--radius);
 }
-
 
 

@@ -115,42 +115,39 @@ export default function ProductCard({ product }) {
       {product.sizes && (
         <div className={styles.selectWrapper}>
           <Select
-            style={{ all: "unset" }}
-            aria-label="Select size"
-            isDisabled={stockStatus !== "In stock"}
-            selectedKeys={sizeSelected ? [sizeSelected] : []}
-            onSelectionChange={(keys) => {
-              const value = Array.from(keys)[0];
-              setSizeSelected(value);
-            }}
-            selectorIcon={
-              <Ruler
-                className={styles.selectIcon}
-                size={20}
-                // color="#333"
-                
-                opacity={0.5}
-            
-                style={{
-                  visibility: sizeSelected === "" ? "visible" : "hidden",
-                }}
-              />
-            }
-            className={styles.sizeSelector}
-            classNames={{
-              trigger: styles.sizeTrigger,
-              value: styles.sizeValue,
-              popoverContent: styles.dropdownContent,
-              listbox: styles.dropdownList,
-              item: styles.dropdownItem,
-            }}
-          >
-            {product.sizes.map((size) => (
-              <SelectItem className={styles.dropdownItem} key={size} value={size}>
-                {size}
-              </SelectItem>
-            ))}
-          </Select>
+  aria-label="Select size"
+  isDisabled={stockStatus !== "In stock"}
+  selectedKeys={sizeSelected ? [sizeSelected] : []}
+  onSelectionChange={(keys) => {
+    const value = Array.from(keys)[0];
+    setSizeSelected(value);
+  }}
+  selectorIcon={
+    <Ruler
+      className={styles.selectIcon}
+      size={22}
+      opacity={0.4}
+      color="black"
+      style={{
+        visibility: sizeSelected === "" ? "visible" : "hidden",
+      }}
+    />
+  }
+  className={styles.sizeSelector}
+  classNames={{
+    trigger: styles.sizeTrigger,
+    value: styles.sizeValue,
+    popoverContent: styles.dropdownContent,
+    listbox: styles.dropdownList,
+    item: styles.dropdownItem,
+  }}
+>
+  {product.sizes.map((size) => (
+    <SelectItem className={styles.dropdownItem} key={size} value={size}>
+      {size}
+    </SelectItem>
+  ))}
+</Select>
         </div>
       )}
     </div>
