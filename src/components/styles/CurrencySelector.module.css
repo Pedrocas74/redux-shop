@@ -1,20 +1,23 @@
 .triggerButton {
   all: unset;
-  background: transparent;
   color: var(--clr-bg);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-big);
   transition: var(--transition);
   width: 35px;
   height: 35px;
+  border: 2px ridge var(--clr-hover);
+  border-radius: 50%;
+  background: rgba(105, 105, 105, 0.075);
 }
 .triggerButton:hover {
   background-color: var(--clr-hover);
 }
-
+.triggerButton:active {
+  transform: translateY(2px);
+}
 .dropdownMenu {
   background: var(--clr-bg);
   color: var(--clr-text-muted);
@@ -22,7 +25,6 @@
   box-shadow: var(--shadow-combined);
   min-width: fit-content;
 }
-
 .menuItem {
   display: flex;
   align-items: center;

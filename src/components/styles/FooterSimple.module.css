@@ -2,18 +2,12 @@
     width: 100%;
     height: 10vh;
     background: var(--clr-text);
-    color: white;
-    /* font-size: 0.7rem; */
-    /* border: 1px solid red; */
-    /* position: absolute; */
     bottom: 0;
 }
 
 .footer a {
-    color: white;
-    font-size: clamp(0.9rem, 2vw, 1rem);
-    padding: 0;
-    margin: 0;
+    color: var(--clr-bg);
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
     position: relative;
 }
 .footer a:not(.madeByPedro) {
@@ -27,18 +21,16 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    /* border: 1px solid blue; */
+    align-items: center; 
 }
 .madeByPedro {
     width: fit-content;
 }
 .socials {
-    /* border: 1px solid yellow; */
-    gap: 1.5em;
+    width: 85px;
+    height: 35px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1em 0;
 }
 

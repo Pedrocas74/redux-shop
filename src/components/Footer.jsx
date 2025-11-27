@@ -30,7 +30,6 @@ export default function Footer() {
           Apply the code <span>PEDRO74</span> at the checkout
         </h6>
       </div>
-      {/* <hr /> */}
 
       <div className={styles.policiesContainer}>
         <div className={styles.leftContainer}>
@@ -38,12 +37,12 @@ export default function Footer() {
             &copy; 2025 SOL, Inc. <br />
             All rights reserved.
           </p>
-          <div className={styles.legalLinks}>
-            <Link href="/shipping-info">Shipping Info</Link>
-            <Link href="/terms-of-use">Terms of Use</Link>
-            <Link href="/privacy-policy">Privacy Policy</Link>
-            <Link href="/returns-and-refunds">Returns & Refunds</Link>
-          </div>
+          <nav className={styles.legalLinks} aria-label="Legal and store information">
+            <Link href="/shipping-info" className="buttonLink">Shipping info</Link>
+            <Link href="/terms-of-use" className="buttonLink">Terms of use</Link>
+            <Link href="/privacy-policy" className="buttonLink">Privacy policy</Link>
+            <Link href="/returns-and-refunds" className="buttonLink">Returns &amp; refunds</Link>
+          </nav>
           
           <div className={styles.apiLink}>
           Powered by{" "}
@@ -51,6 +50,7 @@ export default function Footer() {
             href="https://fakestoreapi.com/"
             target="_blank"
             rel="noopener noreferrer"
+            className="buttonLink"
           >
           FakeStore API
           </a>
@@ -76,7 +76,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <footer className={styles.footer}>
+      <footer id="footer-section" className={styles.footer}>
         <div className={styles.footerWrapper}>
           <a
             href="https://www.pedromagalhaes.vercel.app"
@@ -91,11 +91,13 @@ export default function Footer() {
               href="https://github.com/Pedrocas74"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Social profiles"
             >
               <Image
                 src="/images/icons/socials/github-mark-white.png"
                 fill         
                 alt="Github link"
+                aria-label="Pedro's GitHub profile (opens in a new tab)"
               />
             </a>
             <a
@@ -107,6 +109,7 @@ export default function Footer() {
                 src="/images/icons/socials/InBug-White.png"
                 fill       
                 alt="Linkedin link"
+                aria-label="Pedro's LinkedIn profile (opens in a new tab)"
               />
             </a>
           </div>

@@ -82,18 +82,19 @@ export default function Navbar() {
 
   return (
     <nav
+    aria-label="Main navigation"
       className={`${styles.navbar} ${visible ? styles.visible : styles.hidden}`}
     >
       <div className={styles.navWrapper}>
         <div className={styles.logoWrapper}>
-          <Link href="/">
-            <div className={styles.logo}>
+          <Link href="/" aria-label="Go to homepage">
+            <div className={styles.logo} aria-hidden="true">
               <span>S</span>
               <span>-</span>
               <span>L</span>
             </div>
           </Link>
-          <div className={styles.sun}></div>
+          <div className={styles.sun} aria-hidden="true"></div>
         </div>
 
         <div className={styles.cartAndCurrency}>

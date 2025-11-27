@@ -1,33 +1,22 @@
 .pageContainer {
     width: 100%;
 }
-
 .detailsContainer {
     width: 90%;
     margin: 0 auto;
-    /* border: 1px solid blue; */
     margin-top: 2.5em;
 }
-
-
-
 .detailsContainer h1 {
-    font-size: clamp(1.1rem, 2vw, 1.3rem);
     text-transform: uppercase;
-    font-weight: 600;
     margin-top: 1em;
 }
-
 .price {
-    font-size: clamp(1.1rem, 2vw, 1.2rem);
     margin-top: 0.2em;
     font-family: var(--acma);
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    letter-spacing: var(--ls-big);
 }
-
 .detailsContainer figure {
-    border: 1px solid var(--border);
+    border: 2px outset var(--clr-hoverInLight);
     display: flex;
     justify-content: center;
     padding: 2em 0;
@@ -58,30 +47,24 @@
     border-color: #c62828 !important;
     box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.4) !important;
 }
-
 .sizeSelector button {
     width: 60px;
     max-width: 80px;
-    /* border-radius: 0px; */
 }
-
-
-.linkDescription {
-    margin-top: 1.5em;
-    text-align: center;
+.sizeSelectorSelected {
+    background: var(--clr-bg-dark);
+    color: var(--clr-primary-dark);
 }
 
 .buttonAddContainer {
-    /* border: 1px solid red; */
-    margin: 1.5em 0 3em 0;
+    margin: 1.5em 0 20vh 0;
     display: flex;
     justify-content: center;
 }
 
 .summariesContainer {
-    margin-bottom: 10vh;
+    margin-bottom: 20vh;
 }
-
 .instructions {
     border: 1px solid var(--border);
     border-top-left-radius: var(--radius-small);
@@ -106,11 +89,9 @@ details[open] > .instructions {
   color: var(--clr-text);
   border-color: var(--clr-text);
 }
-
 .instructions span {
     height: 24px;
 }
-
 .careList {
     list-style: none;
 }
@@ -119,7 +100,6 @@ details[open] > .instructions {
     align-items: center;
     gap: 7px;
     margin: 0.5em 0;
-    /* border: 1px solid red; */
 }
 .productDescription,
 .careList {
@@ -140,13 +120,11 @@ details[open] > .instructions {
     width: 20px;
     height: 20px;
 }
-
 @media (width >= 850px) {
     .instructions,
     .productDescription,
     .careList {
         padding: 0.5em 10%;
-        /* width: 90%; */
     }
     .productDescription {
         padding-right: 40%;

@@ -3,9 +3,7 @@ import Navbar from "../components/Navbar";
 import ReduxProvider from "../components/ReduxProvider";
 import { Toaster } from "sonner";
 
-
 import localFont from "next/font/local";
-
 
 export const acma = localFont({
   src: [
@@ -65,9 +63,11 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-
   return (
     <html lang="en">
+      <head>
+        <meta name="google" content="notranslate" />
+      </head>
       <body className={`${acma.variable} ${gatwickJet.variable}`}>
         <ReduxProvider>
           <Navbar />
@@ -79,7 +79,11 @@ export default function RootLayout({ children }) {
               richColors
               duration={4000}
               toastOptions={{
-                style: { fontSize: "1rem", borderRadius: "15px", color: "black" },
+                style: {
+                  fontSize: "1rem",
+                  borderRadius: "15px",
+                  color: "black",
+                },
               }}
             />
           </main>

@@ -1,12 +1,11 @@
 .mainSection {
     width: 90%;
-    height: 85vh;
+    min-height: 100vh;
     margin: 0 auto;
     text-align: justify;
- 
 }
 .mainSection h1 {
-    margin: 1em 0 7vh 0;
+    margin: 5vh 0 10vh 0;
 }
 .description,
 .disclaimer {
@@ -16,9 +15,8 @@
 }
 .disclaimer {
     font-weight: 600;
-    margin: 2em 0;
+    margin: 2em 0 10vh;
 }
 .smile {
-    margin-top: 2em;
-    text-align: center;
+    text-align: right;
 }

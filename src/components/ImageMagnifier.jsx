@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import styles from "./styles/ImageMagnifier.module.css";
+import Image from "next/image";
 
 export default function ImageMagnifier({
   src,
@@ -78,7 +79,14 @@ export default function ImageMagnifier({
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      <img src={src} alt={alt} className={styles.image} />
+      <Image 
+        src={src} 
+        alt={alt} 
+        priority 
+        className={styles.image} 
+        width={240}
+        height={240}
+      />
 
       {isActive && <div className={styles.lens} style={lensStyle} />}
     </div>

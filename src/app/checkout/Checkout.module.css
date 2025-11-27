@@ -1,29 +1,20 @@
 .checkoutSection {
-    /* border: 1px solid red; */
     width: 90%;
     margin: 0 auto;
     transition: var(--transition);
 }
-
 .checkoutSection h1 {
-    margin: 5vh 0;
+    margin: 5vh 0 10vh;
 }
 
 .summarySection {
-    /* border: 1px solid blue; */
     margin-bottom: 10vh;
 }
-.summarySection h2 {
-    text-align: center;
-    margin-bottom: 5vh;
-}
-
-
 .summaryTable {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.9rem;
-    margin: 0 auto 7vh auto;
+    margin: 0 auto 10vh auto;
 }
 
 .summaryTable th,
@@ -47,12 +38,11 @@
 }
 .summaryTable .cellPrice {
     text-align: right;
-    letter-spacing: 0.5px;
+    letter-spacing: var(--ls);
 }
 .summaryTable tfoot {
   background-color: #f2f4f8;
   font-size: 1rem;
-  /* border-top: 2px solid #ccc; */
 }
 .summaryTable tfoot th {
     text-align: left;
@@ -60,7 +50,7 @@
 .summaryTable tfoot td {
     font-weight: 600;
     text-align: right;
-    letter-spacing: 0.5px;
+    letter-spacing: var(--ls);
 }
 
 .toggleCode {
@@ -69,7 +59,6 @@
     width: fit-content;
 }
 .promoCodeContainer {
-    /* border: 1px solid red; */
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -77,10 +66,9 @@
 }
 .promoCodeContainer input {
     min-height: fit-content;
-    width: 50%;
+    min-width: 25%;
     font-size: 1rem;
     padding-left: 1.5em;
-    border-radius: var(--radius-small);
     flex: 2;
     border: none;
     border-bottom: 1px solid var(--border);
@@ -89,6 +77,17 @@
     border-radius: var(--radius-small);
     flex: 1;
     margin-left: 1.5em;
+}
+@media (width >= 1080px) {
+    .promoCodeContainer {
+        justify-content: start;
+    }
+    .promoCodeContainer input {
+        flex: 0.35;
+    }
+    .promoCodeContainer button {
+        flex: 0.25;
+    }
 }
 
 .subtotalPrice {
@@ -101,15 +100,13 @@
     font-size: 1.15rem;
 }
 
-
 .paymentSection {
-    /* border: 1px solid red; */
     margin-bottom: 10vh;
     line-height: 1.7;
 }
 .paymentSection h2 {
     text-align: center;
-    margin-bottom: 5vh;
+    margin-bottom: 7vh;
 }
 
 .paymentMethodsContainer {
@@ -118,17 +115,17 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
-    padding: 2em;
+    padding: 1.5em;
     border-radius: var(--radius);
     box-shadow: var(--shadow-light);
     margin: 0 auto;
     background: var(--clr-bg-dark);
-    /* border: none; */
 }
 .paymentMethodsContainer label {
     display: flex;
     align-items: center;
-    font-size: clamp(1.1rem, 2vw, 1.2rem);
+    justify-content: space-between;
+    font-size: clamp(0.95rem, 3vw, 1.2rem);
     border: 1px solid transparent;
     width: 100%;
     padding: var(--pd-td) var(--pd-lr);
@@ -161,27 +158,24 @@
     min-height: fit-content;
     margin-left: 1em;
     gap: 0.5em;
-    
-}
-
-
-@media(width >= 850px) {
-    /* .summaryTable {
-        width: 55%;
-    } */
-    .paymentMethodsContainer {
-        width: 55%;
-    }
 }
 
 .placeOrderButton {
     width: 55%;
     display: block;
-    margin: 0 auto 10vh auto;
+    margin: 0 auto 15vh auto;
+}
+@media(width >= 850px) {
+    .paymentMethodsContainer {
+        width: 55%;
+    }
+    .placeOrderButton {
+        width: 40%;
+    }
 }
 
 .placeContainer {
-    border: 2px inset var(--clr-primary);
+    border: 2px ridge var(--clr-primary);
     border-radius: var(--radius-big);
     height: 60vh;
     width: 75vw;
@@ -198,32 +192,25 @@
     align-items: center;
     z-index: 100;
 }
-
 .placePaymentIcons {
-    /* border: 1px solid red; */
     width: 100%;
     max-width: 200px;
     text-align: center;
     display: flex;
     justify-content: space-evenly;
-
 }
 .placeInfo {
-    /* border: 1px solid blue; */
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .placeInfo h3 {
-    /* border: 1px solid rgb(141, 141, 15); */
     font-size: clamp(1.1rem, 2.5vw, 1.3rem);
     padding: 0.7em;
     text-align: center;
-    font-weight: 300;
+    font-weight: 200;
     margin-top: 1em;
 }
 .placeInfo svg {
-    /* border: 1px solid green; */
     margin-top: 0.5em;
-    
 }

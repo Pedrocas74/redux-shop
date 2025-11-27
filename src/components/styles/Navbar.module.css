@@ -1,6 +1,6 @@
 
 .navbar {
-    background-color: var(--clr-text);
+    background: var(--clr-text);
     position: sticky;
     top: 0;
     z-index: 999;
@@ -20,9 +20,7 @@
   width: 90%;
   height: fit-content;
   margin: 0 auto;
-  /* border: 1px solid rgb(208, 255, 0); */
 }
-
 .visible {
   transform: translateY(0);
 }
@@ -39,25 +37,21 @@
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  /* border: 1px solid red; */
   color: var(--clr-bg);
   font-family: var(--font-gatwick-jet);
   font-weight: 600;
   width: 75px;
   height: 100%;
-  font-size: 20px
-}
-.logo span {
-  /* border: 1px solid white; */
-  height: 100%;
+  font-size: 22px;
+  letter-spacing: 10px;
 }
 .sun {
     position: absolute;
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 19px;
     background: radial-gradient(circle at center, #ff9d00 0%, #ff6a00 100%);
     border-radius: 50%;
-    border: 2px solid white;
+    border: 2px solid var(--clr-bg);
     pointer-events: none;
 }
 
@@ -66,6 +60,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
 }
 
+.cartAndCurrency a {
+  border: 2px ridge var(--clr-hover);
+  border-radius: 50%;
+  background: rgba(105, 105, 105, 0.075);
+  transition: var(--transition);
+}
+.cartAndCurrency a:active {
+  transform: translateY(2px);
+}

@@ -9,6 +9,7 @@ import Skeleton from "./Skeleton";
 import { Ruler } from "lucide-react";
 import { Select, SelectItem } from "@heroui/select";
 import { toast } from "sonner";
+import Image from "next/image";
 
 export default function ProductCard({ product }) {
   const [sizeSelected, setSizeSelected] = useState("");
@@ -41,8 +42,8 @@ export default function ProductCard({ product }) {
 
   if (!mounted) {
     return (
-      <div className={styles.groupOfSkeletons}>
-        <Skeleton width="150px" height="150px" style={{ margin: "0 auto" }} />
+      <div className={styles.groupOfSkeletons} aria-hidden="true">
+        <Skeleton width="220px" height="300px" style={{ margin: "0 auto" }} />
         <Skeleton width="80%" height="1rem" style={{ margin: "0.5rem auto" }} />
         <Skeleton
           width="50px"
@@ -59,29 +60,41 @@ export default function ProductCard({ product }) {
   }
 
   const handleAddToCart = () => {
-  if (product.sizes && !sizeSelected) {
-    toast.warning("Must select a size before adding to cart.");
+    if (product.sizes && !sizeSelected) {
+      toast.warning("Must select a size before adding to cart.");
 
-    setShowSizeError(true); 
-    setTimeout(() => setShowSizeError(false), 2000); 
+      setShowSizeError(true);
+      setTimeout(() => setShowSizeError(false), 2000);
 
-    return;
-  }
+      return;
+    }
 
-  dispatch(
-    addToCart({
-      product,
-      selectedSize: product.sizes ? sizeSelected : null,
-    })
-  );
-};
-
+    dispatch(
+      addToCart({
+        product,
+        selectedSize: product.sizes ? sizeSelected : null,
+      })
+    );
+  };
 
   return (
-    <div className={styles.productCard}>
+    <article
+      className={styles.productCard}
+      aria-labelledby={`product-title-${product.id}`}
+    >
       <Link href={`/product/${product.id}`}>
-        <img src={product.image} alt={product.title} />
-        <h3>{product.title}</h3>
+        <Image
+          src={product.image}
+          alt={`Picture of ${product.title}`}
+          width={400}
+          height={400}
+          sizes="(max-width: 768px) 90vw,
+       (max-width: 1200px) 40vw,
+       25vw"
+          loading="lazy"
+          style={{ objectFit: "contain" }}
+        />
+        <h3 id={`product-title-${product.id}`}>{product.title}</h3>
       </Link>
       <h4>
         {symbolPosition === "left" ? (
@@ -113,6 +126,7 @@ export default function ProductCard({ product }) {
         <button
           className="buttonPrimary"
           disabled
+          aria-disabled="true"
           style={{ opacity: 0.5, cursor: "not-allowed" }}
         >
           Out of Stock
@@ -123,41 +137,47 @@ export default function ProductCard({ product }) {
       {product.sizes && (
         <div className={styles.selectWrapper}>
           <Select
-  aria-label="Select size"
-  isDisabled={stockStatus !== "In stock"}
-  selectedKeys={sizeSelected ? [sizeSelected] : []}
-  onSelectionChange={(keys) => {
-    const value = Array.from(keys)[0];
-    setSizeSelected(value);
-  }}
-  selectorIcon={
-    <Ruler
-      className={styles.selectIcon}
-      size={22}
-      opacity={0.4}
-      color="black"
-      style={{
-        visibility: sizeSelected === "" ? "visible" : "hidden",
-      }}
-    />
-  }
-  className={styles.sizeSelector}
-  classNames={{
-    trigger: `${styles.sizeTrigger} ${showSizeError ? styles.sizeError : ""}`,
-    value: styles.sizeValue,
-    popoverContent: styles.dropdownContent,
-    listbox: styles.dropdownList,
-    item: styles.dropdownItem,
-  }}
->
-  {product.sizes.map((size) => (
-    <SelectItem className={styles.dropdownItem} key={size} value={size}>
-      {size}
-    </SelectItem>
-  ))}
-</Select>
+            aria-label="Select size"
+            isDisabled={stockStatus !== "In stock"}
+            selectedKeys={sizeSelected ? [sizeSelected] : []}
+            onSelectionChange={(keys) => {
+              const value = Array.from(keys)[0];
+              setSizeSelected(value);
+            }}
+            selectorIcon={
+              <Ruler
+                className={styles.selectIcon}
+                size={22}
+                opacity={0.4}
+                color="black"
+                style={{
+                  visibility: sizeSelected === "" ? "visible" : "hidden",
+                }}
+              />
+            }
+            className={styles.sizeSelector}
+            classNames={{
+              trigger: `${styles.sizeTrigger} ${
+                showSizeError ? styles.sizeError : ""
+              }`,
+              value: styles.sizeValue,
+              popoverContent: styles.dropdownContent,
+              listbox: styles.dropdownList,
+              item: styles.dropdownItem,
+            }}
+          >
+            {product.sizes.map((size) => (
+              <SelectItem
+                className={styles.dropdownItem}
+                key={size}
+                value={size}
+              >
+                {size}
+              </SelectItem>
+            ))}
+          </Select>
         </div>
       )}
-    </div>
+    </article>
   );
 }

@@ -13,30 +13,36 @@ export default function InfoSection() {
   });
 
   return (
-    <section className={styles.infoContainer}>
-      <h2>Why Us?</h2>
+    <section className={styles.infoContainer} aria-labelledby="info-heading">
+      <h2 id="info-heading">Why Us?</h2>
 
       <div className={styles.checksWrapper}>
         <div className={styles.infoChecks}>
-          <div className={styles.starOrbit}>
+          <div className={styles.starOrbit} aria-hidden="true">
             <Star
               className={`${styles.star} ${styles.star1}`}
               size={7}
               color={"var(--clr-bg)"}
               fill={"var(--clr-bg)"}
               opacity={0.7}
+              aria-hidden="true"
+              focusable="false"
             />
             <Star
               className={`${styles.star} ${styles.star2}`}
               size={6}
               color={"var(--clr-bg)"}
               fill={"var(--clr-bg)"}
+              aria-hidden="true"
+              focusable="false"
             />
             <Star
               className={`${styles.star} ${styles.star3}`}
               size={7}
               color={"var(--clr-bg)"}
               fill={"var(--clr-bg)"}
+              aria-hidden="true"
+              focusable="false"
             />
             <Star
               className={`${styles.star} ${styles.star4}`}
@@ -44,12 +50,16 @@ export default function InfoSection() {
               color={"var(--clr-bg)"}
               fill={"var(--clr-bg)"}
               opacity={0.7}
+              aria-hidden="true"
+              focusable="false"
             />
             <Star
               className={`${styles.star} ${styles.star5}`}
               size={7}
               color={"var(--clr-bg)"}
               fill={"var(--clr-bg)"}
+              aria-hidden="true"
+              focusable="false"
             />
             <Star
               className={`${styles.star} ${styles.star6}`}
@@ -57,12 +67,16 @@ export default function InfoSection() {
               color={"var(--clr-bg)"}
               fill={"var(--clr-bg)"}
               opacity={0.7}
+              aria-hidden="true"
+              focusable="false"
             />
             <Star
               className={`${styles.star} ${styles.star7}`}
               size={10}
               color={"var(--clr-bg)"}
               fill={"var(--clr-bg)"}
+              aria-hidden="true"
+              focusable="false"
             />
           </div>
           <span className={styles.bestSpan}>BEST</span>
@@ -72,9 +86,11 @@ export default function InfoSection() {
         </div>
       </div>
 
-   
       <ul ref={ref} className={styles.infoStats}>
-        <li className={styles.statsItems}>
+        <li
+          className={styles.statsItems}
+          aria-label="Over 3 million products sold this year alone"
+        >
           {/* +3M products sold this year alone  */}
           <span className={styles.numbers}>
             +{inView && <CountUp end={3} duration={3} />}M&nbsp;
@@ -82,7 +98,10 @@ export default function InfoSection() {
           <p>Products sold this year alone</p>
         </li>
 
-        <li className={styles.statsItems}>
+        <li
+          className={styles.statsItems}
+          aria-label="Over 1 million five-star reviews"
+        >
           {/* +1M five star reviews */}
           <span className={styles.numbers}>
             +{inView && <CountUp end={1} duration={3} />}M&nbsp;
@@ -90,7 +109,10 @@ export default function InfoSection() {
           <p>5 star reviews and counting</p>
         </li>
 
-        <li className={styles.statsItems}>
+        <li
+          className={styles.statsItems}
+          aria-label="Over 8 million happy customers"
+        >
           {/* Join 10M happy customers*/}
           <span className={styles.numbers}>
             +{inView && <CountUp end={8} duration={4} />}M&nbsp;
@@ -98,7 +120,10 @@ export default function InfoSection() {
           <p>Happy customers</p>
         </li>
 
-        <li className={styles.statsItems}>
+        <li
+          className={styles.statsItems}
+          aria-label="Customers in 74 countries"
+        >
           {/* 74 countries */}
           <span className={styles.numbers}>
             {inView && <CountUp end={74} duration={4} />}&nbsp;
@@ -106,7 +131,7 @@ export default function InfoSection() {
           <p>Countries</p>
         </li>
 
-        <li className={styles.statsItems}>
+        <li className={styles.statsItems} aria-label="27 years of experience">
           {/* 27 Years */}
           <span className={styles.numbers}>
             {inView && <CountUp end={27} duration={6} />}&nbsp;
@@ -114,23 +139,107 @@ export default function InfoSection() {
           <p>Years</p>
         </li>
       </ul>
-    
-      <div id="products-list" className={styles.loopContainer}>
+
+      <div id="products-list" className={styles.loopContainer} aria-hidden="true">
         <div className={styles.loopTrack}>
-          <span className={styles.loopText}><em>WE KNOW </em>• <span><em>WHAT</em></span> • <em>YOU NEED</em> </span>
-          <span className={styles.loopText}><em>WE KNOW </em>• <span><em>WHAT</em></span> • <em>YOU NEED</em> </span>
-          <span className={styles.loopText}><em>WE KNOW </em>• <span><em>WHAT</em></span> • <em>YOU NEED</em> </span>
-          <span className={styles.loopText}><em>WE KNOW </em>• <span><em>WHAT</em></span> • <em>YOU NEED</em> </span>
-          <span className={styles.loopText}><em>WE KNOW </em>• <span><em>WHAT</em></span> • <em>YOU NEED</em> </span>
-          <span className={styles.loopText}><em>WE KNOW </em>• <span><em>WHAT</em></span> • <em>YOU NEED</em> </span>
-          <span className={styles.loopText}><em>WE KNOW </em>• <span><em>WHAT</em></span> • <em>YOU NEED</em> </span>
-          <span className={styles.loopText}><em>WE KNOW </em>• <span><em>WHAT</em></span> • <em>YOU NEED</em> </span>
-          <span className={styles.loopText}><em>WE KNOW </em>• <span><em>WHAT</em></span> • <em>YOU NEED</em> </span>
-          <span className={styles.loopText}><em>WE KNOW </em>• <span><em>WHAT</em></span> • <em>YOU NEED</em> </span>
-          <span className={styles.loopText}><em>WE KNOW </em>• <span><em>WHAT</em></span> • <em>YOU NEED</em> </span>
-          <span className={styles.loopText}><em>WE KNOW </em>• <span><em>WHAT</em></span> • <em>YOU NEED</em> </span>
-          <span className={styles.loopText}><em>WE KNOW </em>• <span><em>WHAT</em></span> • <em>YOU NEED</em> </span>
-          <span className={styles.loopText}><em>WE KNOW </em>• <span><em>WHAT</em></span> • <em>YOU NEED</em> </span>
+          <span className={styles.loopText}>
+            <em>WE KNOW </em>•{" "}
+            <span>
+              <em>WHAT</em>
+            </span>{" "}
+            • <em>YOU NEED</em>{" "}
+          </span>
+          <span className={styles.loopText}>
+            <em>WE KNOW </em>•{" "}
+            <span>
+              <em>WHAT</em>
+            </span>{" "}
+            • <em>YOU NEED</em>{" "}
+          </span>
+          <span className={styles.loopText}>
+            <em>WE KNOW </em>•{" "}
+            <span>
+              <em>WHAT</em>
+            </span>{" "}
+            • <em>YOU NEED</em>{" "}
+          </span>
+          <span className={styles.loopText}>
+            <em>WE KNOW </em>•{" "}
+            <span>
+              <em>WHAT</em>
+            </span>{" "}
+            • <em>YOU NEED</em>{" "}
+          </span>
+          <span className={styles.loopText}>
+            <em>WE KNOW </em>•{" "}
+            <span>
+              <em>WHAT</em>
+            </span>{" "}
+            • <em>YOU NEED</em>{" "}
+          </span>
+          <span className={styles.loopText}>
+            <em>WE KNOW </em>•{" "}
+            <span>
+              <em>WHAT</em>
+            </span>{" "}
+            • <em>YOU NEED</em>{" "}
+          </span>
+          <span className={styles.loopText}>
+            <em>WE KNOW </em>•{" "}
+            <span>
+              <em>WHAT</em>
+            </span>{" "}
+            • <em>YOU NEED</em>{" "}
+          </span>
+          <span className={styles.loopText}>
+            <em>WE KNOW </em>•{" "}
+            <span>
+              <em>WHAT</em>
+            </span>{" "}
+            • <em>YOU NEED</em>{" "}
+          </span>
+          <span className={styles.loopText}>
+            <em>WE KNOW </em>•{" "}
+            <span>
+              <em>WHAT</em>
+            </span>{" "}
+            • <em>YOU NEED</em>{" "}
+          </span>
+          <span className={styles.loopText}>
+            <em>WE KNOW </em>•{" "}
+            <span>
+              <em>WHAT</em>
+            </span>{" "}
+            • <em>YOU NEED</em>{" "}
+          </span>
+          <span className={styles.loopText}>
+            <em>WE KNOW </em>•{" "}
+            <span>
+              <em>WHAT</em>
+            </span>{" "}
+            • <em>YOU NEED</em>{" "}
+          </span>
+          <span className={styles.loopText}>
+            <em>WE KNOW </em>•{" "}
+            <span>
+              <em>WHAT</em>
+            </span>{" "}
+            • <em>YOU NEED</em>{" "}
+          </span>
+          <span className={styles.loopText}>
+            <em>WE KNOW </em>•{" "}
+            <span>
+              <em>WHAT</em>
+            </span>{" "}
+            • <em>YOU NEED</em>{" "}
+          </span>
+          <span className={styles.loopText}>
+            <em>WE KNOW </em>•{" "}
+            <span>
+              <em>WHAT</em>
+            </span>{" "}
+            • <em>YOU NEED</em>{" "}
+          </span>
         </div>
       </div>
     </section>

@@ -65,30 +65,34 @@ export default function Cart() {
   if (!items?.length) {
     return (
       <>
-      <section className={styles.cartSection}>
-        <Breadcrumbs
-          items={[
-            { label: "Home", href: "/" },
-            {label: "Products", href: "/#products-list" },
-            { label: "Cart", href: "/cart" },
-          ]}
-        />
-        <h1>Cart</h1>
-        <div className={styles.emptyCartAction}>
-        <div className={styles.emptyCartImg}></div>
-        <Link href="/#products-list" className="buttonSecondary">
-          Continue Shopping
-        </Link>
+        <section className={styles.cartSection} aria-labelledby="cart-heading">
+          <Breadcrumbs
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Products", href: "/#products-list" },
+              { label: "Cart", href: "/cart" },
+            ]}
+          />
+          <h1 id="cart-heading">Cart</h1>
+          <div className={styles.emptyCartAction}>
+            <div
+              className={styles.emptyCartImg}
+              role="img"
+              aria-label="Your cart is currently empty"
+            ></div>
+            <Link href="/#products-list" className="buttonSecondary">
+              Continue Shopping
+            </Link>
           </div>
-      </section>
-      <Footer />
+        </section>
+        <Footer />
       </>
     );
   }
 
   return (
     <>
-      <section className={styles.cartSection}>
+      <section className={styles.cartSection} aria-labelledby="cart-heading">
         <Breadcrumbs
           id="warning" //to scroll the view to the top of the page
           items={[
@@ -96,11 +100,15 @@ export default function Cart() {
             { label: "Cart", href: "/cart" },
           ]}
         />
-        <h1>Cart</h1>
+        <h1 id="cart-heading">Cart</h1>
 
         {/* WARNING if there are unavailable items */}
         {unavailableItems.length > 0 && (
-          <div className={styles.warningBanner}>
+          <div
+            className={styles.warningBanner}
+            role="alert"
+            aria-live="assertive"
+          >
             <p>Some items in your cart are currently out of stock:</p>
             <ul>
               {unavailableItems.map((item) => (
@@ -110,27 +118,28 @@ export default function Cart() {
                   }`}
                 >
                   {item.title}{" "}
-                  {item.selectedSize ? `(Size: ${item.selectedSize})` : ""}                     
+                  {item.selectedSize ? `(Size: ${item.selectedSize})` : ""}
                 </li>
               ))}
             </ul>
             <div className={styles.removeAllContainer}>
-            <button
-              className="buttonSecondary"
-              onClick={() => {
-                unavailableItems.forEach((item) =>
-                  dispatch(
-                    removeFromCart(
-                      `${item.id}-${item.selectedSize || "default"}`
+              <button
+                type="button"
+                className="buttonSecondary"
+                onClick={() => {
+                  unavailableItems.forEach((item) =>
+                    dispatch(
+                      removeFromCart(
+                        `${item.id}-${item.selectedSize || "default"}`
+                      )
                     )
-                  )
-                );
-              }}
-            >
-              Remove Unavailable Items
-            </button>
+                  );
+                }}
+              >
+                Remove Unavailable Items
+              </button>
             </div>
-            <p>Until this items are not removed, it is not possible to checkout.</p>
+            <p>Until this items are removed, it's not possible to checkout.</p>
           </div>
         )}
 
@@ -179,6 +188,7 @@ export default function Cart() {
 
                 <div className={styles.buttonsContainer}>
                   <button
+                    type="button"
                     style={{
                       display: "flex",
                       justifyContent: "center",
@@ -196,13 +206,21 @@ export default function Cart() {
                     <Plus size={15} />
                   </button>
                   <button
+                    type="button"
                     style={{
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      opacity: item.quantity === 1 && !item.unavailable ? 0.2 : 1,
-                      color: item.quantity === 1 && !item.unavailable ? "black" : "white",
-                      cursor: item.quantity === 1 && !item.unavailable ? "not-allowed" : "pointer",
+                      opacity:
+                        item.quantity === 1 && !item.unavailable ? 0.2 : 1,
+                      color:
+                        item.quantity === 1 && !item.unavailable
+                          ? "black"
+                          : "white",
+                      cursor:
+                        item.quantity === 1 && !item.unavailable
+                          ? "not-allowed"
+                          : "pointer",
                     }}
                     className="buttonPrimary"
                     onClick={() =>
@@ -213,11 +231,11 @@ export default function Cart() {
                       )
                     }
                     disabled={item.quantity === 1 ? true : false}
-                    
                   >
                     <Minus size={15} />
                   </button>
                   <button
+                    type="button"
                     className="buttonSecondary"
                     onClick={() =>
                       dispatch(
@@ -237,6 +255,7 @@ export default function Cart() {
 
         <div className={styles.clearAllContainer}>
           <button
+            type="button"
             className={`buttonTertiary ${styles.clearAllButton} `}
             onClick={() => dispatch(clearCart())}
           >
@@ -244,19 +263,19 @@ export default function Cart() {
           </button>
         </div>
         <hr />
-        <section className={styles.summarySection}>
-          <h2>Summary</h2>
-          <div className={styles.summaryInfoContainer}>
-          <p className={styles.totalItems}>
-            <span>Total Items:</span> {totalQuantity}
-          </p>
-          <p className={styles.subtotalPrice}>
-            <span>Subtotal:</span>{" "}
-            {symbolPosition === "left"
-              ? `${symbol}${convert(totalPrice)}`
-              : `${convert(totalPrice)}${symbol}`}
-          </p>
-              </div>
+        <section className={styles.summarySection} aria-labelledby="cart-summary-heading">
+          <h2 id="cart-summary-heading">Summary</h2>
+          <div className={styles.summaryInfoContainer} aria-live="polite">
+            <p className={styles.totalItems}>
+              <span>Total Items:</span> {totalQuantity}
+            </p>
+            <p className={styles.subtotalPrice}>
+              <span>Subtotal:</span>{" "}
+              {symbolPosition === "left"
+                ? `${symbol}${convert(totalPrice)}`
+                : `${convert(totalPrice)}${symbol}`}
+            </p>
+          </div>
           <div className={styles.summaryButtonsContainer}>
             <Link href="/#products-list" className="buttonSecondary">
               Continue Shopping
@@ -270,7 +289,6 @@ export default function Cart() {
             </Link>
           </div>
         </section>
-        {/* <FooterSimple /> */}
       </section>
       <Footer />
     </>

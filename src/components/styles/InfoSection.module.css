@@ -1,5 +1,4 @@
 .infoContainer {
-    /* height: auto; */
     width: 100%;
     margin: 0 auto;
     display: flex;
@@ -8,28 +7,21 @@
     justify-content: space-evenly;
     text-align: center;
     overflow-x: hidden;
-    /* border: 1px solid red; */
 }
-
 .infoContainer h2 {
-    width: 100%;
     margin-bottom: 10vh;
-    /* border: 1px solid black; */
 }
 
 .checksWrapper {
     position: relative;
-    /* border: 1px solid red; */
-    width: 100%;
     height: 20vh;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 10vh;
 }
- 
 .infoChecks {
-    border: 2px solid #00000010;
+    border: 2px solid #ffffffe1;
     border-radius: 50%;
     position: absolute;
     top: 50%;
@@ -37,7 +29,6 @@
     transform: translate(-50%, -50%);
     width: 125px;
     height: 125px;
-    padding: var(--pd-top-down) var(--pd-left-right);
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -48,7 +39,6 @@
     0 0 10px var(--clr-secondary),   
     0 0 35px #3333335d, 
     0 0 40px var(--clr-primary);
-    
 }
 .bestSpan {
     position: relative;
@@ -71,7 +61,6 @@
 .check2,
 .check3 {
     color: var(--clr-bg);
-    font-weight: 300;
 }
 .check1 { animation-delay: 0s;}
 .check2 { animation-delay: 3s;}
@@ -96,7 +85,6 @@
   transform-style: preserve-3d;
   animation: starOrbitSpin 20s linear infinite;
 }
-
 /* individual stars */
 .star {
   position: absolute;
@@ -104,7 +92,6 @@
   left: 50%;
   transform-origin: center center;
 }
-
 /* place each star along the orbit ring */
 .star1 { transform: rotateY(0deg) translateZ(70px); }
 .star2 { transform: rotateY(50deg) translateZ(70px); }
@@ -113,7 +100,6 @@
 .star5 { transform: rotateY(200deg) translateZ(70px); }
 .star6 { transform: rotateY(250deg) translateZ(70px); }
 .star7 { transform: rotateY(300deg) translateZ(70px); }
-
 /* orbit animation identical to infoChecks spans */
 @keyframes starOrbitSpin {
   0% {
@@ -124,12 +110,7 @@
   }
 }
 
-
-
-
-
 .infoStats {
-    /* border: 1px solid #333333; */
     width: fit-content;
     max-width: 90%;
     margin-bottom: 7vh;
@@ -137,30 +118,25 @@
     flex-direction: column;
     align-items: start;
 }
-
 .statsItems {
-    width: 100%;
     padding: 0.5em 0;
     display: flex;
     align-items: center;
     line-height: 1.7;
-    /* border: 1px solid; */
+}
+.statsItems p {
+    font-weight: 100;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
 }
 .numbers {
     display: inline-block;
     font-family: var(--font-gatwick-jet);
     font-weight: 600;
-    /* border: 1px solid red; */
     font-size: clamp(1.1rem, 2vw, 1.9rem);
     width: 4em;
     text-align: end;
-    padding-right: 1em;
+    padding-right: 0.7em;
 }
-.statsItems p {
-    font-weight: 100;
-    font-size: clamp(1rem, 2.5vw, 1.5rem);
-}
-
 
 .loopContainer {
   width: 100vw;
@@ -169,22 +145,21 @@
 }
 .loopTrack {
   display: inline-flex;
-  overflow-x: hidden;
   white-space: nowrap;
   will-change: transform;
   animation: loop 30s linear infinite;
 }
 .loopText {
   padding-right: 3em;
-  letter-spacing: 0.5px;
+  letter-spacing: var(--ls);
   font-weight: 900;
   font-size: clamp(1.3rem, 2vw, 1.6rem);
   background: radial-gradient(circle at center, #ff9d00 0%, #ff6a00 100%);
   -webkit-background-clip: text;
   background-clip: border-box;
   color: var(--clr-text); 
-  border-top: 2px solid var(--clr-grey);
-  border-bottom: 2px solid var(--clr-grey);
+  border-top: 3px solid var(--clr-hoverInLight);
+  border-bottom: 3px solid var(--clr-hoverInLight);
 }
 .loopText span {
   color: var(--clr-bg);

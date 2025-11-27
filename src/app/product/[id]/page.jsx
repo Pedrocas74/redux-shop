@@ -115,6 +115,7 @@ export default function ProductDetails() {
         selectedSize: product.sizes ? sizeSelected : null,
       })
     );
+    setSizeSelected("");
   };
 
   const upperFirstChars = (str) => {
@@ -128,7 +129,7 @@ export default function ProductDetails() {
 
   return (
     <div className={styles.pageContainer}>
-      <section className={styles.detailsContainer}>
+      <section className={styles.detailsContainer} aria-labelledby="product-title">
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },
@@ -137,7 +138,7 @@ export default function ProductDetails() {
           ]}
         />
 
-        <h1>{product.title}</h1>
+        <h1 id="product-title">{product.title}</h1>
         <h2 className={styles.price}>
           {symbolPosition === "left" ? (
             <>
@@ -170,12 +171,24 @@ export default function ProductDetails() {
             className={`${styles.sizeSelector} ${
               showSizeError ? styles.sizeError : ""
             }`}
+            role="radiogroup"
+            aria-label="Select size"
+            aria-invalid={showSizeError ? "true" : "false"}
+            aria-describedby={
+              showSizeError ? `size-error-${product.id}` : undefined
+            }
           >
             {product.sizes.map((size) => (
               <button
                 key={size}
-                className="buttonSecondary"
-                onClick={() => setSizeSelected(size)}
+                type="button"
+                className={`buttonSecondary ${sizeSelected === size ? styles.sizeSelectorSelected : ""}`}
+                role="radio"
+                aria-checked={sizeSelected === size}
+                onClick={() => {
+                  setSizeSelected(size);
+                  setShowSizeError(false);
+                }}
               >
                 {size}
               </button>
@@ -185,11 +198,11 @@ export default function ProductDetails() {
 
         <div className={styles.buttonAddContainer}>
           {stockStatus === "In stock" ? (
-            <button onClick={handleAddToCart} className="buttonPrimary">
+            <button type="button" onClick={handleAddToCart} className="buttonPrimary">
               Add to Cart
             </button>
           ) : (
-            <button className="buttonPrimary" disabled style={{ opacity: 0.6 }}>
+            <button type="button" className="buttonPrimary" disabled aria-disabled="true" style={{ opacity: 0.6 }}>
               Out of Stock
             </button>
           )}
@@ -245,7 +258,7 @@ export default function ProductDetails() {
 
                 <ul className={styles.careList}>
                   <li>
-                    <span className={styles.iconWrapper}>
+                    <span className={styles.iconWrapper} aria-hidden="true">
                       <Image
                         src="/images/icons/instructions/not-bleach.png"
                         alt="Do not bleach"
@@ -256,7 +269,7 @@ export default function ProductDetails() {
                     Do not bleach
                   </li>
                   <li>
-                    <span className={styles.iconWrapper}>
+                    <span className={styles.iconWrapper} aria-hidden="true">
                       <Image
                         src="/images/icons/instructions/tumble-dry.png"
                         alt="Do not tumble dry"
@@ -267,7 +280,7 @@ export default function ProductDetails() {
                     Do not tumble dry
                   </li>
                   <li>
-                    <span className={styles.iconWrapper}>
+                    <span className={styles.iconWrapper} aria-hidden="true">
                       <Image
                         src="/images/icons/instructions/do-not-dry.png"
                         alt="Do not dry clean"
@@ -278,7 +291,7 @@ export default function ProductDetails() {
                     Do not dry clean
                   </li>
                   <li>
-                    <span className={styles.iconWrapper}>
+                    <span className={styles.iconWrapper} aria-hidden="true">
                       <Image
                         src="/images/icons/instructions/ironing.png"
                         alt="Iron on the lowest setting"
@@ -289,7 +302,7 @@ export default function ProductDetails() {
                     Iron on the lowest setting
                   </li>
                   <li>
-                    <span className={styles.iconWrapper}>
+                    <span className={styles.iconWrapper} aria-hidden="true">
                       <Image
                         src="/images/icons/instructions/wash-30.png"
                         alt="Wash at low temperature"

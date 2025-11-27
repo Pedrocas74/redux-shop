@@ -3,6 +3,7 @@
 import styles from "./styles/RelatedProductsSlider.module.css";
 import { useSelector } from "react-redux";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function RelatedProductsSlider({ category, id }) {
   const products = useSelector((state) => state.products.products);
@@ -35,7 +36,7 @@ export default function RelatedProductsSlider({ category, id }) {
         {relatedProducts.map((product) => (
           <div key={product.id} className={styles.productCard}>
             <Link href={`/product/${product.id}`}>
-            <img src={product.image} alt={product.title} />
+            <Image src={product.image} width={300} height={300} alt={product.title} loading="lazy" />
             <p className={styles.productTitle}>{product.title}</p>
             </Link>
             <p>

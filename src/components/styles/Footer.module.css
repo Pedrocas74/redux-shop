@@ -1,14 +1,10 @@
-
-/* ----------------------------TOP SECTION------------------------------------ */
 .bigContainer {
-    /* border: 1px solid red; */
     height: 70vh;
     display: flex;
     flex-direction: column;
 }
 
 .promotionContainer {
-    /* border: 1px solid blue; */
     text-align: center;
     flex: 1;
     display: flex;
@@ -19,7 +15,6 @@
     color: var(--clr-secondary);
 }
 .promotionContainer h5 {
-    /* border: 1px solid white; */
     width: 90%;
     font-size: clamp(1.7rem, 5vw, 2.7rem);
     letter-spacing: 5px;
@@ -28,7 +23,6 @@
     font-weight: 900;
 }
 .promotionContainer h6 {
-    /* border: 1px solid orange; */
     width: 90%;
     font-size: clamp(0.8rem, 3vw, 1.3rem);
     color: var(--clr-bg-light);
@@ -50,38 +44,25 @@
 }
 .leftContainer {
     flex: 1;
-    /* border-right: 1px solid var(--clr-grey-medium); */
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 0.5em 0.5em 0.5em 5%;
-    /* border: 1px solid red; */
 }
 .leftContainer p {
     font-size: clamp(1rem, 2vw, 1.2rem);
     flex: 1;
-    /* border: 1px solid red; */
 }
-.legalLinks {
-    /* border: 1px solid red; */
-    display: flex;
-    flex-direction: column;
-    flex: 2;
-    margin: 0.3em 0;
-    line-height: 1.7;
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
-}
-
 .leftContainer a {
     font-size: clamp(0.9rem, 2vw, 1.1rem);
     flex: 1;
-    color: var(--clr-text-muted);
-    text-decoration: underline;
-    transition: var(--transition);
     width: fit-content;
 }
-.leftContainer a:hover {
-    color: var(--clr-text);
+.legalLinks {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    line-height: 1.8;
 }
 
 .rightContainer {
@@ -96,11 +77,9 @@
     align-items: center;
     justify-content: center;
     font-size: clamp(1.3rem, 3vw, 1.5rem);
-    
 }
 .creditContainer {
     flex: 1;
-    /* border: 1px solid blue; */
 }
 .creditContainer p {
     font-size: clamp(0.9rem, 2vw, 1.1rem);
@@ -114,14 +93,10 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
-
 /* ---------------------------BOTTOM SECTION------------------------------------------ */
-
 .footer {
     width: 100%;
     background: var(--clr-text);
-    color: var(--clr-bg);
-    /* border: 1px solid red; */
     height: 10vh;
 }
 .footer a {
@@ -140,13 +115,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* border: 1px solid blue; */
 }
 .madeByPedro {
     width: fit-content;
 }
 .socials {
-    /* border: 1px solid yellow; */
     width: 85px;
     height: 35px;
     display: flex;

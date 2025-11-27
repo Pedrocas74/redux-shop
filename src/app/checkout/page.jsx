@@ -33,29 +33,43 @@ export default function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState("card"); //defaul for card payment method
   const [isPlaced, setIsPlaced] = useState(false); //place order button click
   const [isProcessing, setIsProcessing] = useState(false); //payment processing -> successful
-  const [showSuccess, setShowSuccess] = useState(false); //payment sucessfull before redirection to homepage 
+  const [showSuccess, setShowSuccess] = useState(false); //payment sucessfull before redirection to homepage
+  const [supportsApplePay, setSupportsApplePay] = useState(false);
+  const [supportsGooglePay, setSupportsGooglePay] = useState(false);
+
   const router = useRouter();
 
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof navigator === "undefined")
+      return;
+
+    const ua = navigator.userAgent || "";
+
+    const isApple = /Macintosh|Mac OS X|iPhone|iPad|iPod/i.test(ua);
+    const isAndroid = /Android/i.test(ua);
+    setSupportsApplePay(isApple);
+    setSupportsGooglePay(isAndroid || !isApple);
+  }, []);
 
   useEffect(() => {
-  if (!isPlaced) return;
+    if (!isPlaced) return;
 
-  setIsProcessing(true);
+    setIsProcessing(true);
 
-  const processingTimer = setTimeout(() => {
-    setIsProcessing(false);
-    setShowSuccess(true);
-  }, 4000);
+    const processingTimer = setTimeout(() => {
+      setIsProcessing(false);
+      setShowSuccess(true);
+    }, 4000);
 
-  const successTimer = setTimeout(() => {
-    router.replace("/?payment=success");
-  }, 6000);
+    const successTimer = setTimeout(() => {
+      router.replace("/?payment=success");
+    }, 6000);
 
-  return () => {
-    clearTimeout(processingTimer);
-    clearTimeout(successTimer);
-  };
-}, [isPlaced, router]);
+    return () => {
+      clearTimeout(processingTimer);
+      clearTimeout(successTimer);
+    };
+  }, [isPlaced, router]);
 
   const convert = (price) => (price * rates[current]).toFixed(2);
 
@@ -90,7 +104,6 @@ export default function Checkout() {
     setIsApplied(true); // disable further use
     toast.success("10% discount applied! :)");
   };
-
 
   const renderPaymentIcons = () => {
     switch (paymentMethod) {
@@ -127,9 +140,11 @@ export default function Checkout() {
 
   return (
     <>
-      <section 
-      style={{ }}
-      className={styles.checkoutSection}>
+      <section
+        style={{}}
+        className={styles.checkoutSection}
+        aria-labelledby="checkout-heading"
+      >
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },
@@ -138,11 +153,9 @@ export default function Checkout() {
             { label: "Checkout", href: "/checkout" },
           ]}
         />
-        <h1>Checkout</h1>
+        <h1 id="checkout-heading">Checkout</h1>
 
         <div className={styles.summarySection}>
-          <h2>Order Summary</h2>
-
           <table className={styles.summaryTable}>
             <thead>
               <tr>
@@ -174,16 +187,24 @@ export default function Checkout() {
 
           <hr />
 
-          <p
+          <button
+            type="button"
             className={`${styles.toggleCode} buttonTertiary`}
             onClick={() => setShowCode(!showCode)}
+            style={{ textDecoration: "underline" }}
+            aria-expanded={showCode}
+            aria-controls="promo-code-section"
           >
             Have a promo code?
-          </p>
+          </button>
           {showCode && (
             <>
-              <div className={styles.promoCodeContainer}>
+              <div
+                className={styles.promoCodeContainer}
+                id="promo-code-section"
+              >
                 <input
+                  id="promo-code"
                   type="text"
                   placeholder="Enter code"
                   value={code}
@@ -198,6 +219,7 @@ export default function Checkout() {
                 />
 
                 <button
+                  type="button"
                   className="buttonSecondary"
                   onClick={applyDiscount}
                   disabled={isApplied}
@@ -236,20 +258,25 @@ export default function Checkout() {
           </p>
         </div>
 
-        <section className={styles.paymentSection}>
-          <h2>Payment</h2>
+        <section
+          className={styles.paymentSection}
+          aria-labelledby="payment-heading"
+        >
+          <h2 id="payment-heading">Payment</h2>
           <div className={styles.paymentMethodsContainer}>
             <label>
-              <input
-                className={styles.paymentInput}
-                type="radio"
-                name="payment"
-                value="card"
-                checked={paymentMethod === "card"}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />{" "}
-              Credit/Debit Card
-              <span className={styles.paymentIcons}>
+              <div>
+                <input
+                  className={styles.paymentInput}
+                  type="radio"
+                  name="payment"
+                  value="card"
+                  checked={paymentMethod === "card"}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />{" "}
+                Credit Card
+              </div>
+              <span className={styles.paymentIcons} aria-hidden="true">
                 <FaCcVisa size={27} />
                 <FaCcMastercard size={27} />
                 <FaCcAmex size={27} />
@@ -257,61 +284,73 @@ export default function Checkout() {
             </label>
 
             <label>
-              <input
-                className={styles.paymentInput}
-                type="radio"
-                name="payment"
-                value="paypal"
-                checked={paymentMethod === "paypal"}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />{" "}
-              PayPal
-              <span className={styles.paymentIcons}>
+              <div>
+                <input
+                  className={styles.paymentInput}
+                  type="radio"
+                  name="payment"
+                  value="paypal"
+                  checked={paymentMethod === "paypal"}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />{" "}
+                PayPal
+              </div>
+              <span className={styles.paymentIcons} aria-hidden="true">
                 <FaCcPaypal size={27} />
               </span>
             </label>
 
-            <label>
-              <input
-                className={styles.paymentInput}
-                type="radio"
-                name="payment"
-                value="applepay"
-                checked={paymentMethod === "applepay"}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />{" "}
-              Apple Pay
-              <span className={styles.paymentIcons}>
-                <FaCcApplePay size={27} />
-              </span>
-            </label>
+            {supportsApplePay && (
+              <label>
+                <div>
+                  <input
+                    className={styles.paymentInput}
+                    type="radio"
+                    name="payment"
+                    value="applepay"
+                    checked={paymentMethod === "applepay"}
+                    onChange={(e) => setPaymentMethod(e.target.value)}
+                  />{" "}
+                  Apple Pay
+                </div>
+                <span className={styles.paymentIcons} aria-hidden="true">
+                  <FaCcApplePay size={27} />
+                </span>
+              </label>
+            )}
+
+            {supportsGooglePay && (
+              <label>
+                <div>
+                  <input
+                    className={styles.paymentInput}
+                    type="radio"
+                    name="payment"
+                    value="googlepay"
+                    checked={paymentMethod === "googlepay"}
+                    onChange={(e) => setPaymentMethod(e.target.value)}
+                  />{" "}
+                  Google Pay
+                </div>
+                <span className={styles.paymentIcons} aria-hidden="true">
+                  <FaGooglePay size={27} />
+                </span>
+              </label>
+            )}
 
             <label>
-              <input
-                className={styles.paymentInput}
-                type="radio"
-                name="payment"
-                value="googlepay"
-                checked={paymentMethod === "googlepay"}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />{" "}
-              Google Pay
-              <span className={styles.paymentIcons}>
-                <FaGooglePay size={27} />
-              </span>
-            </label>
-
-            <label>
-              <input
-                className={styles.paymentInput}
-                type="radio"
-                name="payment"
-                value="other"
-                checked={paymentMethod === "other"}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />{" "}
-              Other methods
-              <span className={styles.paymentIcons}>
+              <div>
+                <input
+                  className={styles.paymentInput}
+                  type="radio"
+                  name="payment"
+                  value="other"
+                  checked={paymentMethod === "other"}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />{" "}
+                Other methods
+              </div>
+              <span className={styles.paymentIcons} aria-hidden="true">
                 <FaCcAmazonPay size={27} />
                 <FaCcStripe size={27} />
               </span>
@@ -320,52 +359,59 @@ export default function Checkout() {
         </section>
 
         <button
+          type="button"
           className={`buttonPrimary ${styles.placeOrderButton}`}
           onClick={handlePlaceOrder}
         >
           Place Order
         </button>
-        
       </section>
       {isPlaced && (
-          <section className={styles.placeContainer}>
-            <span className={styles.placePaymentIcons}>
-              {renderPaymentIcons()}
-            </span>
-            <div className={styles.placeInfo}>
-              {isProcessing ? (
-                <>
-                  <h3>Your payment is being processed...</h3>
-                  <motion.svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="50"
-                    height="50"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    style={{ display: "block" }}
-                    animate={{ rotate: 360 }}
-                    transition={{
-                      repeat: Infinity,
-                      duration: 1,
-                      ease: "linear",
-                    }}
-                  >
-                    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-                  </motion.svg>
-                </>
-              ) : (
-                <>
-                  <h3>Payment successful!</h3>
-                  <CheckCircle size={50} />
-                </>
-              )}
-            </div>
-          </section>
-        )}
+        <section
+          className={styles.placeContainer}
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <span className={styles.placePaymentIcons} aria-hidden="true">
+            {renderPaymentIcons()}
+          </span>
+          <div className={styles.placeInfo}>
+            {isProcessing ? (
+              <>
+                <h3>Your payment is being processed...</h3>
+                <motion.svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="50"
+                  height="50"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={{ display: "block" }}
+                  animate={{ rotate: 360 }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 1,
+                    ease: "linear",
+                  }}
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                </motion.svg>
+              </>
+            ) : (
+              <>
+                <h3>Payment successful!</h3>
+                <CheckCircle size={50} aria-hidden="true" />
+              </>
+            )}
+          </div>
+        </section>
+      )}
       <FooterSimple />
     </>
   );
