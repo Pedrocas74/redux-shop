@@ -58,8 +58,8 @@ export const gatwickJet = localFont({
 });
 
 export const metadata = {
-  title: "Redux Shop",
-  description: "Awesome e-commerce store",
+  title: "SOL | For Those Who Shine",
+  description: "Awesome e-commerce store.",
 };
 
 export default function RootLayout({ children }) {

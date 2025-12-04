@@ -180,7 +180,7 @@ export default function Checkout() {
             <tfoot>
               <tr>
                 <th scope="row">Subtotal ({symbol})</th>
-                <td>{totalPrice.toFixed(2)}</td>
+                <td>{convert(totalPrice.toFixed(2))}</td>
               </tr>
             </tfoot>
           </table>
