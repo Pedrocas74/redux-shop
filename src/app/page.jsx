@@ -1,13 +1,13 @@
 "use client";
 
-import { Suspense, useEffect } from 'react';
+import { Suspense, useEffect } from "react";
 
-import Hero from '@components/Hero';
-import InfoSection from '@components/InfoSection';
-import Reviews from '@components/Reviews';
-import Footer from '@components/Footer';
-import PaymentBanner from '@components/PaymentBanner.';
-import LazyProductsSection from '@components/LazyProductsSection';
+import Hero from "@components/layout/Hero";
+import InfoSection from "@components/layout/InfoSection";
+import Reviews from "@components/layout/Reviews";
+import Footer from "@components/layout/Footer/Footer";
+import PaymentBanner from "@components/ui/PaymentBanner";
+import LazyProductsSection from "@features/products/LazyProductsSection";
 
 export default function Home() {
   useEffect(() => {
@@ -35,21 +35,21 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-  if (typeof window === "undefined") return;
+    if (typeof window === "undefined") return;
 
-  //only after full page reload
-  const nav = performance.getEntriesByType("navigation")[0];
-  const isReload = nav && nav.type === "reload";
+    //only after full page reload
+    const nav = performance.getEntriesByType("navigation")[0];
+    const isReload = nav && nav.type === "reload";
 
-  if (isReload && window.location.pathname === "/" && !window.location.hash) {
-    window.scrollTo({ top: 0, behavior: "auto" });
-  }
-}, []);
+    if (isReload && window.location.pathname === "/" && !window.location.hash) {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
+  }, []);
 
   return (
     <main>
       <Suspense>
-        <PaymentBanner /> 
+        <PaymentBanner />
       </Suspense>
       <Hero />
       <div style={{ height: "180vh" }} />

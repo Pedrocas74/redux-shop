@@ -1,0 +1,342 @@
+"use client";
+
+import styles from "./ProductDetails.module.css";
+import { useParams } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../../../../features/cart/cartSlice";
+import { useState, useEffect } from "react";
+import Skeleton from "@components/Skeleton";
+import Image from "next/image";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import RelatedProductsSlider from "@components/products/RelatedProductsSlider";
+import Footer from "@components/layout/Footer/Footer";
+import Breadcrumbs from "@components/ui/Breadcrumbs";
+import { toast } from "sonner";
+import ImageMagnifier from "@components/ui/ImageMagnifier";
+
+export default function ProductDetails() {
+  const [sizeSelected, setSizeSelected] = useState("");
+  const [showSizeError, setShowSizeError] = useState(false);
+  const [openStates, setOpenStates] = useState({
+    summary1: false,
+    summary2: false,
+    summary3: false,
+  });
+  const [mounted, setMounted] = useState(false);
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
+  const product = useSelector((state) =>
+    state.products.products.find((p) => p.id === parseInt(id))
+  );
+
+  const { current, rates } = useSelector((state) => state.currency);
+  useEffect(() => setMounted(true), []);
+
+  const convert = (price) => (price * rates[current]).toFixed(2);
+  let symbolPosition = "right"; //euro as default
+  const getSymbol = () => {
+    switch (current) {
+      case "USD":
+        symbolPosition = "left";
+        return "$";
+      case "GBP":
+        symbolPosition = "left";
+        return "£";
+      default:
+        symbolPosition = "right";
+        return "€";
+    }
+  };
+  const symbol = getSymbol();
+  const stockStatus = product?.stock;
+
+  const arrow1 = openStates.summary1 ? (
+    <ChevronUp color="#333" />
+  ) : (
+    <ChevronDown color="#333" />
+  );
+  const arrow2 = openStates.summary2 ? (
+    <ChevronUp color="#333" />
+  ) : (
+    <ChevronDown color="#333" />
+  );
+  const arrow3 = openStates.summary3 ? (
+    <ChevronUp color="#333" />
+  ) : (
+    <ChevronDown color="#333" />
+  );
+
+  const toggleSummary = (key) => {
+    setOpenStates((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
+
+  if (!mounted || !product) {
+    return (
+      <div
+        style={{
+          height: "85vh",
+          padding: "1em",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-around",
+        }}
+      >
+        <Skeleton width="20%" height="1rem" style={{ margin: "0 5%" }} />
+        <Skeleton width="45%" height="2rem" style={{ margin: "0 5%" }} />
+        <Skeleton width="15%" height="1.5rem" style={{ margin: "0 5%" }} />
+        <Skeleton width="90%" height="50vh" style={{ margin: "0 auto" }} />
+        <Skeleton
+          width="120px"
+          height="2.5rem"
+          borderRadius="5px"
+          style={{ margin: "0 auto" }}
+        />
+      </div>
+    );
+  }
+
+  const handleAddToCart = () => {
+    if (product.sizes && !sizeSelected) {
+      toast.warning("Must select a size before adding to cart.");
+
+      setShowSizeError(true);
+      setTimeout(() => setShowSizeError(false), 2000);
+
+      return;
+    }
+
+    dispatch(
+      addToCart({
+        product,
+        selectedSize: product.sizes ? sizeSelected : null,
+      })
+    );
+    setSizeSelected("");
+  };
+
+  const upperFirstChars = (str) => {
+    return str
+      .toLowerCase()
+      .split(" ")
+      .filter(Boolean)
+      .map((w) => w[0].toUpperCase() + w.slice(1))
+      .join(" ");
+  };
+
+  return (
+    <div className={styles.pageContainer}>
+      <section
+        className={styles.detailsContainer}
+        aria-labelledby="product-title"
+      >
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Products", href: "/#products-list", scroll: true },
+            { label: upperFirstChars(product.category) },
+          ]}
+        />
+
+        <h1 id="product-title">{product.title}</h1>
+        <h2 className={styles.price}>
+          {symbolPosition === "left" ? (
+            <>
+              {symbol}
+              {convert(product.price)}
+            </>
+          ) : (
+            <>
+              {convert(product.price)}
+              {symbol}
+            </>
+          )}
+        </h2>
+        <figure
+          style={{
+            position: "relative",
+            zIndex: 1,
+          }}
+        >
+          <ImageMagnifier
+            src={product.image}
+            alt={product.title}
+            width={240}
+            height={240}
+            zoom={1.5}
+            lensSize={180}
+            lensOffsetX={50}
+          />
+        </figure>
+
+        {stockStatus === "In stock" && product.sizes && (
+          <div
+            className={`${styles.sizeSelector} ${
+              showSizeError ? styles.sizeError : ""
+            }`}
+            role="radiogroup"
+            aria-label="Select size"
+            aria-invalid={showSizeError ? "true" : "false"}
+            aria-describedby={
+              showSizeError ? `size-error-${product.id}` : undefined
+            }
+          >
+            {product.sizes.map((size) => (
+              <button
+                key={size}
+                type="button"
+                className={`buttonSecondary ${
+                  sizeSelected === size ? styles.sizeSelectorSelected : ""
+                }`}
+                role="radio"
+                aria-checked={sizeSelected === size}
+                onClick={() => {
+                  setSizeSelected(size);
+                  setShowSizeError(false);
+                }}
+              >
+                {size}
+              </button>
+            ))}
+          </div>
+        )}
+
+        <div className={styles.buttonAddContainer}>
+          {stockStatus === "In stock" ? (
+            <button
+              type="button"
+              onClick={handleAddToCart}
+              className="buttonPrimary"
+            >
+              Add to Cart
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="buttonPrimary"
+              disabled
+              aria-disabled="true"
+              style={{ opacity: 0.6 }}
+            >
+              Out of Stock
+            </button>
+          )}
+        </div>
+
+        <div className={styles.summariesContainer}>
+          {/* DESCRIPTION OF THE PRODUCT */}
+          <details open={openStates.summary1}>
+            <summary
+              onClick={(e) => {
+                e.preventDefault();
+                toggleSummary("summary1");
+              }}
+              className={styles.instructions}
+            >
+              Description <span>{arrow1}</span>
+            </summary>
+            <p className={styles.productDescription}>{product.description}</p>
+          </details>
+
+          {/* DELIVERY AND RETURN RULES */}
+          <details open={openStates.summary2}>
+            <summary
+              onClick={(e) => {
+                e.preventDefault();
+                toggleSummary("summary2");
+              }}
+              className={styles.instructions}
+            >
+              Free delivery and returns <span>{arrow2}</span>
+            </summary>
+            <ul className={styles.careList}>
+              <li>✓ 30 Day Returns </li>
+              <li>✓ Free Worldwide Shipping </li>
+              <li>✓ Shipped within 48 hours</li>
+            </ul>
+          </details>
+
+          {/* WASHING INSTRUCTIONS */}
+          {(product.category === "men's clothing" ||
+            product.category === "women's clothing") &&
+            !product.title.toLowerCase().includes("backpack") && (
+              <details open={openStates.summary3}>
+                <summary
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleSummary("summary3");
+                  }}
+                  className={styles.instructions}
+                >
+                  Care <span>{arrow3}</span>
+                </summary>
+
+                <ul className={styles.careList}>
+                  <li>
+                    <span className={styles.iconWrapper} aria-hidden="true">
+                      <Image
+                        src="/images/icons/instructions/not-bleach.png"
+                        alt="Do not bleach"
+                        fill
+                        priority
+                      />
+                    </span>
+                    Do not bleach
+                  </li>
+                  <li>
+                    <span className={styles.iconWrapper} aria-hidden="true">
+                      <Image
+                        src="/images/icons/instructions/tumble-dry.png"
+                        alt="Do not tumble dry"
+                        fill
+                        priority
+                      />
+                    </span>
+                    Do not tumble dry
+                  </li>
+                  <li>
+                    <span className={styles.iconWrapper} aria-hidden="true">
+                      <Image
+                        src="/images/icons/instructions/do-not-dry.png"
+                        alt="Do not dry clean"
+                        fill
+                        priority
+                      />
+                    </span>
+                    Do not dry clean
+                  </li>
+                  <li>
+                    <span className={styles.iconWrapper} aria-hidden="true">
+                      <Image
+                        src="/images/icons/instructions/ironing.png"
+                        alt="Iron on the lowest setting"
+                        fill
+                        priority
+                      />
+                    </span>
+                    Iron on the lowest setting
+                  </li>
+                  <li>
+                    <span className={styles.iconWrapper} aria-hidden="true">
+                      <Image
+                        src="/images/icons/instructions/wash-30.png"
+                        alt="Wash at low temperature"
+                        fill
+                        priority
+                      />
+                    </span>
+                    Wash at low temperature and on delicate cycle
+                  </li>
+                </ul>
+              </details>
+            )}
+        </div>
+      </section>
+      <RelatedProductsSlider id={product.id} category={product.category} />
+      <Footer />
+    </div>
+  );
+}

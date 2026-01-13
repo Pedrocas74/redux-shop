@@ -1,44 +1,9 @@
 import "./globals.css";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/layout/Navbar";
 import ReduxProvider from "../components/ReduxProvider";
 import { Toaster } from "sonner";
 
 import localFont from "next/font/local";
-
-export const acma = localFont({
-  src: [
-    { path: "./fonts/acma/PPAcma-Thin.otf", weight: "100", style: "normal" },
-    { path: "./fonts/acma/PPAcma-Light.otf", weight: "300", style: "normal" },
-    {
-      path: "./fonts/acma/PPAcma-Semibold.otf",
-      weight: "600",
-      style: "normal",
-    },
-    { path: "./fonts/acma/PPAcma-Black.otf", weight: "900", style: "normal" },
-    {
-      path: "./fonts/acma/PPAcma-ThinItalic.otf",
-      weight: "100",
-      style: "italic",
-    },
-    {
-      path: "./fonts/acma/PPAcma-LightItalic.otf",
-      weight: "300",
-      style: "italic",
-    },
-    {
-      path: "./fonts/acma/PPAcma-SemiboldItalic.otf",
-      weight: "600",
-      style: "italic",
-    },
-    {
-      path: "./fonts/acma/PPAcma-BlackItalic.otf",
-      weight: "900",
-      style: "italic",
-    },
-  ],
-  variable: "--font-acma",
-  display: "swap",
-});
 
 export const gatwickJet = localFont({
   src: [
@@ -68,7 +33,7 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="google" content="notranslate" />
       </head>
-      <body className={`${acma.variable} ${gatwickJet.variable}`}>
+      <body className={`${gatwickJet.variable}`}>
         <ReduxProvider>
           <Navbar />
           <main>

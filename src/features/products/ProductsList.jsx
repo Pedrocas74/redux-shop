@@ -4,7 +4,7 @@ import styles from "./ProductsList.module.css";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "./productsSlice";
-import ProductCard from "../../components/ProductCard";
+import ProductCard from "../../components/products/ProductCard";
 import Image from "next/image";
 
 export default function ProductsList() {
@@ -28,7 +28,13 @@ export default function ProductsList() {
 
   if (loading)
     return (
-      <p role="status" aria-live="polite" style={{ textAlign: "center", marginBottom: "10vh" }}>Loading...</p>
+      <p
+        role="status"
+        aria-live="polite"
+        style={{ textAlign: "center", marginBottom: "10vh" }}
+      >
+        Loading...
+      </p>
     );
   if (error)
     return (
@@ -118,7 +124,6 @@ export default function ProductsList() {
         style={{
           marginBottom: "7vh",
           display: selectedCategory === null ? "none" : "inline-block",
-
         }}
         type="button"
         onClick={() => setSelectedCategory(null)}

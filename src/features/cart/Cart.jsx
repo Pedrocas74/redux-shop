@@ -13,8 +13,8 @@ import {
   clearCart,
   reconcileWithProducts,
 } from "./cartSlice";
-import Footer from "@components/Footer";
-import Breadcrumbs from "@components/Breadcrumbs";
+import Footer from "@components/layout/Footer/Footer";
+import Breadcrumbs from "@components/ui/Breadcrumbs";
 import { fetchProducts } from "../products/productsSlice.js";
 
 export default function Cart() {
@@ -263,7 +263,10 @@ export default function Cart() {
           </button>
         </div>
         <hr />
-        <section className={styles.summarySection} aria-labelledby="cart-summary-heading">
+        <section
+          className={styles.summarySection}
+          aria-labelledby="cart-summary-heading"
+        >
           <h2 id="cart-summary-heading">Summary</h2>
           <div className={styles.summaryInfoContainer} aria-live="polite">
             <p className={styles.totalItems}>
