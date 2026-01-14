@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "./productsSlice";
 import ProductCard from "../../components/products/ProductCard";
 import Image from "next/image";
-import LoadingSVG from "@components/ui/LoadingSVG/LoadingSVG";
+// import LoadingSVG from "@components/ui/LoadingSVG/LoadingSVG";
 import ProductsListSkeleton from "./ProductsListSkeleton";
 
 export default function ProductsList() {

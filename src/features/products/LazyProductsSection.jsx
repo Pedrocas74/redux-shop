@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
+import ProductsListSkeleton from "./ProductsListSkeleton";
 
 
 const ProductsList = dynamic(
@@ -9,16 +10,9 @@ const ProductsList = dynamic(
   {
     ssr: false, 
     loading: () => (
-      <section
-        style={{
-          minHeight: "50vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <p style={{ opacity: 0.6 }}>Getting products ready…</p>
-      </section>
+      <>
+        <ProductsListSkeleton />
+      </>
     ),
   }
 );
