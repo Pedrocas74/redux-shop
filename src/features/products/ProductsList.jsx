@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "./productsSlice";
 import ProductCard from "../../components/products/ProductCard";
 import Image from "next/image";
+import LoadingSVG from "@components/ui/LoadingSVG/LoadingSVG";
+import ProductsListSkeleton from "./ProductsListSkeleton";
 
 export default function ProductsList() {
   const [selectedCategory, setSelectedCategory] = useState(null); //null = show all products
@@ -26,19 +28,13 @@ export default function ProductsList() {
     setSelectedCategory((prev) => (prev === cat ? null : cat));
   };
 
-  if (loading)
-    return (
-      <p
-        role="status"
-        aria-live="polite"
-        style={{ textAlign: "center", marginBottom: "10vh" }}
-      >
-        Loading...
-      </p>
-    );
+  if (loading) return <ProductsListSkeleton />;
   if (error)
     return (
-      <p role="alert" style={{ textAlign: "center", marginBottom: "10vh" }}>
+      <p
+        role="alert"
+        style={{ textAlign: "center", margin: "var(--space-xxl) auto" }}
+      >
         Error: {error}
       </p>
     );
@@ -52,7 +48,9 @@ export default function ProductsList() {
       <p>Select a category</p>
 
       <div
-        className={styles.productsSelector}
+        className={`${styles.productsSelector} ${
+          selectedCategory ? styles.hasSelected : ""
+        }`}
         role="radiogroup"
         aria-label="Filter products by category"
       >

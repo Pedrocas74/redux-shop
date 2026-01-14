@@ -110,7 +110,8 @@ h1, h2 {
 }
 h1:not(.heroTitle) {
   margin-top: var(--space-md);
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-xs);
+  font-size: var(--fs-lg);
 }
 /* h1:not(.heroTitle, .itemTitle, #cart-heading), */
 h2:not(#products-heading, .youMayAlsoLike, #payment-heading, #cart-summary-heading) {
@@ -118,7 +119,6 @@ h2:not(#products-heading, .youMayAlsoLike, #payment-heading, #cart-summary-headi
   font-weight: 600;
   margin: var(--space-xl) 0;
 }
-
 
 
 button,

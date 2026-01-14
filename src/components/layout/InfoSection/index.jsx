@@ -103,7 +103,20 @@ export default function InfoSection() {
         >
           {/* +1M five star reviews */}
           <span className={styles.numbers}>
-            +{inView && <CountUp end={1} duration={3} />}M&nbsp;
+            +
+            {inView && (
+              <CountUp
+                end={1}
+                duration={1}
+                useEasing
+                easingFn={(t, b, c, d) => {
+                  t /= d;
+                  t--;
+                  return c * (t * t * t + 1) + b;
+                }}
+              />
+            )}
+            M&nbsp;
           </span>
           <p>5 star reviews and counting</p>
         </li>
@@ -114,7 +127,20 @@ export default function InfoSection() {
         >
           {/* Join 10M happy customers*/}
           <span className={styles.numbers}>
-            +{inView && <CountUp end={8} duration={4} />}M&nbsp;
+            +
+            {inView && (
+              <CountUp
+                end={8}
+                duration={4.5}
+                useEasing
+                easingFn={(t, b, c, d) => {
+                  t /= d;
+                  t--;
+                  return c * (t * t * t + 1) + b;
+                }}
+              />
+            )}
+            M&nbsp;
           </span>
           <p>Happy customers</p>
         </li>
@@ -125,7 +151,19 @@ export default function InfoSection() {
         >
           {/* 74 countries */}
           <span className={styles.numbers}>
-            {inView && <CountUp end={74} duration={4} />}&nbsp;
+            {inView && (
+              <CountUp
+                end={74}
+                duration={5}
+                useEasing
+                easingFn={(t, b, c, d) => {
+                  t /= d;
+                  t--;
+                  return c * (t * t * t + 1) + b;
+                }}
+              />
+            )}
+            &nbsp;
           </span>
           <p>Countries</p>
         </li>
@@ -133,13 +171,29 @@ export default function InfoSection() {
         <li className={styles.statsItems} aria-label="27 years of experience">
           {/* 27 Years */}
           <span className={styles.numbers}>
-            {inView && <CountUp end={27} duration={6} />}&nbsp;
+            {inView && (
+              <CountUp
+                end={27}
+                duration={7}
+                useEasing
+                easingFn={(t, b, c, d) => {
+                  t /= d;
+                  t--;
+                  return c * (t * t * t + 1) + b;
+                }}
+              />
+            )}
+            &nbsp;
           </span>
           <p>Years</p>
         </li>
       </ul>
 
-      <div id="products-list" className={styles.loopContainer} aria-hidden="true">
+      <div
+        id="products-list"
+        className={styles.loopContainer}
+        aria-hidden="true"
+      >
         <div className={styles.loopTrack}>
           <span className={styles.loopText}>
             <em>WE KNOW </em>•{" "}

@@ -1,17 +1,21 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import LoadingSVG from "@components/ui/LoadingSVG/LoadingSVG";
 
 const Cart = dynamic(() => import("../../features/cart/Cart"), {
   ssr: false,
   loading: () => (
-    <p
+    <div
       style={{
-        margin: "10vh 2vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        margin: "var(--space-xxl) auto",
       }}
     >
-      LOADING CART...
-    </p>
+      <LoadingSVG />
+    </div>
   ),
 });
 
