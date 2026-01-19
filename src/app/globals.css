@@ -25,9 +25,9 @@
   --border: hsl(300 0% 50%);
   --border-muted: hsl(340 0% 62%);
 
-  --clr-primary-light: hsl(28, 100%, 60%);
-  --clr-primary: hsl(28, 100%, 50%);
-  --clr-primary-dark: hsl(28, 100%, 40%);
+  --clr-primary-light: hsl(28, 100%, 45%);
+  --clr-primary: #e16900;
+  --clr-primary-dark: hsl(28, 100%, 32%);
 
   --clr-secondary: #ffbf04;
   --clr-accent: #83190b;
@@ -108,12 +108,12 @@ p {
 h1, h2 {
   font-family: var(--font-gatwick-jet);
 }
-h1:not(.heroTitle) {
-  margin-top: var(--space-md);
-  margin-bottom: var(--space-xs);
+h1:not(.heroTitle, #product-title) {
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-sm);
   font-size: var(--fs-lg);
 }
-/* h1:not(.heroTitle, .itemTitle, #cart-heading), */
+
 h2:not(#products-heading, .youMayAlsoLike, #payment-heading, #cart-summary-heading) {
   font-size: var(--fs-lg);
   font-weight: 600;
@@ -141,7 +141,7 @@ a.buttonPrimary {
   background: var(--clr-text);
 }
 .buttonPrimary:hover {
-  background: var(--clr-primary);
+  background: var(--clr-primary-light);
   box-shadow: var(--shadow-button);
 }
 .buttonPrimary:active {
@@ -155,14 +155,14 @@ a.buttonSecondary {
   border: 1px solid var(--clr-text);
 }
 .buttonSecondary:hover {
-  border-color: var(--clr-primary);
+  border-color: var(--clr-primary-light);
   color: var(--clr-primary);
   background: var(--clr-bg-light);
   box-shadow: var(--shadow-button);
 }
 .buttonSecondary:active {
   background: var(--clr-bg-dark);
-  color: var(--clr-primary-dark);
+  color: var(--clr-primary);
 }
 /* Tertiary */
 .buttonTertiary {

@@ -67,6 +67,9 @@
     flex: 2;
     line-height: var(--lh-list);
 }
+.apiLink {
+    line-height: var(--lh-list);
+}
 
 .rightContainer {
     flex: 1;

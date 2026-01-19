@@ -1,18 +1,24 @@
 "use client";
 
 import styles from "./ProductDetails.module.css";
+//custom components
+import Footer from "@components/layout/Footer/Footer";
+import ImageMagnifier from "@components/ui/ImageMagnifier";
+import ProductDetailsSkeleton from "./ProductDetailsSkeleton";
+import Breadcrumbs from "@components/ui/Breadcrumbs";
+import RelatedProductsSlider from "@components/products/RelatedProductsSlider";
+//built-in
+import Image from "next/image";
+import { toast } from "sonner";
+//hooks
 import { useParams } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart } from "../../../features/cart/cartSlice";
 import { useState, useEffect } from "react";
-// import Skeleton from "@components/Skeleton";
-import Image from "next/image";
+//Redux actions
+import { addToCart } from "../../../features/cart/cartSlice";
+import { fetchProducts } from "../../../features/products/productsSlice";
+//icons
 import { ChevronDown, ChevronUp } from "lucide-react";
-import RelatedProductsSlider from "@components/products/RelatedProductsSlider";
-import Footer from "@components/layout/Footer/Footer";
-import Breadcrumbs from "@components/ui/Breadcrumbs";
-import { toast } from "sonner";
-import ImageMagnifier from "@components/ui/ImageMagnifier";
 
 export default function ProductDetails() {
   const [sizeSelected, setSizeSelected] = useState("");
@@ -27,11 +33,19 @@ export default function ProductDetails() {
   const dispatch = useDispatch();
 
   const product = useSelector((state) =>
-    state.products.products.find((p) => p.id === parseInt(id))
+    state.products.products.find((p) => p.id === parseInt(id)),
   );
+  const loading = useSelector((state) => state.products.loading);
 
   const { current, rates } = useSelector((state) => state.currency);
   useEffect(() => setMounted(true), []);
+
+  //allow browser refreshment
+  useEffect(() => {
+    if (!product && !loading) {
+      dispatch(fetchProducts());
+    }
+  }, [dispatch, product, loading]);
 
   const convert = (price) => (price * rates[current]).toFixed(2);
   let symbolPosition = "right"; //euro as default
@@ -52,17 +66,17 @@ export default function ProductDetails() {
   const stockStatus = product?.stock;
 
   const arrow1 = openStates.summary1 ? (
-    <ChevronUp color="#333" />
+    <ChevronUp color="var(--clr-text)" />
   ) : (
     <ChevronDown color="#333" />
   );
   const arrow2 = openStates.summary2 ? (
-    <ChevronUp color="#333" />
+    <ChevronUp color="var(--clr-text)" />
   ) : (
     <ChevronDown color="#333" />
   );
   const arrow3 = openStates.summary3 ? (
-    <ChevronUp color="#333" />
+    <ChevronUp color="var(--clr-text)" />
   ) : (
     <ChevronDown color="#333" />
   );
@@ -74,30 +88,10 @@ export default function ProductDetails() {
     }));
   };
 
-  // if (!mounted || !product) {
-  //   return (
-  //     <div
-  //       style={{
-  //         height: "85vh",
-  //         padding: "1em",
-  //         display: "flex",
-  //         flexDirection: "column",
-  //         justifyContent: "space-around",
-  //       }}
-  //     >
-  //       <Skeleton width="20%" height="1rem" style={{ margin: "0 5%" }} />
-  //       <Skeleton width="45%" height="2rem" style={{ margin: "0 5%" }} />
-  //       <Skeleton width="15%" height="1.5rem" style={{ margin: "0 5%" }} />
-  //       <Skeleton width="90%" height="50vh" style={{ margin: "0 auto" }} />
-  //       <Skeleton
-  //         width="120px"
-  //         height="2.5rem"
-  //         borderRadius="5px"
-  //         style={{ margin: "0 auto" }}
-  //       />
-  //     </div>
-  //   );
-  // }
+  //show skeletons
+  if (!mounted || !product) {
+    return <ProductDetailsSkeleton />;
+  }
 
   const handleAddToCart = () => {
     if (product.sizes && !sizeSelected) {
@@ -113,7 +107,7 @@ export default function ProductDetails() {
       addToCart({
         product,
         selectedSize: product.sizes ? sizeSelected : null,
-      })
+      }),
     );
     setSizeSelected("");
   };
@@ -126,8 +120,6 @@ export default function ProductDetails() {
       .map((w) => w[0].toUpperCase() + w.slice(1))
       .join(" ");
   };
-
-
 
   return (
     <div className={styles.pageContainer}>
@@ -143,7 +135,9 @@ export default function ProductDetails() {
           ]}
         />
 
-        <h1 className="itemTitle" id="product-title">{product.title}</h1>
+        <h1 className="itemTitle" id="product-title">
+          {product.title}
+        </h1>
         <p className={styles.price}>
           {symbolPosition === "left" ? (
             <>

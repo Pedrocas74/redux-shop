@@ -105,6 +105,7 @@ details[open] > .instructions {
     font-size: var(--fs-md);
 }
 
+
 .iconWrapper {
     position: relative;
     flex-shrink: 0;

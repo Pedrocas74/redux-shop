@@ -2,19 +2,17 @@
     width: 90%;
     margin: 0 auto;
     text-align: justify;
-}
-.mainSection h1 {
-    margin: 5vh 0 10vh 0;
+    min-height: 100dvh;
 }
 .description,
 .disclaimer {
-    font-size: clamp(0.95rem, 3vw, 1.1rem);
+    font-size: var(--fs-md);
     letter-spacing: var(--ls);
-    max-width: 60ch;
+    max-width: 70ch;
 }
 .disclaimer {
     font-weight: 600;
-    margin: 2em 0 10vh;
+    margin: var(--space-lg) 0;
 }
 .smile {
     text-align: right;

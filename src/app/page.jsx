@@ -10,6 +10,7 @@ import PaymentBanner from "@components/ui/PaymentBanner";
 import LazyProductsSection from "@features/products/LazyProductsSection";
 
 export default function Home() {
+  
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -40,7 +41,7 @@ export default function Home() {
     //only after full page reload
     const nav = performance.getEntriesByType("navigation")[0];
     const isReload = nav && nav.type === "reload";
-
+    //scroll automatically to ttop of the page
     if (isReload && window.location.pathname === "/" && !window.location.hash) {
       window.scrollTo({ top: 0, behavior: "auto" });
     }
