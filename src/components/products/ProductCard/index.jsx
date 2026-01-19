@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../features/cart/cartSlice";
 import { useState, useEffect } from "react";
-// import Skeleton from "../../Skeleton";
 import { Ruler } from "lucide-react";
 import { Select, SelectItem } from "@heroui/select";
 import { toast } from "sonner";
@@ -40,24 +39,6 @@ export default function ProductCard({ product }) {
   const stockStatus = product.stock;
   const stockColor = stockStatus === "In stock" ? "#1a1a1abd " : "#8f1010ff";
 
-  // if (!mounted) {
-  //   return (
-  //     <div className={styles.groupOfSkeletons} aria-hidden="true">
-  //       <Skeleton width="220px" height="300px" style={{ margin: "0 auto" }} />
-  //       <Skeleton width="80%" height="1rem" style={{ margin: "0.5rem auto" }} />
-  //       <Skeleton
-  //         width="50px"
-  //         height="1rem"
-  //         style={{ margin: "0.5rem auto" }}
-  //       />
-  //       <Skeleton
-  //         width="80px"
-  //         height="2rem"
-  //         style={{ margin: "0.5rem auto" }}
-  //       />
-  //     </div>
-  //   );
-  // }
 
   const handleAddToCart = () => {
     if (product.sizes && !sizeSelected) {
@@ -110,7 +91,7 @@ export default function ProductCard({ product }) {
         )}
       </h4>
       <p
-        className={styles.stockInfo}
+        className={`${styles.stockInfo} stockP`}
         style={{
           color: stockColor,
         }}

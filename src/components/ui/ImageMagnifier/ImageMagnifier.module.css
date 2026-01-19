@@ -3,13 +3,16 @@
   overflow: hidden;
   touch-action: none;
   user-select: none;
+  cursor: zoom-in;
+}
+.magnifierActive {
+  cursor: zoom-out;
 }
 .image {
   width: 100%;
   height: 100%;
   object-fit: contain;
   display: block;
-  cursor: zoom-in;
   pointer-events: auto;
   user-select: none;
 }
@@ -20,5 +23,4 @@
   pointer-events: none; 
   border-radius: var(--radius); 
   background: var(--clr-bg);
-  
 }

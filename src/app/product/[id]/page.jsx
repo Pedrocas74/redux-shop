@@ -151,12 +151,14 @@ export default function ProductDetails() {
             </>
           )}
         </p>
+
         <figure
           style={{
             position: "relative",
             zIndex: 1,
           }}
         >
+          
           <ImageMagnifier
             src={product.image}
             alt={product.title}

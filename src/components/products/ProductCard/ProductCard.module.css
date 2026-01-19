@@ -1,12 +1,5 @@
-/* .groupOfSkeletons {
-    border: 1px solid var(--border);
-    padding: 0.5em;
-    border-radius: var(--radius);
-    text-align: center;
-} */
-
 .productCard {
-    border: 1.5px outset var(--clr-bg-light);
+    border: 1.5px solid var(--clr-bg-dark);
     padding: var(--pd-card);
     border-radius: var(--radius-small);
     margin: 0 auto;
@@ -23,6 +16,7 @@
     
 }.productCard:hover {
   box-shadow: var(--shadow-combined);
+  border-color: var(--clr-primary);
 }
 .productCard a {
   height: 55%;
@@ -43,11 +37,12 @@
     width: 100%;
     margin-bottom: var(--space-xs);
     max-height: 50px;
+    font-weight: 600;
 }
 .productCard h4 {
-    font-size: calc(var(--fs-md) - 0.2rem);
+    font-size: calc(var(--fs-md) - 0.15rem);
     margin-bottom: var(--space-md);
-    font-weight: 400;
+    font-weight: 300;
     letter-spacing: var(--ls);
 }
 .productCard p {
@@ -61,6 +56,7 @@
   position: absolute;
   top: 6px;
   right: 6px;
+  
 }
 .sizeError {
   border-color: #c62828 !important;
@@ -108,8 +104,9 @@
   box-shadow: none;
 }
 .sizeValue {
-  font-size: 1.5rem;
-  color: var(--border-muted);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--clr-text);
   text-align: center;
   position: absolute;
   top: 0;
@@ -145,7 +142,7 @@
   color: var(--clr-text-muted);
   display: block;
   padding: 0.5rem 0.6rem;
-  font-size: 1rem;
+  font-size: var(--fs-md);
 }
 .dropdownItem svg {
   display: none; 

@@ -69,21 +69,22 @@ export default function ImageMagnifier({
 
   return (
     <div
-      className={styles.magnifierContainer}
+      className={`${styles.magnifierContainer} ${
+        isActive ? styles.magnifierActive : ""
+      }`}
       style={{ width, height }}
       ref={containerRef}
-      onMouseEnter={() => setIsActive(true)}
-      onMouseLeave={() => setIsActive(false)}
+      onClick={() => setIsActive(!isActive)}
       onMouseMove={handleMouseMove}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      <Image 
-        src={src} 
-        alt={alt} 
-        priority 
-        className={styles.image} 
+      <Image
+        src={src}
+        alt={alt}
+        priority
+        className={styles.image}
         width={240}
         height={240}
       />
