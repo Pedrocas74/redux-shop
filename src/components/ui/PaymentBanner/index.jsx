@@ -14,7 +14,7 @@ export default function PaymentBanner() {
 
   useEffect(() => {
     if (paymentStatus === "success") {
-      toast.success("Your order is on the way!");
+      toast.success("The order is on your way!");
       router.replace(window.location.pathname);
       dispatch(clearCart(items));
     }

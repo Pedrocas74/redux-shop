@@ -43,7 +43,7 @@
   /* font-sizes  */
   --fs-xs: clamp(0.75rem, 1vw, 0.85rem);
   --fs-sm: clamp(0.85rem, 1.2vw, 1rem);
-  --fs-button: clamp(0.95rem, 1.3vw, 1.1rem);
+  --fs-button: clamp(0.87rem, 1.3vw, 1.05rem);
   --fs-md: clamp(1rem, 2vw, 1.3rem);
   --fs-lg: clamp(1.3rem, 3vw, 2rem);
   --fs-xl: clamp(2.4rem, 4.5vw, 5.5rem);
@@ -147,6 +147,17 @@ a.buttonPrimary {
 .buttonPrimary:active {
   background: var(--clr-primary-dark);
 }
+
+.buttonLog {
+  background: transparent;
+  border: 2px solid var(--clr-bg);
+}
+.buttonLog:hover {
+  color: var(--clr-primary-light);
+}
+.buttonLog:active {
+  color: var(--clr-primary-dark);
+}
 /* black Secondary (secondary color) */
 .buttonSecondary,
 a.buttonSecondary {
@@ -154,6 +165,7 @@ a.buttonSecondary {
   color: var(--clr-text);             
   border: 1px solid var(--clr-text);
 }
+
 .buttonSecondary:hover {
   border-color: var(--clr-primary-light);
   color: var(--clr-primary);

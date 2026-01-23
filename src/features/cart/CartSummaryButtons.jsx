@@ -42,6 +42,7 @@ export default function CartSummaryButtons({ unavailableItems }) {
         <Link
           href={checkoutHref}
           scroll={hasUnavailable} // only scroll for #warning
+          prefetch={false} 
           className="buttonPrimary"
           aria-describedby={hasUnavailable ? "warning" : undefined}
         >

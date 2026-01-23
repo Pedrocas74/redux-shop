@@ -18,8 +18,10 @@ import Breadcrumbs from "@components/ui/Breadcrumbs";
 import LoadingSVG from "@components/ui/LoadingSVG/LoadingSVG";
 import { CheckCircle } from "lucide-react";
 import { toast } from "sonner";
+import { useAuth } from "@clerk/nextjs";
 
 export default function Checkout() {
+  const { isLoaded, isSignedIn } = useAuth();
   const { items } = useSelector((state) => state.cart);
   const { current, rates } = useSelector((state) => state.currency);
   const [showCode, setShowCode] = useState(false); //promo code input display set | hidden -> visible
@@ -27,7 +29,7 @@ export default function Checkout() {
   const [isApplied, setIsApplied] = useState(false); //promo code validation
   const totalPrice = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0
+    0,
   );
   const [discountedTotal, setDiscountedTotal] = useState(totalPrice); //total price BEFORE|AFTER discount
   const [paymentMethod, setPaymentMethod] = useState("card"); //defaul for card payment method
@@ -37,6 +39,14 @@ export default function Checkout() {
   const [supportsGooglePay, setSupportsGooglePay] = useState(false); //if Android system -> displays google pay
 
   const router = useRouter();
+
+  // clerk auth logic
+  useEffect(() => {
+    if (!isLoaded) return;
+    if (!isSignedIn) {
+      router.replace("/sign-in?redirect_url=/checkout");
+    }
+  }, [isLoaded, isSignedIn, router]);
 
   useEffect(() => {
     if (typeof window === "undefined" || typeof navigator === "undefined")
@@ -135,6 +145,9 @@ export default function Checkout() {
     setIsPlaced(true);
     setIsProcessing(true);
   };
+
+  if (!isLoaded) return <LoadingSVG />;
+  if (!isSignedIn) return null;
 
   return (
     <div className={styles.checkoutPage}>

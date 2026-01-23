@@ -1,4 +1,3 @@
-
 .navbar {
     background: var(--clr-text);
     position: sticky;
@@ -44,21 +43,28 @@
   height: 100%;
   font-size: 22px;
   letter-spacing: 10px;
+  flex: 1;
 }
+
 .sun {
-    position: absolute;
-    width: 20px;
-    height: 19px;
-    background: radial-gradient(circle at center, #ff9d00 0%, #ff6a00 100%);
-    border-radius: 50%;
-    border: 2px solid var(--clr-bg);
-    pointer-events: none;
+  position: absolute;
+  width: 20px;
+  height: 19px;
+  background: radial-gradient(circle at center, #ff9d00 0%, #ff6a00 100%);
+  border-radius: 50%;
+  border: 2px solid var(--clr-bg);
+  pointer-events: none;
 }
 
 .right {
-    /* border: 1px solid red; */
-    /* width: clamp(120px, 140px, 160px); */
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: end;
+    gap: 15px;
+}
+@media(width <= 500px) {
+  .right {
+    gap: 7px;
+    flex: 2;
+  }
 }

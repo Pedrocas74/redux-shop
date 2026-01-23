@@ -124,16 +124,22 @@ export default function Navbar() {
           </Link>
           <CurrencySelector />
 
-          {/* clerk user button  */}
+          {/* clerk auth */}
+          {/* when signed out:  */}
           <SignedOut>
-            <SignInButton />
+            <SignInButton>
+              <button type="button" className="buttonLog" style={{ fontSize: "var(--fs-xs)" }}>
+              Log In
+              </button>
+            </SignInButton>
             <SignUpButton>
-              <button className="bg-[#6c47ff] text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
+              <button type="button" className="buttonPrimary" style={{ border: "2px solid var(--clr-primary-light)", fontSize: "var(--fs-xs)"}} >
                 Sign Up
               </button>
             </SignUpButton>
           </SignedOut>
-          <SignedIn>
+          {/* when signed in: */}
+          <SignedIn> 
             <UserButton />
           </SignedIn>
         </div>
