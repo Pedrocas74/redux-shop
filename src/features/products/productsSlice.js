@@ -7,40 +7,91 @@ const initialState = {
     error: null,
 };
 
+const STOCK_MAP_KEY = "products:stockMap";
+
 export const fetchProducts = createAsyncThunk(
-    'products/fetchProducts',
-    async (_, thunkAPI) => {
-        const state = thunkAPI.getState();
-        const existing = state.products?.products;
-        if (existing && existing.length > 0) {
-          return { products: existing, cartItems: (state.cart?.items ?? [])};
-        }
+  "products/fetchProducts",
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const existing = state.products?.products;
+
+    if (existing && existing.length > 0) {
+      return { products: existing, cartItems: state.cart?.items ?? [] };
+    }
+
+    try {
+      //maintain a stable stock map for this session
+      let stockMap = {};
+      if (typeof window !== "undefined") {
+        const nav = performance.getEntriesByType?.("navigation")?.[0];
+        const isReload = nav && nav.type === "reload";
+        if (isReload) sessionStorage.removeItem(STOCK_MAP_KEY);
 
         try {
-            const response = await axios.get('https://fakestoreapi.com/products');
-            
-            // Get cart items to check availability
-            let cartItems = [];
-            if (typeof window !== 'undefined') {
-  const cartRaw = localStorage.getItem('cart') || '{}';
-  try {
-    const cart = JSON.parse(cartRaw);
-    if (cart.items) {
-      cart.items = cart.items.map(item =>
-        item.id === p.id ? { ...item, unavailable: true } : item
-      );
-      localStorage.setItem('cart', JSON.stringify(cart));
-    }
-  } catch {}
-}
-            return { 
-              products: response.data,
-              cartItems 
-            };
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error.response?.data || "Error fetching the products");
+          stockMap = JSON.parse(sessionStorage.getItem(STOCK_MAP_KEY) || "{}");
+        } catch {
+          stockMap = {};
         }
+      }
+
+      const response = await axios.get("https://fakestoreapi.com/products");
+      const apiProducts = response.data;
+
+      //read cart from localStorage
+      let cartItems = [];
+      if (typeof window !== "undefined") {
+        try {
+          const cart = JSON.parse(localStorage.getItem("cart") || "{}");
+          cartItems = Array.isArray(cart.items) ? cart.items : [];
+        } catch {
+          cartItems = [];
+        }
+      }
+
+      //attach stable stock to each product
+      const productsWithStableStock = apiProducts.map((p) => {
+  
+        const fromMap = stockMap[p.id];
+        if (fromMap) return { ...p, stock: fromMap };
+
+        //generate once per session
+        const newStatus = Math.random() > 0.2 ? "In stock" : "Sold out";
+        stockMap[p.id] = newStatus;
+        return { ...p, stock: newStatus };
+      });
+
+      //prevents changes after login/signup
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem(STOCK_MAP_KEY, JSON.stringify(stockMap));
+      }
+
+      if (typeof window !== "undefined" && cartItems.length > 0) {
+        const soldOutIds = new Set(
+          productsWithStableStock.filter((p) => p.stock === "Sold out").map((p) => p.id)
+        );
+
+        try {
+          const cart = JSON.parse(localStorage.getItem("cart") || "{}");
+          if (Array.isArray(cart.items)) {
+            cart.items = cart.items.map((item) =>
+              soldOutIds.has(item.id) ? { ...item, unavailable: true } : item
+            );
+            localStorage.setItem("cart", JSON.stringify(cart));
+          }
+        } catch {
+        }
+      }
+
+      return {
+        products: productsWithStableStock,
+        cartItems,
+      };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data || "Error fetching the products"
+      );
     }
+  }
 );
 
 const productSlice = createSlice({
@@ -86,36 +137,16 @@ const productSlice = createSlice({
         const sizes = ["XS", "S", "M", "L", "XL"];
 
         state.products = products.map((p) => {
-          // If product already has stock keep it unchanged
-          if (p.stock) return p;
-
+          //hard coded titles
           const cleanTitle = p.title.trim().toLowerCase();
           const hasSizes =
             (p.category === "men's clothing" || p.category === "women's clothing") &&
             p.title.toLowerCase().trim() !== "fjallraven - foldsack no. 1 backpack, fits 15 laptops"; //ignore the backpack
-          const newStatus = Math.random() > 0.2 ? "In stock" : "Sold out";
-
-          // Check if this product is in cart and now out of stock
-          const inCart = cartItems.some(item => item.id === p.id);
-          if (inCart && newStock === "Sold out") {
-            // Update cart item to mark as unavailable
-            const cart = JSON.parse(localStorage.getItem('cart') || '{}');
-            if (cart.items) {
-                cart.items = cart.items.map(item => 
-                    item.id === p.id 
-                        ? { ...item, unavailable: true }
-                        : item
-                );
-                localStorage.setItem('cart', JSON.stringify(cart));
-            }
-          }
 
           return {
             ...p,
             title: nameMap[cleanTitle] || p.title,
-            stock: newStatus,
-            sizes: hasSizes ? sizes : null,
-            
+            sizes: hasSizes ? sizes : null,          
           }; 
         });
       })

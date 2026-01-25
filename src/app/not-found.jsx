@@ -2,36 +2,28 @@
 
 import FooterSimple from "@components/layout/Footer/FooterSimple";
 import { CircleX, CornerDownLeft } from "lucide-react";
-import { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function NotFound() {
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   return (
     <section
       style={{
-        width: "90%",
-        margin: "2.5rem auto 0",
+        padding: "0 5%",
+        minHeight: "100vh",
+        margin: "0 auto",
+        position: "relative",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "center"
       }}
     >
       <h1
         style={{
           textAlign: "center",
-          fontSize: isMobile ? "2rem" : "2.5rem",
+          fontSize: "var(--fs-xl)",
         }}
       >
         <CircleX fill="#D10221" color="white" /> 404{" "}
@@ -40,7 +32,7 @@ export default function NotFound() {
       </h1>
       <p
         style={{
-          fontSize: isMobile ? "1rem" : "1.5rem",
+          fontSize: "var(--fs-lg)",
           marginTop: "var(--space-sm)",
         }}
       >
@@ -50,7 +42,7 @@ export default function NotFound() {
         href="/"
         className="buttonSecondary"
         style={{
-          marginTop: "var(--space-sm)",
+          margin: "var(--space-md) auto",
         }}
       >
         <CornerDownLeft size={13} /> Back

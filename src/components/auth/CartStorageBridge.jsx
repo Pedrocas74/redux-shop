@@ -5,6 +5,7 @@ import { useAuth } from "@clerk/nextjs";
 import { useDispatch } from "react-redux";
 import { setCartStorageKey } from "@features/cart/cartSlice";
 
+//cart updates whenever a user logs in
 export default function CartStorageBridge() {
   const { userId, isLoaded } = useAuth();
   const dispatch = useDispatch();
@@ -12,8 +13,9 @@ export default function CartStorageBridge() {
   useEffect(() => {
     if (!isLoaded) return;
 
+    //switch of key
     const key = userId ? `cart:${userId}` : "cart:guest";
-    dispatch(setCartStorageKey(key));
+    dispatch(setCartStorageKey(key)); 
   }, [userId, isLoaded, dispatch]);
 
   return null;

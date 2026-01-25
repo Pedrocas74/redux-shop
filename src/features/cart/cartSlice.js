@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const DEFAULT_KEY = "cart:guest";
+const DEFAULT_KEY = "cart:guest";  //no user account logged in
+//cart:${userId} when a user is logged in
 
 const emptyCart = (storageKey = DEFAULT_KEY) => ({
   items: [],
@@ -40,7 +41,7 @@ const saveCartToLocalStorage = (state) => {
       totalQuantity: state.totalQuantity,
       totalPrice: state.totalPrice,
     };
-
+    //update the Key's value with the persisted cart values in JSON format
     localStorage.setItem(key, JSON.stringify(toPersist));
   } catch (e) {
     console.error("Could not save cart to localStorage", e);
@@ -145,8 +146,9 @@ const cartSlice = createSlice({
       state.totalPrice = 0;
       saveCartToLocalStorage(state);
     },
+
+    //syncs the cart items with the latest products state and updates unavailable flag per cart item
     reconcileWithProducts: (state, action) => {
-  
   state.items = state.items.map(item => {
         const productInState = action.payload.find(p => p.id === item.id);
         return {

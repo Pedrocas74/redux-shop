@@ -19,14 +19,14 @@ import { fetchProducts } from "../products/productsSlice.js";
 import CartSummaryButtons from "./CartSummaryButtons";
 
 export default function Cart() {
-  const { items = [] } = useSelector((state) => state.cart || { items: [] }); //items in cart
+  const { items = [] } = useSelector((state) => state.cart || {}); //items in cart
   const { current, rates } = useSelector((state) => state.currency);
   const { products = [] } = useSelector((state) => state.products); //products in productList
   const dispatch = useDispatch();
 
   //fetch products if they're not loaded
   useEffect(() => {
-    if (!products) {
+    if (products.length === 0) {
       dispatch(fetchProducts());
     }
   }, [dispatch, products.length]);

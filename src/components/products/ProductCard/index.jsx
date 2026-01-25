@@ -4,7 +4,7 @@ import styles from "./ProductCard.module.css";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../features/cart/cartSlice";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Ruler } from "lucide-react";
 import { Select, SelectItem } from "@heroui/select";
 import { toast } from "sonner";
@@ -15,9 +15,6 @@ export default function ProductCard({ product }) {
   const [showSizeError, setShowSizeError] = useState(false);
   const dispatch = useDispatch();
   const { current, rates } = useSelector((state) => state.currency);
-
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
 
   const convert = (price) => (price * rates[current]).toFixed(2);
   let symbolPosition = "right"; //euro as default
@@ -46,7 +43,6 @@ export default function ProductCard({ product }) {
 
       setShowSizeError(true);
       setTimeout(() => setShowSizeError(false), 2000);
-
       return;
     }
 
